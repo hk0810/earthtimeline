@@ -1,1 +1,1811 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あなたの人生と地球の進化年表</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF9F6;
+    --bg-soft:#F1EEE6;
+    --card:#FFFFFF;
+    --navy:#0B1F3A;
+    --navy-deep:#050B14;
+    --navy-soft:#16294A;
+    --gold:#AD8A34;
+    --gold-light:#D9B96A;
+    --gold-glow:#F0CE83;
+    --text:#16202E;
+    --text-muted:#5B6472;
+    --border:#E6E1D4;
+    --radius:14px;
+    --serif:'Noto Serif JP', serif;
+    --sans:'Noto Sans JP', sans-serif;
+    --disp:'Cormorant Garamond', 'Noto Serif JP', serif;
+  }
+  [data-theme="dark"]{
+    --bg:#070B14;
+    --bg-soft:#0C1220;
+    --card:#0F1830;
+    --navy:#CBD5E6;
+    --navy-deep:#E8ECF5;
+    --navy-soft:#1A2740;
+    --text:#E7E6DE;
+    --text-muted:#9BA3B4;
+    --border:#22304C;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.7;
+    transition:background .4s ease, color .4s ease;
+    min-height:100vh;
+  }
+  ::selection{background:var(--gold-glow); color:var(--navy-deep);}
 
+  .container{max-width:920px; margin:0 auto; padding:0 24px;}
+  button{font-family:var(--sans); cursor:pointer; border:none;}
+  input,select{font-family:var(--sans);}
+  a{color:inherit;}
+  .sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0);}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    background:
+      radial-gradient(ellipse at 50% -10%, #1B3560 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 100%, #12203C 0%, transparent 50%),
+      linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 70%, var(--navy-soft) 100%);
+    color:#F3EFE4;
+    overflow:hidden;
+    padding:80px 24px;
+  }
+  .stars{position:absolute; inset:0; pointer-events:none;}
+  .stars span{
+    position:absolute; width:2px; height:2px; border-radius:50%;
+    background:#fff; opacity:.5;
+    animation:twinkle 4s ease-in-out infinite;
+  }
+  @keyframes twinkle{0%,100%{opacity:.15;} 50%{opacity:.85;}}
+  @media (prefers-reduced-motion:reduce){
+    .stars span{animation:none; opacity:.4;}
+  }
+  .hero-eyebrow{
+    font-family:var(--disp); font-style:italic; letter-spacing:.12em;
+    color:var(--gold-light); font-size:15px; text-transform:uppercase;
+    margin-bottom:22px; position:relative; z-index:1;
+  }
+  .hero h1{
+    font-family:var(--serif); font-weight:600;
+    font-size:clamp(28px, 5vw, 46px);
+    text-align:center; max-width:14ch; line-height:1.4;
+    position:relative; z-index:1;
+  }
+  .hero p.sub{
+    margin-top:20px; color:#B9C2D6; text-align:center;
+    max-width:38ch; font-size:15.5px; position:relative; z-index:1;
+  }
+  .hero-form{
+    margin-top:48px; position:relative; z-index:1;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(217,185,106,.28);
+    backdrop-filter:blur(6px);
+    border-radius:18px;
+    padding:32px 30px;
+    width:100%; max-width:400px;
+    display:flex; flex-direction:column; gap:18px;
+  }
+  .hero-form label{font-size:13px; color:var(--gold-light); letter-spacing:.04em;}
+  .hero-form input[type="date"]{
+    width:100%; padding:13px 14px; margin-top:8px;
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.18);
+    border-radius:9px; color:#F3EFE4; font-size:16px;
+  }
+  .hero-form input[type="text"]{
+    width:100%; padding:13px 14px; margin-top:8px;
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.18);
+    border-radius:9px; color:#F3EFE4; font-size:15px;
+  }
+  .hero-form input::placeholder{color:#8590A6;}
+  .btn-gold{
+    margin-top:6px; padding:15px 20px; border-radius:9px;
+    background:linear-gradient(135deg, var(--gold-light), var(--gold));
+    color:#1A1204; font-weight:600; font-size:15.5px; letter-spacing:.03em;
+    transition:transform .2s ease, box-shadow .2s ease;
+    box-shadow:0 8px 24px -8px rgba(173,138,52,.6);
+  }
+  .btn-gold:hover{transform:translateY(-1px); box-shadow:0 10px 30px -6px rgba(173,138,52,.75);}
+  .btn-gold:disabled{opacity:.55; cursor:not-allowed; transform:none;}
+  .hero-note{
+    margin-top:14px; font-size:12px; color:#7B87A0; text-align:center; position:relative; z-index:1;
+  }
+
+  .app-header{
+    position:sticky; top:0; z-index:40;
+    background:var(--bg); border-bottom:1px solid var(--border);
+  }
+  .app-header-inner{
+    max-width:920px; margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .brand{display:flex; align-items:baseline; gap:10px;}
+  .brand .mark{width:9px; height:9px; border-radius:50%; background:var(--gold); display:inline-block;}
+  .brand span{font-family:var(--serif); font-weight:600; font-size:15px;}
+  .header-actions{display:flex; gap:8px; align-items:center; flex-wrap:wrap;}
+  .icon-btn{
+    padding:8px 13px; border-radius:8px; background:transparent; border:1px solid var(--border);
+    color:var(--text); font-size:13px; display:flex; align-items:center; gap:6px;
+  }
+  .icon-btn:hover{border-color:var(--gold);}
+
+  .stats-bar{
+    background:linear-gradient(135deg, var(--navy-deep), var(--navy-soft));
+    color:#EDE9DC; padding:34px 24px; margin-top:0;
+  }
+  .stats-title{
+    font-family:var(--serif); font-size:14px; letter-spacing:.08em; color:var(--gold-light);
+    text-align:center; margin-bottom:20px;
+  }
+  .stats-grid{
+    max-width:920px; margin:0 auto;
+    display:grid; grid-template-columns:repeat(6,1fr); gap:10px;
+  }
+  @media (max-width:760px){ .stats-grid{grid-template-columns:repeat(3,1fr);} }
+  .stat{text-align:center;}
+  .stat .num{font-family:var(--disp); font-weight:600; font-size:clamp(18px,3vw,26px); color:#fff; font-variant-numeric:tabular-nums;}
+  .stat .lbl{font-size:11px; color:#9BAAC4; margin-top:4px; letter-spacing:.03em;}
+
+  .controls{
+    max-width:920px; margin:28px auto 0; padding:0 24px;
+    display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+  }
+  .controls input[type="search"]{
+    flex:1; min-width:180px; padding:11px 14px; border-radius:9px;
+    border:1px solid var(--border); background:var(--card); color:var(--text); font-size:14px;
+  }
+  .controls select{
+    padding:11px 12px; border-radius:9px; border:1px solid var(--border);
+    background:var(--card); color:var(--text); font-size:14px;
+  }
+  .toggle-group{display:flex; border:1px solid var(--border); border-radius:9px; overflow:hidden;}
+  .toggle-group button{
+    padding:10px 14px; background:var(--card); color:var(--text-muted); font-size:13px;
+  }
+  .toggle-group button.active{background:var(--navy); color:#fff;}
+
+  .timeline-wrap{max-width:920px; margin:0 auto; padding:50px 24px 20px; position:relative;}
+  .spine{
+    position:absolute; left:50%; top:50px; bottom:20px; width:2px; transform:translateX(-50%);
+    background:linear-gradient(180deg, var(--gold-light), var(--border) 92%);
+  }
+  @media (max-width:680px){ .spine{left:20px;} }
+
+  .year-block{position:relative; padding:0 0 56px;}
+  .year-node{
+    position:relative; z-index:2; display:flex; justify-content:center; margin-bottom:22px;
+  }
+  @media (max-width:680px){ .year-node{justify-content:flex-start; padding-left:2px;} }
+  .year-badge{
+    background:var(--navy); color:#fff; border:2px solid var(--gold-light);
+    border-radius:999px; padding:10px 22px; display:flex; align-items:center; gap:12px;
+    box-shadow:0 4px 18px -6px rgba(11,31,58,.4);
+  }
+  .year-badge .yr{font-family:var(--disp); font-weight:600; font-size:22px;}
+  .year-badge .age{font-size:12px; color:var(--gold-light); border-left:1px solid rgba(255,255,255,.25); padding-left:12px;}
+  .year-node.current .year-badge{box-shadow:0 0 0 5px rgba(217,185,106,.22), 0 4px 18px -6px rgba(11,31,58,.4); animation:pulse 2.4s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(217,185,106,.18);} 50%{box-shadow:0 0 0 9px rgba(217,185,106,.05);}}
+
+  .stars-row{display:flex; gap:3px; justify-content:center; margin:-6px 0 24px;}
+  .stars-row .star{color:var(--border); font-size:15px;}
+  .stars-row .star.on{color:var(--gold);}
+
+  .cols{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:680px){ .cols{grid-template-columns:1fr;} }
+  .col h4{
+    font-family:var(--serif); font-size:13.5px; font-weight:600; margin-bottom:10px;
+    color:var(--text-muted); display:flex; align-items:center; gap:6px;
+  }
+  .event-card{
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+    padding:14px 16px; margin-bottom:10px;
+  }
+  .event-card .cat{
+    display:inline-block; font-size:11px; color:var(--gold); background:rgba(173,138,52,.1);
+    padding:2px 9px; border-radius:999px; margin-bottom:7px; letter-spacing:.02em;
+  }
+  .event-card h5{font-size:14.5px; font-weight:600; margin-bottom:5px; line-height:1.5;}
+  .event-card p{font-size:13px; color:var(--text-muted); line-height:1.65;}
+  .event-card .impact{
+    margin-top:9px; padding-top:9px; border-top:1px dashed var(--border);
+    font-size:12px; color:var(--text-muted);
+  }
+  .event-card .impact b{color:var(--gold); font-weight:600; display:block; margin-bottom:3px; font-size:11px;}
+
+  .ai-comment{
+    margin-top:16px; background:var(--bg-soft); border-left:3px solid var(--gold);
+    border-radius:0 10px 10px 0; padding:14px 18px; font-size:13.5px; color:var(--text);
+  }
+  .ai-comment b{color:var(--gold); font-size:11px; display:block; margin-bottom:5px; letter-spacing:.03em;}
+
+  .star-reason{font-size:11.5px; color:var(--text-muted); text-align:center; margin-top:-18px; margin-bottom:22px;}
+
+  .skeleton-year{padding:26px 0 56px; text-align:center;}
+  .skel-badge{
+    display:inline-block; width:120px; height:38px; border-radius:999px; margin-bottom:20px;
+    background:linear-gradient(90deg, var(--bg-soft) 25%, var(--border) 37%, var(--bg-soft) 63%);
+    background-size:400% 100%; animation:shimmer 1.6s ease-in-out infinite;
+  }
+  .skel-card{
+    height:74px; border-radius:var(--radius); margin-bottom:10px;
+    background:linear-gradient(90deg, var(--bg-soft) 25%, var(--border) 37%, var(--bg-soft) 63%);
+    background-size:400% 100%; animation:shimmer 1.6s ease-in-out infinite;
+  }
+  @keyframes shimmer{0%{background-position:100% 0;} 100%{background-position:0 0;}}
+
+  .summary-section{
+    background:linear-gradient(160deg, var(--navy-deep), var(--navy) 60%, var(--navy-soft));
+    color:#EDE9DC; padding:70px 24px; margin-top:20px;
+  }
+  .summary-inner{max-width:720px; margin:0 auto;}
+  .summary-eyebrow{
+    font-family:var(--disp); font-style:italic; color:var(--gold-light); text-align:center;
+    letter-spacing:.1em; margin-bottom:14px; font-size:15px;
+  }
+  .summary-inner h2{
+    font-family:var(--serif); text-align:center; font-size:clamp(22px,3.4vw,30px);
+    margin-bottom:28px; font-weight:600;
+  }
+  .summary-text{font-size:15px; line-height:2.05; color:#D7DBE6; white-space:pre-wrap;}
+  .summary-text::first-letter{font-size:2.6em; font-family:var(--disp); color:var(--gold-light); float:left; line-height:.8; margin-right:8px; margin-top:6px;}
+
+  .export-bar{
+    max-width:920px; margin:0 auto; padding:36px 24px 90px;
+    display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
+  }
+  .export-bar button{
+    padding:11px 20px; border-radius:9px; border:1px solid var(--border);
+    background:var(--card); color:var(--text); font-size:13.5px; display:flex; gap:7px; align-items:center;
+  }
+  .export-bar button:hover{border-color:var(--gold); color:var(--gold);}
+
+  .loading-status{
+    text-align:center; padding:16px; font-size:13px; color:var(--text-muted);
+  }
+  .loading-status .dot{
+    display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--gold);
+    margin-right:8px; animation:blink 1.2s ease-in-out infinite;
+  }
+  @keyframes blink{0%,100%{opacity:.25;} 50%{opacity:1;}}
+
+  .error-box{
+    max-width:600px; margin:20px auto; padding:16px 18px; border-radius:10px;
+    background:#FDEDEC; border:1px solid #F1B4AE; color:#8A2E24; font-size:13.5px;
+  }
+  [data-theme="dark"] .error-box{background:#2A1414; border-color:#5C2B24; color:#F0A79C;}
+
+  @media print{
+    .app-header, .controls, .export-bar, .stars, .hero-note, .icon-btn{display:none !important;}
+    .hero{min-height:auto; page-break-after:always;}
+    .year-block{page-break-inside:avoid; break-inside:avoid;}
+    body{background:#fff; color:#111;}
+    .stats-bar, .summary-section{background:#0B1F3A !important; -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  }
+
+  .hidden{display:none !important;}
+</style>
+</head>
+<body>
+
+<section class="hero" id="hero">
+  <div class="stars" id="stars"></div>
+  <div class="hero-eyebrow">Life &amp; Earth Evolution Timeline</div>
+  <h1>あなたの人生と<br>地球の進化年表</h1>
+  <p class="sub">あなたが生きてきた時代、人類と地球はどのように<br>進化してきたのでしょう。</p>
+
+  <form class="hero-form" id="birthForm">
+    <div>
+      <label for="birthdate">生年月日</label>
+      <input type="date" id="birthdate" min="1920-01-01" required>
+    </div>
+    <button type="submit" class="btn-gold" id="generateBtn">年表を作成</button>
+  </form>
+  <p class="hero-note">生年月日を入力すると、その日から今日までの年表がすぐに表示されます。</p>
+</section>
+
+<div id="app" class="hidden">
+
+  <header class="app-header">
+    <div class="app-header-inner">
+      <div class="brand"><span class="mark"></span><span>人生と地球の進化年表</span></div>
+      <div class="header-actions">
+        <button class="icon-btn" id="themeToggle">🌙 ダーク</button>
+        <button class="icon-btn" id="printBtn">🖨 印刷 / PDF保存</button>
+        <button class="icon-btn" id="restartBtn">↺ 最初から</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="stats-bar">
+    <div class="stats-title">LIFE  IN  NUMBERS</div>
+    <div class="stats-grid" id="statsGrid"></div>
+  </section>
+
+  <div class="controls">
+    <input type="search" id="searchInput" placeholder="キーワードで検索（例：AI、宇宙、医療）">
+    <select id="categoryFilter">
+      <option value="">すべてのカテゴリ</option>
+    </select>
+    <div class="toggle-group" id="regionToggle">
+      <button data-region="all" class="active">日本＋世界</button>
+      <button data-region="jp">日本のみ</button>
+      <button data-region="world">世界のみ</button>
+    </div>
+    <select id="jumpYear"><option value="">年代へジャンプ</option></select>
+  </div>
+
+  <main class="timeline-wrap" id="timelineWrap">
+    <div class="spine"></div>
+  </main>
+
+  <section class="summary-section hidden" id="summarySection">
+    <div class="summary-inner">
+      <div class="summary-eyebrow">Your Chapter in History</div>
+      <h2>あなたが生きた時代</h2>
+      <div class="summary-text" id="summaryText"></div>
+    </div>
+  </section>
+
+  <div class="export-bar">
+    <button id="exportJson">⇩ JSON書き出し</button>
+    <button id="exportCsv">⇩ CSV書き出し</button>
+    <button id="saveHistory">☆ この年表を保存</button>
+    <button id="loadHistory">🕘 保存履歴を開く</button>
+  </div>
+</div>
+
+<script>
+// 静的年表データ (1920-2025)
+// jp/world: 3件ずつ。category は 科学/医学/IT/AI/宇宙/環境/インフラ/文化/スポーツ/経済/平和 のいずれか
+const TIMELINE_DATA = {
+1920:{jp:[
+  {title:"日本、国際連盟の常任理事国に",category:"平和",desc:"第一次大戦後に設立された国際連盟に、日本は常任理事国として参加した。",impact:"国際協調の枠組みに参加した経験は、戦後の国連加盟や外交姿勢の原点となった。"},
+  {title:"内務省衛生局が感染症対策を強化",category:"医学",desc:"スペイン風邪の流行を経て、日本国内で公衆衛生行政の整備が進められた。",impact:"その後の保健所制度や感染症法制の基盤となった。"},
+  {title:"東京帝国大学で航空研究所が構想",category:"科学",desc:"航空技術の研究体制づくりが始まり、後の航空機産業の礎となった。",impact:"戦後の航空宇宙研究、JAXAへとつながる技術系譜の出発点となった。"},
+  {title:"大学令に基づき私立大学が正式に昇格",category:"教育",desc:"慶應義塾大学・早稲田大学など私立校が正式な大学として認可された。",impact:"日本の高等教育の担い手が官立大学以外にも広がる転機となった。"},
+  {title:"帝国美術院美術展覧会（帝展）が本格的に定着",category:"文化",desc:"官設の美術展覧会が芸術家の発表の場として広く定着した。",impact:"日展として現在まで続く日本美術界の中心的な展覧会の基盤となった。"},
+  {title:"熊谷一弥がアントワープ五輪テニスで日本人初のメダル",category:"スポーツ",desc:"熊谷一弥がテニスシングルスで銀メダルを獲得した。",impact:"日本のオリンピック参加の歴史における最初の輝かしい実績となった。"},
+  {title:"日本初の国勢調査を実施",category:"経済",desc:"全国民を対象とした近代的な人口統計調査が初めて行われた。",impact:"以後100年以上続く国の基礎統計として政策立案を支え続けている。"}
+],world:[
+  {title:"国際連盟が発足",category:"平和",desc:"世界初の恒久的な国際平和機構として国際連盟がジュネーブで発足した。",impact:"理念は国際連合に引き継がれ、現在の国際協調の原型となっている。"},
+  {title:"アインシュタインの相対性理論が観測で裏付け",category:"科学",desc:"前年の日食観測データの検証が進み、一般相対性理論への支持が広がった。",impact:"GPSなど現代の測位技術は相対性理論の補正なしには成立しない。"},
+  {title:"KDKA局による世界初の商業ラジオ放送が始まる",category:"IT",desc:"アメリカのピッツバーグで定期的な商業ラジオ放送が開始された。",impact:"以後のマスメディア・放送産業全体の出発点となった。"},
+  {title:"ゴダードによる液体燃料ロケットの理論研究が進む",category:"宇宙",desc:"ロバート・ゴダードが液体燃料ロケットの理論的基礎を構築した。",impact:"後の宇宙開発・ロケット技術発展の理論的な出発点となった。"},
+  {title:"アントワープ五輪が開催、国際スポーツの祭典が復活",category:"スポーツ",desc:"第一次世界大戦後初めてのオリンピックが戦後復興の象徴として開催された。",impact:"国際的なスポーツ交流の枠組みが戦後の世界で再び動き出した。"}
+],aiComment:"戦争の惨禍を経て国際協調の枠組みが生まれ、同時に科学・情報・スポーツの各分野で人類が新たな一歩を踏み出した年でした。",stars:3,starReason:"国際協調の礎が築かれた年"},
+
+1921:{jp:[
+  {title:"理化学研究所が本格始動",category:"科学",desc:"民間と政府が支援する総合研究所として理化学研究所の活動が拡大した。",impact:"現在も続く日本の基礎科学研究の中核機関として多くの成果を生んでいる。"},
+  {title:"職業紹介法が制定",category:"経済",desc:"国が職業紹介事業を整備し、労働市場の近代化が進められた。",impact:"現在の公共職業安定所（ハローワーク）制度の原型となった。"},
+  {title:"日本初の本格的な地下鉄計画が始動",category:"インフラ",desc:"東京の都市交通を支える地下鉄建設に向けた具体的な計画が動き出した。",impact:"数年後の開業を経て、現在の東京の巨大な地下鉄網の出発点となった。"},
+  {title:"皇太子（後の昭和天皇）が欧州各国を歴訪",category:"平和",desc:"皇太子が英仏など欧州各国を訪問し、国際親善を深めた。",impact:"日本の皇室外交の先駆けとして、以後の国際親善のあり方に影響を与えた。"}
+],world:[
+  {title:"BCGワクチンが初めて人に投与される",category:"医学",desc:"結核予防のためのBCGワクチンがフランスで初めて乳児に接種された。",impact:"以後100年にわたり世界中で使われ続け、結核による死者を大きく減らした。"},
+  {title:"インスリンによる糖尿病治療への道が開く",category:"医学",desc:"カナダの研究チームがインスリンの抽出と作用の解明を進めた。",impact:"翌年の臨床応用につながり、糖尿病が致死的な病から管理可能な病へ変わった。"},
+  {title:"アインシュタインがノーベル物理学賞を受賞",category:"科学",desc:"光電効果の理論的説明により、アインシュタインの功績が公式に称えられた。",impact:"量子論の発展を加速させ、後の半導体・太陽電池技術の理論的基盤となった。"},
+  {title:"ゴダードが液体燃料ロケットの研究を継続",category:"宇宙",desc:"ロバート・ゴダードが実用ロケットの実現に向けた研究を地道に進めた。",impact:"1926年の打ち上げ成功につながる重要な研究蓄積の期間となった。"},
+  {title:"ワシントン会議に向けた国際的な準備が本格化",category:"平和",desc:"海軍軍縮と極東問題を話し合う国際会議の開催準備が各国で進んだ。",impact:"翌年のワシントン海軍軍縮条約締結という国際協調の成果につながった。"}
+],aiComment:"医学と物理学の両面で、後の世界を大きく変える発見の芽が育った年でした。同時に外交・平和面でも新しい国際協調への準備が進みました。",stars:3,starReason:"医学と物理学の礎が進んだ年"},
+
+1922:{jp:[
+  {title:"日本放送協会設立に向けた議論が本格化",category:"IT",desc:"ラジオ放送の実用化に向けて、制度や技術の検討が進められた。",impact:"数年後のラジオ放送開始を経て、現在の放送インフラの原点となった。"},
+  {title:"理研でビタミン研究が進展",category:"医学",desc:"鈴木梅太郎らによる栄養学的研究が国内外で評価を高めていった。",impact:"栄養学の発展は、現在の食品科学や公衆衛生政策の基礎となっている。"},
+  {title:"全国水平社が結成",category:"平和",desc:"部落差別の撤廃を掲げる社会運動団体が設立された。",impact:"日本における人権運動の先駆けとして、後の同和対策や人権教育に影響を与えた。"},
+  {title:"健康保険法が制定",category:"経済",desc:"労働者を対象とした日本初の社会保険制度が法制化された。",impact:"戦後の国民皆保険制度へとつながる社会保障の出発点となった。"}
+],world:[
+  {title:"インスリンの臨床応用に成功",category:"医学",desc:"カナダの医師チームが糖尿病患者へのインスリン投与に世界で初めて成功した。",impact:"以後、糖尿病治療は劇的に進歩し、数億人の命を救い続けている。"},
+  {title:"ボーアの原子模型がノーベル賞に",category:"科学",desc:"ニールス・ボーアの原子構造理論がノーベル物理学賞で評価された。",impact:"量子力学の基礎となり、半導体や化学結合の理解に直結している。"},
+  {title:"エジプトでツタンカーメン王墓が発見",category:"文化",desc:"考古学史に残る大発見として、古代エジプト研究が飛躍的に進んだ。",impact:"考古学・保存科学の発展を促し、世界中の文化財保護の意識を高めた。"},
+  {title:"イギリス放送協会（BBC）が設立",category:"IT",desc:"公共放送の先駆けとしてBBCがラジオ放送を開始した。",impact:"世界各国の公共放送モデルとして、現在も放送業界に影響を与え続けている。"}
+],aiComment:"医学の実用化と基礎科学の理論確立が同時に進み、人類の知の地図が大きく塗り替えられた年でした。日英で放送・保険制度の基盤も整い始めています。",stars:4,starReason:"インスリン臨床応用の年"},
+
+1923:{jp:[
+  {title:"関東大震災を機に耐震・都市防災が本格化",category:"インフラ",desc:"甚大な被害を受けた東京・横浜の復興で、近代的な都市計画と耐震基準が導入された。",impact:"その後の建築基準法や防災都市計画の考え方の出発点となった。"},
+  {title:"後藤新平による帝都復興計画が始動",category:"インフラ",desc:"震災復興にあわせ、広い道路や公園を備えた近代都市計画が立案された。",impact:"現在の東京の道路網や防災公園の多くはこの構想に起源を持つ。"},
+  {title:"震災を教訓に地震研究が組織化",category:"科学",desc:"震災の経験から地震観測・研究体制の強化が求められるようになった。",impact:"後の地震研究所設立や耐震工学の発展につながった。"}
+],world:[
+  {title:"ハッブルがアンドロメダ銀河の正体を解明",category:"科学",desc:"エドウィン・ハッブルが、アンドロメダが天の川銀河の外にある別の銀河であることを示した。",impact:"宇宙が銀河系だけではないことが判明し、現代宇宙論の出発点となった。"},
+  {title:"国際赤十字が災害救援活動を拡充",category:"平和",desc:"各国の災害や紛争への人道支援体制の整備が進んだ。",impact:"現在の国際的な災害救援・人道支援の枠組みの基盤となっている。"},
+  {title:"ヨーロッパでインフレ対策の経済改革が進む",category:"経済",desc:"戦後の激しいインフレを受け、通貨・財政制度の立て直しが図られた。",impact:"中央銀行の独立性や物価安定策の重要性が広く認識される契機となった。"}
+],aiComment:"日本は大震災という悲劇に見舞われましたが、そこから近代的な防災都市計画が生まれました。同じ年、宇宙の見方を一変させる発見も起きています。",stars:4,starReason:"銀河の発見と都市防災の起点"},
+
+1924:{jp:[
+  {title:"日本初のラジオ実験放送が成功",category:"IT",desc:"東京でラジオの試験放送が行われ、実用化に向けた技術検証が進んだ。",impact:"翌年の本放送開始を経て、日本の放送メディアの歴史が始まった。"},
+  {title:"野口英世がアフリカで黄熱病研究に従事",category:"医学",desc:"世界的細菌学者・野口英世がガーナで黄熱病の研究に取り組んだ。",impact:"感染症研究における国際協力の先駆例として、今も語り継がれている。"},
+  {title:"箱根で日本初の本格的な森林保護区が拡充",category:"環境",desc:"国立公園の前身となる自然保護の取り組みが各地で進められた。",impact:"戦後の国立公園制度、現在の自然保護行政の基礎となった。"}
+],world:[
+  {title:"ハッブルが銀河の分類体系を発表",category:"科学",desc:"銀河の形状に基づく分類法が確立され、宇宙の構造理解が進んだ。",impact:"現在の天文学における銀河研究の基本的な枠組みとして使われ続けている。"},
+  {title:"レーニン死去後のソ連で計画経済が本格化",category:"経済",desc:"国家主導の産業計画が進められ、急速な工業化政策が始まった。",impact:"20世紀の経済体制論争に大きな影響を与えることになった。"},
+  {title:"国際連盟で子どもの権利宣言が採択",category:"平和",desc:"世界初の子どもの権利に関する国際宣言がジュネーブで採択された。",impact:"後の国連・子どもの権利条約（1989年）の礎となった。"}
+],aiComment:"通信・医学・環境保護と幅広い分野で、後の制度につながる種がまかれた年でした。子どもの権利という考え方もこの頃に生まれています。",stars:3,starReason:"子どもの権利宣言採択の年"},
+
+1925:{jp:[
+  {title:"日本初のラジオ本放送が開始",category:"IT",desc:"東京放送局（JOAK）が日本初のラジオ本放送を開始した。",impact:"以後100年近くにわたる日本の放送メディアの原点となった。"},
+  {title:"治安維持法と並び普通選挙法が成立",category:"平和",desc:"25歳以上のすべての男性に選挙権を認める普通選挙法が制定された。",impact:"制限はあったものの、日本における参政権拡大の重要な一歩となった。"},
+  {title:"京都帝国大学で湯川秀樹らが物理学を学ぶ",category:"科学",desc:"後にノーベル賞を受賞する若手物理学者たちがこの時期に学問を深めた。",impact:"戦後の日本人初のノーベル賞受賞（1949年）へとつながる人材育成の時期。"}
+],world:[
+  {title:"量子力学の基礎理論（行列力学）が確立",category:"科学",desc:"ハイゼンベルクらが量子力学の数学的基礎を築いた。",impact:"半導体・レーザー・MRIなど現代技術の理論的土台となっている。"},
+  {title:"電子スピンの概念が提唱される",category:"科学",desc:"ウーレンベックとハウトスミットが電子のスピンという性質を提唱した。",impact:"物質の磁気的性質の理解が進み、ハードディスクなどの記憶技術に応用された。"},
+  {title:"国際労働機関で労働時間の国際基準が整備",category:"経済",desc:"各国の労働条件を改善するための国際的な基準づくりが進んだ。",impact:"現在の労働基準法制の国際的な枠組みの礎となっている。"}
+],aiComment:"日本ではラジオ放送と参政権拡大が同時に進み、世界では量子力学という現代科学の土台が築かれました。情報と権利、そして科学の基礎が整った年です。",stars:4,starReason:"量子力学の基礎確立とラジオ放送開始"},
+
+1926:{jp:[
+  {title:"高柳健次郎が電子式テレビの受像に世界初成功",category:"IT",desc:"静岡で研究者・高柳健次郎がブラウン管による文字「イ」の電送受信に成功した。",impact:"世界的なテレビ技術の発展史における日本の重要な貢献として評価されている。"},
+  {title:"日本放送協会（NHK）が設立",category:"IT",desc:"全国的な放送網を担う公共放送機関としてNHKが発足した。",impact:"現在に至るまで日本の公共放送を支える基幹組織となっている。"},
+  {title:"箱根土地による郊外住宅開発が進む",category:"インフラ",desc:"都市近郊での計画的な住宅地開発が各地で始まった。",impact:"戦後の郊外ニュータウン開発モデルの先駆けとなった。"},
+  {title:"八木秀次・宇田新太郎が「八木・宇田アンテナ」を発明",category:"科学",desc:"指向性の高い電波受信アンテナが日本人研究者により発明された。",impact:"レーダーやテレビ受信用アンテナとして世界中で広く使われる技術となった。"}
+],world:[
+  {title:"ゴダードが世界初の液体燃料ロケットを打ち上げ",category:"宇宙",desc:"アメリカのロバート・ゴダードが液体燃料ロケットの飛行実験に成功した。",impact:"現代のロケット工学の出発点となり、後の宇宙開発全体の礎を築いた。"},
+  {title:"国際的な麻薬取締条約が拡充",category:"平和",desc:"アヘンなど有害薬物の国際的な取り締まり枠組みが強化された。",impact:"現在の国連薬物犯罪事務所の活動につながる国際協力の先例となった。"},
+  {title:"ドイツで高速道路網の構想が始動",category:"インフラ",desc:"アウトバーンの初期構想と建設準備が進められた。",impact:"世界各国の高速道路網整備のモデルケースとなった。"}
+],aiComment:"日本の高柳健次郎による電子テレビ受像の成功は、世界のテレビ史に残る快挙でした。同じ年、ロケット工学も産声を上げています。",stars:5,starReason:"電子テレビとロケットの原点"},
+
+1927:{jp:[
+  {title:"東京地下鉄（銀座線）が開業",category:"インフラ",desc:"上野〜浅草間で東洋初の地下鉄が開業し、都市交通の新時代を開いた。",impact:"現在の東京の巨大な地下鉄網の原点であり、都市交通のモデルとなった。"},
+  {title:"昭和金融恐慌への対応で銀行制度が整備",category:"経済",desc:"取り付け騒ぎを受け、銀行法改正など金融システムの安定化が図られた。",impact:"現在の金融規制・預金保険制度の考え方の基礎となった。"},
+  {title:"北海道帝国大学で農学研究が拡充",category:"科学",desc:"寒冷地農業の研究体制が強化され、収量向上の技術開発が進んだ。",impact:"現在の日本の農業技術・品種改良研究の基盤となっている。"}
+],world:[
+  {title:"リンドバーグが大西洋単独無着陸横断飛行に成功",category:"インフラ",desc:"チャールズ・リンドバーグがニューヨーク〜パリ間を単独無着陸で飛行した。",impact:"航空技術への信頼を高め、後の大陸間旅客航空の発展を後押しした。"},
+  {title:"第5回ソルベー会議で量子力学の解釈が議論される",category:"科学",desc:"世界の物理学者が集い、量子力学の解釈をめぐる歴史的議論が行われた。",impact:"現代物理学の哲学的基礎を形づくり、量子技術の理解を深める礎となった。"},
+  {title:"テレビ実験放送がイギリス・アメリカでも進展",category:"IT",desc:"各国で電子的な映像伝送の実験が相次いで行われた。",impact:"世界的なテレビ放送時代の幕開けにつながる技術競争が始まった。"}
+],aiComment:"空の旅と量子力学、そして映像技術が同時に進歩し、人類の移動と情報の可能性が大きく広がった年でした。",stars:4,starReason:"大西洋横断飛行と量子論議論の年"},
+
+1928:{jp:[
+  {title:"日本初の全国的なラジオ体操放送が開始",category:"医学",desc:"国民の健康増進を目的としたラジオ体操の放送が全国で始まった。",impact:"現在まで続く国民的な健康習慣として、公衆衛生に貢献し続けている。"},
+  {title:"東京〜大阪間の長距離電話が実用化",category:"IT",desc:"都市間を結ぶ電話網の整備が進み、遠距離通信が身近になった。",impact:"現在の全国通信インフラの発展の重要な一歩となった。"},
+  {title:"北海道での寒冷地稲作の品種改良が進展",category:"科学",desc:"低温に強い稲の品種開発が進み、収穫の安定化が図られた。",impact:"現在の北海道が有数の米どころとなる基盤を築いた。"},
+  {title:"織田幹雄が三段跳びで日本人初の五輪金メダル",category:"スポーツ",desc:"アムステルダム五輪の陸上三段跳びで織田幹雄が優勝した。",impact:"日本人初の五輪陸上金メダルとして、以後の日本陸上界の目標となった。"}
+],world:[
+  {title:"フレミングがペニシリンを発見",category:"医学",desc:"アレクサンダー・フレミングがアオカビから抗菌物質ペニシリンを発見した。",impact:"抗生物質の時代を切り開き、感染症による死亡を劇的に減らす原点となった。"},
+  {title:"不戦条約（ケロッグ＝ブリアン協定）が締結",category:"平和",desc:"戦争を国家政策の手段として放棄することを定めた国際条約が結ばれた。",impact:"戦争放棄の理念は日本国憲法第9条など、後の平和主義に影響を与えた。"},
+  {title:"アメリカで最初のテレビ定期放送実験が開始",category:"IT",desc:"限定的ながら世界初のテレビ定期放送実験がニューヨークで行われた。",impact:"世界的なテレビ産業の萌芽として、後のメディア革命の先駆けとなった。"}
+],aiComment:"ペニシリンの発見は、後に数え切れないほどの命を救うことになる歴史的な出来事でした。平和への制度的な取り組みも進んだ年です。",stars:5,starReason:"ペニシリン発見という医学史上の転換点"},
+
+1929:{jp:[
+  {title:"世界恐慌の影響下で農村振興策の検討が始まる",category:"経済",desc:"世界的な経済危機を受け、農村経済を支える政策の議論が始まった。",impact:"後の農業協同組合制度など、農村支援策の原型が形づくられた。"},
+  {title:"逓信省が航空郵便網の整備を拡充",category:"インフラ",desc:"国内主要都市を結ぶ航空郵便路線の拡張が進められた。",impact:"戦後の民間航空網発展の基礎となるインフラ整備が進んだ。"},
+  {title:"理化学研究所でビタミンB研究が国際的評価を得る",category:"医学",desc:"日本人研究者による栄養学研究が世界的に注目を集めた。",impact:"栄養学分野における日本の国際的な存在感を高める契機となった。"}
+],world:[
+  {title:"ハッブルの法則が発表され宇宙膨張が判明",category:"科学",desc:"エドウィン・ハッブルが銀河の後退速度と距離の関係（宇宙膨張）を示した。",impact:"ビッグバン理論の基礎となり、現代宇宙論の出発点となった。"},
+  {title:"世界恐慌を機に各国で社会保障制度の検討が始まる",category:"経済",desc:"世界的な経済危機への対応として、失業保険など社会保障制度の議論が各国で進んだ。",impact:"戦後の福祉国家・社会保障制度の考え方の重要な出発点の一つとなった。"},
+  {title:"国際的な労働者保護基準がさらに拡充",category:"平和",desc:"恐慌下での労働者保護を目的とした国際的な取り組みが進んだ。",impact:"現在の社会保障・雇用保険制度の考え方の基礎の一部となっている。"},
+  {title:"ハンス・ベルガーが人間の脳波（EEG）測定に成功",category:"医学",desc:"ドイツの精神科医ベルガーが人間の脳波を記録する技術を発表した。",impact:"現在の脳神経科学・てんかん診断など臨床医学の基礎技術となっている。"}
+],aiComment:"世界恐慌という大きな試練の年でしたが、同時にハッブルの発見やEEG測定技術の確立など、科学と医学は着実に前進しました。",stars:4,starReason:"宇宙膨張の発見という科学的偉業"}
+,
+
+1930:{jp:[
+  {title:"特急「燕（つばめ）」が東京〜神戸間で運行開始",category:"インフラ",desc:"当時アジア最速級の特急列車が登場し、鉄道による高速輸送時代を開いた。",impact:"後の新幹線に至る、日本の高速鉄道技術の系譜の出発点となった。"},
+  {title:"日本放送協会が全国中継網を拡大",category:"IT",desc:"ラジオ放送の全国中継網が整備され、情報伝達の速度が大きく向上した。",impact:"災害情報や生活情報を全国へ届ける放送インフラの基盤となった。"},
+  {title:"北海道での寒冷地農業試験が拡充",category:"科学",desc:"低温環境に強い農作物の研究開発がさらに進められた。",impact:"現在の日本の食料自給を支える農業技術の蓄積につながった。"},
+  {title:"金解禁が実施され金本位制に復帰",category:"経済",desc:"金の輸出を解禁し、国際的な金本位制の枠組みに復帰した。",impact:"為替の安定を目指す政策として、戦後の国際通貨体制論議にも影響を与えた。"}
+],world:[
+  {title:"冥王星が発見される",category:"宇宙",desc:"アメリカの天文学者クライド・トンボーが太陽系の新天体・冥王星を発見した。",impact:"太陽系の姿への理解を広げ、後の太陽系外縁天体研究の出発点となった。"},
+  {title:"ロンドン海軍軍縮条約が締結",category:"平和",desc:"主要国間で海軍軍備の制限に関する国際合意が結ばれた。",impact:"軍縮交渉の国際的な枠組みづくりの経験として、後の軍備管理条約に影響した。"},
+  {title:"世界初のジェットエンジン特許が出願",category:"科学",desc:"イギリスの技術者フランク・ホイットルがジェットエンジンの特許を出願した。",impact:"戦後のジェット旅客機時代を切り開く基礎技術となった。"},
+  {title:"エンパイア・ステート・ビルの建設が始まる",category:"インフラ",desc:"当時世界最高層を目指す超高層ビルの建設がニューヨークで着工した。",impact:"翌年の完成とともに、高層建築技術発展の象徴的なプロジェクトとなった。"}
+],aiComment:"鉄道と放送というインフラが日本国内で発展する一方、世界では宇宙の新天体発見とジェット技術の萌芽という、後の時代を形づくる出来事が起きました。",stars:3,starReason:"冥王星発見とジェット技術の萌芽"},
+
+1931:{jp:[
+  {title:"国立公園法が制定",category:"環境",desc:"優れた自然景観を保護し公共の利用に供するための法律が制定された。",impact:"現在の国立公園制度の基礎となり、自然保護と観光振興の両立モデルとなった。"},
+  {title:"重要美術品等ノ保存ニ関スル法律が制定",category:"文化",desc:"貴重な美術品・文化財を保護するための法制度が整備された。",impact:"戦後の文化財保護法へと発展し、日本の文化財保存の基盤を築いた。"},
+  {title:"東北地方で農業共済制度の検討が進む",category:"経済",desc:"冷害などの自然災害から農家を守る共済制度の議論が始まった。",impact:"後の農業災害補償制度の確立につながる重要な一歩となった。"}
+],world:[
+  {title:"エンパイア・ステート・ビルが完成",category:"インフラ",desc:"当時世界最高層となる超高層ビルがニューヨークに完成した。",impact:"高層建築技術の発展を象徴し、後の摩天楼建築の技術基盤となった。"},
+  {title:"中性子の存在を示唆する実験結果が報告される",category:"科学",desc:"原子核物理学の研究が進み、後の中性子発見（1932年）への道が開かれた。",impact:"原子核構造の理解が進み、後の原子力研究の基礎となった。"},
+  {title:"ジェームズ・チャドウィックらが原子核研究を前進",category:"科学",desc:"原子核の内部構造解明に向けた実験研究が世界各地で進んだ。",impact:"物質の根源的な理解を深め、現代物理学の発展を支えた。"}
+],aiComment:"日本では自然や文化を守る制度が生まれ、世界では建築技術と原子核物理学が大きく前進した年でした。",stars:3,starReason:"国立公園制度と超高層建築の誕生"},
+
+1932:{jp:[
+  {title:"日本放送協会が海外向け短波放送を試験開始",category:"IT",desc:"国際的な情報発信を目的とした短波放送の技術検証が進められた。",impact:"戦後の国際放送（NHKワールドなど）につながる技術的な出発点となった。"},
+  {title:"満州における農業開発技術の研究が進む",category:"科学",desc:"寒冷地・大陸性気候への対応を目的とした農業技術研究が行われた。",impact:"後の北海道や東北における低温耐性品種の開発に知見が活かされた。"},
+  {title:"全国健康保険制度の適用拡大が議論される",category:"医学",desc:"労働者向け健康保険の対象拡大に向けた検討が進められた。",impact:"後の国民健康保険制度（1938年）につながる社会保障の議論を深めた。"},
+  {title:"ロサンゼルス五輪で日本選手団が競泳などで活躍",category:"スポーツ",desc:"競泳や陸上競技で日本選手が複数の金メダルを獲得した。",impact:"戦前の日本スポーツ界の国際的な実力を世界に示す成果となった。"}
+],world:[
+  {title:"チャドウィックが中性子を発見",category:"科学",desc:"イギリスの物理学者ジェームズ・チャドウィックが原子核内の中性子を発見した。",impact:"原子核物理学の基礎が確立し、後の原子力エネルギー研究の出発点となった。"},
+  {title:"サイクロトロン（加速器）が実用化",category:"科学",desc:"アーネスト・ローレンスらが世界初の実用的な粒子加速器を開発した。",impact:"素粒子物理学・医療用加速器（がん治療）など幅広い応用の基盤となった。"},
+  {title:"アメリカでニューディール政策の準備が進む",category:"経済",desc:"世界恐慌からの脱却を目指す大規模な経済政策の検討が始まった。",impact:"政府による経済介入という新しい政策モデルとして各国に影響を与えた。"},
+  {title:"ロサンゼルスオリンピックが開催",category:"スポーツ",desc:"世界恐慌下でも国際的なスポーツの祭典としてロサンゼルス五輪が開かれた。",impact:"厳しい経済状況の中でも国際交流を続ける意義を世界に示した。"}
+],aiComment:"中性子の発見と加速器の実用化により、原子核物理学が一気に花開いた年でした。ロサンゼルス五輪では日本選手団も世界的な活躍を見せています。",stars:4,starReason:"中性子発見という原子核物理学の転換点"},
+
+1933:{jp:[
+  {title:"理化学研究所で仁科芳雄の原子核研究室が始動",category:"科学",desc:"日本における原子核物理学の本格的な研究拠点が立ち上げられた。",impact:"戦後の日本の原子核・素粒子物理学研究の中核的な系譜となった。"},
+  {title:"国産初の本格的な航空機エンジン開発が進展",category:"インフラ",desc:"国内メーカーによる航空機用エンジンの研究開発が本格化した。",impact:"戦後の航空機産業、ひいては自動車産業の技術基盤の一部となった。"},
+  {title:"寄生虫予防と学校保健の取り組みが拡充",category:"医学",desc:"学校における健康診断・衛生教育の体制整備が進められた。",impact:"現在の学校保健安全法につながる児童の健康管理制度の礎となった。"}
+],world:[
+  {title:"ローズヴェルトのニューディール政策が始動",category:"経済",desc:"公共事業と金融改革を柱とする大規模な経済政策がアメリカで開始された。",impact:"政府による景気対策のモデルとなり、後の各国の経済政策に影響を与えた。"},
+  {title:"デュポン社がナイロンの基礎研究に着手",category:"科学",desc:"合成繊維の研究が進み、後のナイロン発明（1935年）への道が開かれた。",impact:"衣料や工業製品に革命をもたらす合成繊維時代の幕開けとなった。"},
+  {title:"アメリカでテネシー川流域開発公社（TVA）が設立",category:"インフラ",desc:"河川流域の総合開発による治水・電力供給のモデル事業が始まった。",impact:"世界各国の河川総合開発・地域振興政策の参考モデルとなった。"}
+],aiComment:"日本で原子核研究の拠点が立ち上がり、世界では経済政策と新素材開発の分野で新しい挑戦が始まった年でした。",stars:3,starReason:"原子核研究拠点の始動"},
+
+1934:{jp:[
+  {title:"日本初の国立公園3か所が指定",category:"環境",desc:"瀬戸内海・雲仙・霧島の3地域が最初の国立公園に指定された。",impact:"自然保護と観光の両立を図る国立公園制度が実質的に始動した。"},
+  {title:"室戸台風を教訓に気象観測網の強化が進む",category:"科学",desc:"甚大な被害をもたらした台風の教訓から、気象観測体制の見直しが進んだ。",impact:"後の気象庁による台風予報・防災情報の高度化につながった。"},
+  {title:"東京〜大阪間で長距離バス路線の実証実験",category:"インフラ",desc:"鉄道を補う都市間交通としてバス路線網の検討が進められた。",impact:"戦後の高速バスネットワーク発展の先駆的な取り組みとなった。"}
+],world:[
+  {title:"国際的な小児麻痺（ポリオ）研究が進展",category:"医学",desc:"ポリオの感染メカニズム解明に向けた研究が各国で進められた。",impact:"後のポリオワクチン開発（1950年代）につながる重要な礎となった。"},
+  {title:"イタリアでフェルミが中性子照射による原子核反応を発見",category:"科学",desc:"エンリコ・フェルミが中性子を使った原子核反応の研究で成果を上げた。",impact:"核分裂の発見（1938年）に至る重要な研究の流れをつくった。"},
+  {title:"国際連盟で難民保護の枠組みが拡充",category:"平和",desc:"政治的混乱で生じた難民を保護するための国際的な取り組みが進んだ。",impact:"戦後の国連難民高等弁務官事務所（UNHCR）の理念的な先駆けとなった。"}
+],aiComment:"日本では自然保護と防災体制が前進し、世界では医学と原子核物理学の両分野で後の大発見につながる研究が進みました。",stars:3,starReason:"国立公園始動と原子核研究の進展"},
+
+1935:{jp:[
+  {title:"湯川秀樹が中間子理論を発表",category:"科学",desc:"湯川秀樹が原子核内の力を説明する中間子（メソン）の存在を理論的に予言した。",impact:"1949年のノーベル物理学賞受賞につながり、日本の基礎科学の国際的評価を高めた。"},
+  {title:"東北帝国大学で金属材料研究が国際的評価を得る",category:"科学",desc:"本多光太郎らによる磁性材料の研究が世界的に注目された。",impact:"現在に至る日本の材料科学・磁性材料技術の強みの源流となった。"},
+  {title:"国産初の民間旅客機が試作される",category:"インフラ",desc:"国内メーカーによる旅客輸送用航空機の開発が進められた。",impact:"戦後の航空機産業再建に向けた技術的な土台の一部となった。"}
+],world:[
+  {title:"デュポン社がナイロンを発明",category:"科学",desc:"世界初の完全合成繊維であるナイロンがアメリカで開発された。",impact:"衣料品から工業製品まで、現代の合成素材産業の出発点となった。"},
+  {title:"レーダー技術の基礎実験に成功",category:"IT",desc:"イギリスで電波を用いた物体検知（レーダー）の実証実験が行われた。",impact:"航空管制や気象観測など、現在の電波利用技術の重要な基礎となった。"},
+  {title:"国際労働機関で週40時間労働の基準が議論される",category:"経済",desc:"労働者の労働時間短縮を目指す国際的な基準づくりが進められた。",impact:"現在の労働時間規制の国際的な議論の出発点の一つとなった。"}
+],aiComment:"湯川秀樹の中間子理論は、日本の基礎科学が世界レベルにあることを示した画期的な成果でした。世界でもナイロンとレーダーという、後の生活と安全を支える技術が生まれています。",stars:5,starReason:"湯川秀樹の中間子理論という世界的偉業"},
+
+1936:{jp:[
+  {title:"自動車製造事業法が制定",category:"経済",desc:"国内自動車メーカーの育成を目的とした産業政策が導入された。",impact:"トヨタ・日産など日本の自動車産業が本格的に育つ基盤となった。"},
+  {title:"東北地方で冷害対策の農業技術研究が拡充",category:"科学",desc:"冷害に強い品種改良や栽培技術の研究が進められた。",impact:"現在の日本の稲作における冷害対策技術の蓄積につながった。"},
+  {title:"NHKがテレビ実験放送を開始",category:"IT",desc:"技術研究所でテレビジョン技術の実験放送が試みられた。",impact:"戦後のテレビ放送本格化（1953年）に向けた技術蓄積の一歩となった。"},
+  {title:"前畑秀子がベルリン五輪で日本人女性初の金メダル",category:"スポーツ",desc:"女子200m平泳ぎで前畑秀子が優勝し、日本女性初の五輪金メダルを獲得した。",impact:"女性スポーツの発展と、以後の日本女子競泳界の礎となった。"}
+],world:[
+  {title:"フーバーダムが完成",category:"インフラ",desc:"当時世界最大級のダムがアメリカ・コロラド川に完成した。",impact:"水力発電と治水を両立する大規模ダム建設のモデルケースとなった。"},
+  {title:"ベルリンオリンピックでテレビ試験中継が実施",category:"IT",desc:"史上初めてオリンピック競技の映像がテレビで試験的に中継された。",impact:"後のスポーツ中継・メディア産業発展の先駆的な出来事となった。"},
+  {title:"ケインズが「雇用・利子および貨幣の一般理論」を発表",category:"経済",desc:"政府の財政政策が経済を安定させるという新しい経済理論が示された。",impact:"戦後の各国の経済政策運営に大きな影響を与え続けている。"},
+  {title:"ベルリンオリンピックが開催",category:"スポーツ",desc:"49か国が参加し、当時最大規模の国際スポーツ大会が開かれた。",impact:"近代オリンピックの演出・運営手法の多くがこの大会で確立された。"}
+],aiComment:"日本の自動車産業の礎が築かれ、前畑秀子選手が女性初の金メダルを獲得した年でした。世界ではダム建設やテレビ中継、経済理論という社会基盤となる出来事が相次ぎました。",stars:4,starReason:"前畑秀子の金メダルと自動車産業育成策"},
+
+1937:{jp:[
+  {title:"トヨタ自動車工業が設立",category:"経済",desc:"豊田自動織機から独立する形でトヨタ自動車工業が発足した。",impact:"現在世界最大級の自動車メーカーへと成長し、日本経済を支える存在となった。"},
+  {title:"仁科芳雄のグループが日本初の小型サイクロトロンを完成",category:"科学",desc:"理化学研究所で原子核研究用の粒子加速器が国内で初めて稼働した。",impact:"日本の原子核物理学研究を国際水準に引き上げる重要な設備となった。"},
+  {title:"結核対策のためのBCG接種が本格化",category:"医学",desc:"当時死因の上位を占めた結核への対策として予防接種が広がった。",impact:"戦後の結核死亡率の大幅な低下につながる公衆衛生施策の柱となった。"}
+],world:[
+  {title:"ゴールデンゲートブリッジが完成",category:"インフラ",desc:"当時世界最長級の吊り橋がサンフランシスコに完成した。",impact:"大規模吊り橋建設の技術水準を大きく引き上げ、後の橋梁工学に影響を与えた。"},
+  {title:"アモキシシリン等の礎となる抗菌薬研究が進展",category:"医学",desc:"サルファ剤など初期の抗菌薬の研究・実用化が世界各地で進んだ。",impact:"ペニシリンと並び、感染症治療における抗菌薬時代の礎を築いた。"},
+  {title:"中国大陸で人道支援活動の国際的枠組みが模索される",category:"平和",desc:"戦禍による難民支援のための国際的な人道支援体制が検討された。",impact:"戦後の国際人道支援の枠組み構築における教訓の一つとなった。"}
+],aiComment:"トヨタ自動車の誕生は、戦後日本経済の屋台骨となる自動車産業の出発点でした。同じ年、日本は原子核研究でも重要な一歩を踏み出しています。",stars:4,starReason:"トヨタ自動車誕生という産業史の転換点"},
+
+1938:{jp:[
+  {title:"国民健康保険法が制定",category:"医学",desc:"農山漁村を中心に、国民が広く医療を受けられる保険制度が創設された。",impact:"現在の国民皆保険制度の礎となり、日本の医療アクセスを大きく向上させた。"},
+  {title:"仁科芳雄が大型サイクロトロンの建設に着手",category:"科学",desc:"より大規模な原子核研究用加速器の建設プロジェクトが始まった。",impact:"日本の原子核物理学が世界の最先端研究に伍する基盤を築いた。"},
+  {title:"電力管理法により全国的な電力供給体制が整備",category:"インフラ",desc:"発電・送電を国が統制し、安定的な電力供給網の構築が進められた。",impact:"戦後の電力再編を経て、現在の全国的な電力インフラの原型となった。"}
+],world:[
+  {title:"ハーンとシュトラスマンが核分裂を発見",category:"科学",desc:"ウラン原子核が中性子照射により分裂する現象がドイツで発見された。",impact:"原子力発電や核医学など、後のエネルギー・医療技術の科学的基礎となった。"},
+  {title:"世界初の複写機（ゼログラフィー）技術が発明される",category:"IT",desc:"チェスター・カールソンが乾式複写技術の基礎を発明した。",impact:"後のコピー機・レーザープリンター産業の技術的な出発点となった。"},
+  {title:"国際的な難民条約の議論が本格化",category:"平和",desc:"迫害を逃れる人々を保護するための国際的な議論が活発化した。",impact:"戦後の難民条約（1951年）制定に向けた重要な布石となった。"}
+],aiComment:"日本では国民皆保険への大きな一歩が踏み出され、世界では核分裂の発見という、後のエネルギー技術を大きく左右する科学的発見がありました。",stars:5,starReason:"核分裂発見と国民健康保険制度創設"},
+
+1939:{jp:[
+  {title:"国民健康保険制度の全国普及が進む",category:"医学",desc:"前年に創設された国民健康保険の加入促進が各地で進められた。",impact:"戦後の国民皆保険達成（1961年）に向けた重要な準備段階となった。"},
+  {title:"仁科芳雄グループが原子核物理学で国際的な論文を発表",category:"科学",desc:"日本発の原子核研究の成果が国際的な学術誌に発表された。",impact:"日本の物理学研究が世界の第一線にあることを示す成果となった。"},
+  {title:"満蒙開拓に伴う寒冷地農業技術の蓄積が進む",category:"科学",desc:"厳しい気候条件下での農業技術に関する知見の集積が進んだ。",impact:"戦後の北海道における大規模農業技術の発展に一部影響を与えた。"}
+],world:[
+  {title:"ドイツでヘリコプターの実用機が初飛行",category:"インフラ",desc:"フォッケウルフFw61が世界初の実用的なヘリコプターとして飛行に成功した。",impact:"救助・医療搬送など、後のヘリコプター活用の技術的な出発点となった。"},
+  {title:"抗生物質研究がフローリー・チェインらにより本格化",category:"医学",desc:"ペニシリンを実用的な治療薬にするための精製研究が進められた。",impact:"数年後の量産化を経て、抗生物質による感染症治療の時代が本格的に始まった。"},
+  {title:"アメリカでナイロン製ストッキングが発売され化学産業が拡大",category:"経済",desc:"合成繊維製品の商業化が進み、新しい消費財市場が生まれた。",impact:"化学工業の産業化モデルとして、後の素材産業の発展に影響を与えた。"}
+],aiComment:"世界情勢が緊迫する中でも、医学・航空技術・化学産業では着実な前進が続きました。ペニシリンの実用化に向けた研究が本格化したのもこの時期です。",stars:3,starReason:"ペニシリン実用化研究の本格化"}
+,
+
+1940:{jp:[
+  {title:"仁科芳雄グループが大型サイクロトロンを本格稼働",category:"科学",desc:"理化学研究所の大型加速器が本格的に稼働し、原子核研究が進展した。",impact:"戦後の日本の原子核・素粒子物理学研究の重要な技術基盤となった。"},
+  {title:"国民体力法が制定され健康増進策が拡充",category:"医学",desc:"国民の体力向上を目的とした健康診断・体力測定の制度が整えられた。",impact:"戦後の学校健康診断や体力測定制度の一部の原型となった。"},
+  {title:"電子顕微鏡の国産開発が進む",category:"科学",desc:"国内メーカーによる電子顕微鏡の研究開発が本格的に始まった。",impact:"戦後の日本製電子顕微鏡が世界市場で高いシェアを得る出発点となった。"}
+],world:[
+  {title:"世界初のヘリコプター量産機VS-300が実用化",category:"インフラ",desc:"イゴール・シコルスキーが実用的なヘリコプターの開発に成功した。",impact:"災害救助・医療搬送用ヘリコプターの実用化への道を開いた。"},
+  {title:"抗マラリア薬の研究が世界的に進展",category:"医学",desc:"熱帯病対策としてのマラリア治療薬開発が各国で進められた。",impact:"戦後の熱帯感染症対策における重要な医学研究の基盤となった。"},
+  {title:"ペニシリンの精製に成功し治療への応用が進む",category:"医学",desc:"フローリーとチェインがペニシリンの実用的な精製方法を確立した。",impact:"大量生産への道が開かれ、数百万人の命を救う医薬品となった。"}
+],aiComment:"世界が戦争へ向かう緊張の中でも、加速器や電子顕微鏡、そしてペニシリンの精製など、後の科学と医療を支える研究は着実に前進していました。",stars:4,starReason:"ペニシリン精製成功という医学的偉業"},
+
+1941:{jp:[
+  {title:"科学研究の国家的な体制強化が進められる",category:"科学",desc:"戦時下でも基礎研究・応用研究への投資体制の整備が図られた。",impact:"戦後の研究機関再編・科学技術政策の土台の一部となった。"},
+  {title:"結核対策として保健所法が制定",category:"医学",desc:"地域住民の健康を支える保健所の設置根拠となる法律が定められた。",impact:"現在まで続く保健所制度の基礎となり、地域医療・公衆衛生を支えている。"},
+  {title:"電子顕微鏡の国産第1号機が完成",category:"科学",desc:"日本製の実用的な電子顕微鏡が初めて完成した。",impact:"戦後、日本の電子顕微鏡技術が世界トップクラスに成長する出発点となった。"}
+],world:[
+  {title:"世界初の商業用コンピュータZ3が完成",category:"IT",desc:"ドイツの技術者コンラート・ツーゼが世界初のプログラム制御可能な計算機を完成させた。",impact:"現代のコンピュータ技術の直接的な先駆けとなり、情報化社会の礎を築いた。"},
+  {title:"ペニシリンが初めて人間の治療に使用される",category:"医学",desc:"イギリスで感染症患者へのペニシリン投与治療が初めて実施された。",impact:"抗生物質による治療の実用化が進み、感染症治療の常識を大きく変えた。"},
+  {title:"大西洋憲章が発表され戦後国際秩序の構想が示される",category:"平和",desc:"戦後の平和構築に向けた基本原則が米英首脳により示された。",impact:"後の国際連合設立（1945年）の理念的な土台の一つとなった。"}
+],aiComment:"世界初のプログラム可能なコンピュータが誕生し、情報化時代の第一歩が記されました。ペニシリンの臨床応用も本格的に始まっています。",stars:5,starReason:"世界初のコンピュータZ3誕生"},
+
+1942:{jp:[
+  {title:"科学研究動員体制の中で基礎研究が継続",category:"科学",desc:"厳しい戦時体制下でも、大学や研究機関での基礎研究が続けられた。",impact:"戦後の急速な学術復興を支える研究者・知見の蓄積につながった。"},
+  {title:"保健所の全国的な設置が進む",category:"医学",desc:"前年制定の保健所法に基づき、全国各地で保健所の設置が進められた。",impact:"地域に根ざした公衆衛生体制の全国展開の基礎を築いた。"},
+  {title:"食糧増産のための農業技術研究が強化",category:"科学",desc:"限られた資源の中での収量向上を目指す研究が進められた。",impact:"戦後の高度経済成長期における農業生産性向上の技術的土台となった。"}
+],world:[
+  {title:"世界初の人工的な原子炉が臨界に到達",category:"科学",desc:"シカゴ大学でエンリコ・フェルミらが世界初の制御された核分裂連鎖反応を実現した。",impact:"後の原子力発電の実用化（1950年代）につながる科学的な出発点となった。"},
+  {title:"ペニシリンの量産技術開発が加速",category:"医学",desc:"アメリカで抗生物質の大量生産に向けた発酵技術の開発が進められた。",impact:"翌年以降の大量生産を経て、世界中で感染症治療に使われるようになった。"},
+  {title:"レーダー技術が航空・海上安全に応用拡大",category:"IT",desc:"電波を用いた探知技術の実用化がさらに進んだ。",impact:"戦後の航空管制・気象観測レーダーなど、幅広い安全技術に発展した。"}
+],aiComment:"世界初の原子炉臨界という科学史に残る出来事があった年です。この技術は後にエネルギーとしても医療としても人類に大きな恩恵をもたらすことになります。",stars:4,starReason:"世界初の原子炉臨界達成"},
+
+1943:{jp:[
+  {title:"国内の電子工学・無線技術研究が進展",category:"科学",desc:"通信・レーダー関連の技術研究が大学・研究機関で進められた。",impact:"戦後の日本の電子産業・エレクトロニクス技術発展の技術的素地となった。"},
+  {title:"栄養研究所で代用食品の研究が進む",category:"科学",desc:"限られた食料資源の中での栄養確保に関する研究が行われた。",impact:"戦後の食品科学・栄養学研究の知見の一部として活かされた。"},
+  {title:"結核対策の医療体制がさらに強化",category:"医学",desc:"当時の主要な死因であった結核への対策が各地で進められた。",impact:"戦後の結核予防法制定（1951年）に向けた土台の一つとなった。"}
+],world:[
+  {title:"世界初のプログラム可能な電子計算機コロッサスが稼働",category:"IT",desc:"イギリスで暗号解読用の電子計算機コロッサスが実用化された。",impact:"電子式コンピュータの実用性を証明し、戦後のコンピュータ開発を加速させた。"},
+  {title:"ストレプトマイシンが発見される",category:"医学",desc:"セルマン・ワクスマンらが結核に効く抗生物質ストレプトマイシンを発見した。",impact:"当時不治の病とされた結核の治療に道を開き、多くの命を救うことになった。"},
+  {title:"アクアラング（水中呼吸装置）が発明される",category:"科学",desc:"ジャック＝イヴ・クストーらが実用的なスキューバダイビング器材を開発した。",impact:"海洋研究や海洋資源開発など、人類の海への関わり方を大きく広げた。"}
+],aiComment:"結核の特効薬ストレプトマイシンの発見は、多くの命を救う医学史上の大きな一歩でした。電子計算機の実用化も進んでいます。",stars:5,starReason:"ストレプトマイシン発見という医学的偉業"},
+
+1944:{jp:[
+  {title:"戦時下でも学術研究の記録・継承が図られる",category:"科学",desc:"研究者や大学関係者により、学術資料や研究成果の保全が試みられた。",impact:"戦後の学術復興に際して、貴重な研究基盤の一部が引き継がれた。"},
+  {title:"医療従事者養成機関の拡充が進む",category:"医学",desc:"医師・看護師などの医療人材を育成する体制の強化が図られた。",impact:"戦後の医療人材不足解消に向けた基盤づくりの一つとなった。"},
+  {title:"気象観測技術の高度化が進められる",category:"科学",desc:"台風などの自然災害に備えるための気象観測研究が続けられた。",impact:"戦後の気象庁による近代的な気象予報体制の基礎の一部となった。"}
+],world:[
+  {title:"ブレトンウッズ会議が開催され戦後国際経済体制が構想される",category:"経済",desc:"戦後の国際通貨制度の枠組みを話し合う国際会議が開かれた。",impact:"IMF・世界銀行の設立につながり、戦後の国際経済協調の基盤を築いた。"},
+  {title:"エイヴリーがDNAが遺伝情報を担うことを示す研究を発表",category:"科学",desc:"オズワルド・エイヴリーらが遺伝物質の本体がDNAであることを示唆する実験結果を発表した。",impact:"分子生物学の出発点となり、後のDNA構造解明（1953年）への道を開いた。"},
+  {title:"ペニシリンの大量生産体制が確立",category:"医学",desc:"アメリカでペニシリンの工業的な大量生産技術が確立された。",impact:"世界中で抗生物質が広く使われるようになる基盤を築いた。"}
+],aiComment:"戦後の国際経済秩序の構想と、生命の設計図DNAへの理解の第一歩が同時に記された年でした。ペニシリンの量産化も大きく進んでいます。",stars:4,starReason:"DNAが遺伝情報を担う証拠の発見"},
+
+1945:{jp:[
+  {title:"国際連合への参加に向けた準備が戦後始まる",category:"平和",desc:"敗戦を経て、国際社会への復帰と平和国家としての歩みが模索され始めた。",impact:"1956年の国連加盟へとつながる、戦後日本の国際協調路線の出発点となった。"},
+  {title:"広島・長崎の被爆を教訓に核兵器廃絶運動が始まる",category:"平和",desc:"甚大な被害を受けた広島・長崎から、核兵器廃絶を訴える市民運動が生まれた。",impact:"世界で最も強い説得力を持つ反核運動として、国際的な核軍縮議論に影響を与え続けている。"},
+  {title:"戦災からの復興に向けた都市計画の検討が始まる",category:"インフラ",desc:"焼失した都市の再建に向けた近代的な都市計画の議論が始まった。",impact:"戦後復興都市計画として、現在の主要都市の街区や道路網の基礎となった。"}
+],world:[
+  {title:"国際連合が発足",category:"平和",desc:"世界の平和と安全を維持するための新たな国際機構、国際連合が設立された。",impact:"以後80年近くにわたり、国際紛争の調停や人道支援の中心的な枠組みとなっている。"},
+  {title:"世界初の汎用電子計算機ENIACの開発が完了間近に",category:"IT",desc:"アメリカで大規模な電子計算機ENIACの開発が最終段階を迎えた。",impact:"翌年の完成を経て、現代コンピュータ産業の実質的な出発点となった。"},
+  {title:"世界保健機関の設立に向けた国際的な議論が始まる",category:"医学",desc:"国際的な保健協力の恒久的な枠組みづくりに向けた検討が始まった。",impact:"1948年のWHO設立につながり、世界の感染症対策・保健向上に貢献し続けている。"}
+],aiComment:"人類史上最も悲劇的な年の一つでしたが、その痛切な教訓から、国際連合という恒久平和への仕組みと、核廃絶を訴える力強い声が生まれました。",stars:5,starReason:"国際連合発足という戦後平和の出発点"},
+
+1946:{jp:[
+  {title:"日本国憲法が公布",category:"平和",desc:"主権在民・基本的人権の尊重・平和主義を三原則とする新憲法が公布された。",impact:"戦後日本の民主主義と平和主義の根幹として、今も社会の基盤となっている。"},
+  {title:"東京通信工業（現ソニー）が設立",category:"IT",desc:"井深大・盛田昭夫らにより、後の世界的電機メーカーの前身が創業した。",impact:"トランジスタラジオやウォークマンなど、世界を変える製品を生む原点となった。"},
+  {title:"労働組合法・労働基準法の整備が進む",category:"平和",desc:"労働者の権利を保護するための基本的な法制度が整えられた。",impact:"現在の労働者保護制度の根幹として、働く人々の権利を支え続けている。"}
+],world:[
+  {title:"世界初の汎用電子計算機ENIACが完成",category:"IT",desc:"アメリカでプログラム可能な大型電子計算機ENIACが完成し稼働を開始した。",impact:"現代のコンピュータ産業とデジタル社会全体の直接的な出発点となった。"},
+  {title:"国際連合児童基金（ユニセフ）が設立",category:"平和",desc:"戦争で被害を受けた子どもたちを支援する国際機関が設立された。",impact:"現在も世界中の子どもの命と権利を守る中心的な国際機関として活動している。"},
+  {title:"世界保健機関（WHO）憲章が採択される",category:"医学",desc:"すべての人の健康を目的とする国際保健機関の設立文書が採択された。",impact:"感染症対策やワクチン普及など、世界の公衆衛生向上を牽引してきた。"}
+],aiComment:"日本国憲法の公布とソニーの創業という、戦後日本の平和と技術革新の原点が同じ年に生まれました。世界ではENIACの完成とユニセフ・WHOの設立が、その後の情報化と国際保健協力を方向づけました。",stars:5,starReason:"日本国憲法公布とENIAC完成という二重の転換点"},
+
+1947:{jp:[
+  {title:"日本国憲法が施行",category:"平和",desc:"国民主権・平和主義・基本的人権を柱とする新憲法が施行された。",impact:"以後80年近くにわたり、日本社会の基本的な枠組みを支え続けている。"},
+  {title:"教育基本法・学校教育法が制定",category:"教育",desc:"六・三・三・四制など、戦後の新しい教育制度の基盤が整えられた。",impact:"現在の日本の学校教育制度の骨格として今も使われ続けている。"},
+  {title:"労働基準法が施行",category:"平和",desc:"労働時間や賃金など、労働条件の最低基準を定める法律が施行された。",impact:"現在まで続く労働者保護の基本法として、働く環境の改善を支えている。"}
+],world:[
+  {title:"トランジスタが発明される",category:"IT",desc:"ベル研究所のショックレー、バーディーン、ブラッテンがトランジスタを発明した。",impact:"真空管に代わる小型・省電力の電子部品として、現代の電子機器全体の基礎となった。"},
+  {title:"インドとパキスタンが独立",category:"平和",desc:"イギリスからの独立を経て、南アジアに新しい二つの国家が誕生した。",impact:"戦後の脱植民地化の流れを象徴し、その後多くの国の独立運動に影響を与えた。"},
+  {title:"世界初の超音速飛行に成功",category:"インフラ",desc:"アメリカのチャック・イェーガーが音速を超える飛行に世界で初めて成功した。",impact:"超音速航空機・宇宙飛行技術の発展における重要なマイルストーンとなった。"}
+],aiComment:"トランジスタの発明は、後のあらゆる電子機器・コンピュータ・スマートフォンを生み出す種となった、20世紀最大級の発明の一つです。",stars:5,starReason:"トランジスタ発明という電子技術の起点"},
+
+1948:{jp:[
+  {title:"福井謙一らが量子化学の研究を本格化",category:"科学",desc:"分子軌道理論など、日本の理論化学研究が国際的な水準に育っていった。",impact:"1981年のノーベル化学賞受賞につながる研究の重要な土台となった。"},
+  {title:"医療法・医師法が制定",category:"医学",desc:"病院の設置基準や医師の資格に関する基本的な法制度が整備された。",impact:"現在の日本の医療提供体制の法的基盤として機能し続けている。"},
+  {title:"優生保護法（後の母体保護法）が制定",category:"医学",desc:"母体の健康保護を目的とした医療関連法が整備された。",impact:"後年、人権上の課題が指摘され改正されるなど、医療倫理を考える契機ともなった。"}
+],world:[
+  {title:"世界保健機関（WHO）が正式に発足",category:"医学",desc:"すべての人々の健康を目的とする国連の専門機関として正式に活動を開始した。",impact:"以後、天然痘根絶やワクチン普及など、世界の保健向上を牽引し続けている。"},
+  {title:"世界人権宣言が国連総会で採択",category:"平和",desc:"すべての人が生まれながらに持つ権利を定めた画期的な宣言が採択された。",impact:"各国の憲法・人権関連法の基礎となり、現在も人権保障の基本理念であり続けている。"},
+  {title:"トランジスタの発明が公式発表される",category:"IT",desc:"ベル研究所が前年に発明したトランジスタを正式に発表した。",impact:"電子機器の小型化・省電力化を可能にし、情報化社会の物理的な基盤を築いた。"},
+  {title:"ロンドンオリンピックが開催",category:"スポーツ",desc:"第二次世界大戦後初めてのオリンピックがロンドンで開催された。",impact:"戦後の国際スポーツ交流再開を象徴する大会となった。"}
+],aiComment:"世界人権宣言の採択は、人類が「すべての人の尊厳」という理念を初めて国際的に明文化した歴史的な出来事でした。WHOの発足、そして戦後初のオリンピック開催と、平和と健康への基盤が築かれた年です。",stars:5,starReason:"世界人権宣言採択という人類史的偉業"},
+
+1949:{jp:[
+  {title:"湯川秀樹が日本人初のノーベル物理学賞を受賞",category:"科学",desc:"中間子理論の功績により、湯川秀樹が日本人として初めてノーベル賞を受賞した。",impact:"戦後の日本社会に大きな希望を与え、以後の日本の科学研究の国際的地位向上を象徴した。"},
+  {title:"教育委員会制度が発足",category:"教育",desc:"地方教育行政を担う教育委員会制度が全国に導入された。",impact:"地域に根ざした教育行政の仕組みとして、現在も学校教育を支えている。"},
+  {title:"シャウプ勧告に基づく税制改革が行われる",category:"経済",desc:"戦後の税制を近代化するための包括的な改革案が実施された。",impact:"現在の日本の税制の基本的な骨格に大きな影響を与え続けている。"}
+],world:[
+  {title:"北大西洋条約機構（NATO）が設立",category:"平和",desc:"集団安全保障を目的とした西側諸国の軍事同盟が発足した。",impact:"戦後の国際安全保障の枠組みとして、現在も国際政治に大きな影響を持つ。"},
+  {title:"世界気象機関（WMO）が発足",category:"環境",desc:"各国の気象観測データを共有・調整する国際機関が設立された。",impact:"現在の国際的な気象予報・気候変動観測体制の基盤となっている。"},
+  {title:"経口避妊薬の基礎研究が進展",category:"医学",desc:"ホルモンによる妊娠調節メカニズムの研究が各国で進められた。",impact:"1960年代の経口避妊薬実用化につながり、女性の健康と社会進出に影響を与えた。"}
+],aiComment:"湯川秀樹のノーベル賞受賞は、戦後の焼け跡から立ち上がる日本にとって、大きな誇りと希望をもたらした出来事でした。",stars:5,starReason:"湯川秀樹 日本人初のノーベル賞受賞"}
+,
+
+1950:{jp:[
+  {title:"文化財保護法が制定",category:"文化",desc:"法隆寺金堂の焼損を教訓に、文化財を体系的に保護する法律が制定された。",impact:"現在の国宝・重要文化財制度の基盤となり、日本の文化遺産保護を支えている。"},
+  {title:"生活保護法が施行",category:"平和",desc:"生活に困窮する国民の最低生活を保障する社会保障制度が整備された。",impact:"現在に続くセーフティネットとして、日本の社会保障制度の柱の一つとなっている。"},
+  {title:"朝鮮戦争特需により重工業が急速に復興",category:"経済",desc:"特需景気により、造船・機械などの重工業生産が急速に回復した。",impact:"戦後日本の高度経済成長への足がかりとなる産業基盤が築かれた。"}
+],world:[
+  {title:"チューリングが「計算する機械と知性」を発表",category:"AI",desc:"アラン・チューリングが機械の知能を判定する「チューリングテスト」を提唱した。",impact:"人工知能という学問分野の思想的な出発点となり、現在のAI研究の礎となった。"},
+  {title:"アメリカでコレラワクチンなど感染症対策が進展",category:"医学",desc:"世界各地で感染症予防のためのワクチン開発・接種体制が強化された。",impact:"戦後の乳幼児死亡率低下など、世界的な公衆衛生の向上に貢献した。"},
+  {title:"ユネスコ憲章に基づく国際教育協力が本格化",category:"教育",desc:"教育・科学・文化を通じた国際協力を進めるユネスコの活動が拡大した。",impact:"世界遺産や識字教育支援など、現在も続く国際協力の枠組みとなっている。"}
+],aiComment:"チューリングの論文は、機械が知性を持ちうるかという問いを初めて学術的に提起したもので、現在のAIブームの思想的原点といえる出来事です。",stars:5,starReason:"AIの思想的起点となったチューリングの論文"},
+
+1951:{jp:[
+  {title:"サンフランシスコ平和条約が締結",category:"平和",desc:"連合国と日本の間で戦争状態を終結させる平和条約が締結された。",impact:"日本の主権回復につながり、国際社会への復帰の重要な一歩となった。"},
+  {title:"結核予防法が制定",category:"医学",desc:"当時最大の死因であった結核への総合的な対策法が整備された。",impact:"以後の結核死亡率の劇的な低下に貢献し、日本の平均寿命延伸を後押しした。"},
+  {title:"民間ラジオ放送が開始",category:"IT",desc:"NHKに加え、民間放送局によるラジオ放送が全国で始まった。",impact:"多様な情報・娯楽コンテンツが広がり、戦後のメディア産業発展の礎となった。"}
+],world:[
+  {title:"難民の地位に関する条約が採択",category:"平和",desc:"迫害を逃れる難民を国際的に保護するための条約が国連で採択された。",impact:"現在も難民保護の中心的な国際法として、多くの人々の命を守っている。"},
+  {title:"世界初の商用コンピュータUNIVAC Iが稼働",category:"IT",desc:"アメリカで初めて商業目的に利用された電子計算機が稼働を開始した。",impact:"コンピュータが研究用途から産業・行政用途へ広がる出発点となった。"},
+  {title:"原子力発電の実験炉が世界初の発電に成功",category:"科学",desc:"アメリカの実験炉EBR-Iが世界で初めて原子力による発電を実証した。",impact:"1950年代後半以降の商用原子力発電所建設への道を開いた。"}
+],aiComment:"日本は主権を回復し国際社会への復帰を果たしました。世界では商用コンピュータの登場と原子力発電の実証という、後の産業構造を変える技術が生まれています。",stars:4,starReason:"サンフランシスコ平和条約と商用コンピュータ登場"},
+
+1952:{jp:[
+  {title:"日本が国際社会に主権国家として復帰",category:"平和",desc:"サンフランシスコ平和条約発効により、日本は独立国として主権を回復した。",impact:"戦後復興から高度経済成長へ向かう、日本の新たな出発点となった。"},
+  {title:"IMF・世界銀行に加盟",category:"経済",desc:"国際通貨基金と世界銀行への加盟を果たし、国際経済への復帰が進んだ。",impact:"戦後日本の対外経済関係の正常化と、経済成長のための国際協調が始まった。"},
+  {title:"NHKがテレビ放送実験局の免許を取得",category:"IT",desc:"本放送に向けたテレビジョン技術の実証実験が拡大した。",impact:"翌年のテレビ本放送開始（1953年）に向けた最終段階となった。"},
+  {title:"ヘルシンキ五輪に戦後初めて参加",category:"スポーツ",desc:"主権回復直後の日本選手団が、戦後初めてオリンピックに参加した。",impact:"国際スポーツ界への復帰を象徴し、以後の日本のオリンピック参加が本格化した。"}
+],world:[
+  {title:"世界初の水素爆弾実験が実施される",category:"科学",desc:"アメリカが太平洋で世界初の水爆実験を行った。核技術の脅威が広く認識された。",impact:"核軍縮運動が国際的に活発化する契機となり、後の核不拡散条約に影響した。"},
+  {title:"ソーク博士がポリオワクチンの開発に成功",category:"医学",desc:"ジョナス・ソークが不活化ポリオワクチンの開発に成功した。",impact:"世界的なポリオ流行を終息させ、後のポリオ根絶運動の基盤となった。"},
+  {title:"国連総会で女性の参政権に関する条約が採択",category:"平和",desc:"すべての国で女性に参政権を保障することを求める条約が採択された。",impact:"世界各国の女性参政権拡大を後押しする重要な国際的枠組みとなった。"},
+  {title:"ヘルシンキオリンピックが開催",category:"スポーツ",desc:"69か国が参加し、ソ連が初参加を果たした冷戦下の国際大会となった。",impact:"東西陣営が同じ舞台で競う場として、国際スポーツ交流の重要性を示した。"}
+],aiComment:"日本が国際社会に復帰する一方、世界ではポリオワクチンという多くの子どもの命を救う医学的偉業が達成されました。ヘルシンキ五輪では日本選手団も戦後初の国際舞台に立っています。",stars:5,starReason:"ポリオワクチン開発という医学的偉業"},
+
+1953:{jp:[
+  {title:"NHKがテレビ本放送を開始",category:"IT",desc:"日本で初めてのテレビジョン本放送がNHKにより開始された。",impact:"以後70年以上にわたるテレビというメディアの歴史が日本で始まった。"},
+  {title:"民間放送によるテレビ本放送も開始",category:"IT",desc:"日本テレビによる民間初のテレビ本放送が始まった。",impact:"公共放送と民間放送が並立する日本独自の放送体制の基礎となった。"},
+  {title:"町村合併促進法が制定",category:"インフラ",desc:"小規模な市町村を合併し行政基盤を強化する政策が進められた。",impact:"現在の日本の市町村行政の効率化・広域化の出発点となった。"}
+],world:[
+  {title:"ワトソンとクリックがDNAの二重らせん構造を解明",category:"科学",desc:"生命の設計図であるDNAの構造が、二重らせんとして解明された。",impact:"分子生物学・遺伝子工学の礎となり、後のゲノム解読や遺伝子治療につながった。"},
+  {title:"エベレスト初登頂に成功",category:"文化",desc:"ヒラリーとテンジンが世界最高峰エベレストへの人類初登頂を達成した。",impact:"人類の限界への挑戦を象徴する出来事として、登山史・探検史に刻まれた。"},
+  {title:"世界初の原子力潜水艦の建造が進む",category:"インフラ",desc:"原子力を動力とする潜水艦の開発がアメリカで進められた。",impact:"後の原子力技術の民生・軍事両面での応用拡大につながった。"}
+],aiComment:"DNAの二重らせん構造の発見は、20世紀科学史上最大級の発見の一つです。生命の仕組みを分子レベルで理解する時代が始まりました。",stars:5,starReason:"DNA二重らせん構造の解明という科学史的偉業"},
+
+1954:{jp:[
+  {title:"第五福竜丸事件を機に反核運動が全国に拡大",category:"平和",desc:"ビキニ環礁での水爆実験による被ばく事件を受け、原水爆禁止運動が広がった。",impact:"日本の平和運動の重要な原点となり、後の核兵器廃絶運動を国際的に後押しした。"},
+  {title:"防衛庁・自衛隊が発足",category:"平和",desc:"国の防衛を担う組織として防衛庁・自衛隊が設置された。",impact:"戦後日本の安全保障体制の基本的な枠組みが形づくられた。"},
+  {title:"洞爺丸台風を教訓に気象・海難対策が強化",category:"環境",desc:"甚大な被害を出した台風を教訓に、気象観測と海難防止策の見直しが進んだ。",impact:"現在の台風予報の高度化や船舶安全基準の強化につながった。"}
+],world:[
+  {title:"世界初の原子力発電所オブニンスク原発が稼働",category:"科学",desc:"ソ連で世界初の商業規模の原子力発電所が稼働を開始した。",impact:"原子力発電が実用的なエネルギー源として世界に広がる出発点となった。"},
+  {title:"ソーク・ポリオワクチンの大規模接種が始まる",category:"医学",desc:"アメリカで数百万人規模のポリオワクチン接種プログラムが開始された。",impact:"世界的なポリオ流行の終息に向けた大きな一歩となった。"},
+  {title:"CERN（欧州原子核研究機構）が設立",category:"科学",desc:"素粒子物理学の国際共同研究拠点としてCERNが設立された。",impact:"後のインターネット誕生（WWW）やヒッグス粒子発見など、多くの成果を生んだ。"}
+],aiComment:"第五福竜丸事件という悲劇から、日本の平和運動が世界に広がる大きな力となりました。世界では原子力発電とCERN設立という、その後のエネルギーと科学研究を方向づける出来事がありました。",stars:4,starReason:"CERN設立と原子力発電の実用化"},
+
+1955:{jp:[
+  {title:"東京通信工業がトランジスタラジオを発売",category:"IT",desc:"日本初のトランジスタラジオがソニーの前身企業から発売された。",impact:"小型・軽量な電子機器という日本の得意分野を切り開く先駆けとなった。"},
+  {title:"経済企画庁が「もはや戦後ではない」と経済白書で表現",category:"経済",desc:"経済白書で日本経済が戦前水準を回復したことが明確に示された。",impact:"高度経済成長期の本格的な始まりを象徴する言葉として語り継がれている。"},
+  {title:"原子力基本法制定に向けた議論が本格化",category:"科学",desc:"平和利用に限定した原子力研究開発の法制度づくりが進められた。",impact:"1956年の原子力委員会発足など、日本の原子力政策の枠組みを形成した。"}
+],world:[
+  {title:"ソーク・ワクチンの効果が正式に確認される",category:"医学",desc:"大規模接種の結果、ポリオワクチンの高い有効性が公式に確認された。",impact:"世界各国でのポリオワクチン普及が加速し、流行の終息に大きく貢献した。"},
+  {title:"アインシュタインとラッセルが核兵器廃絶を訴える宣言を発表",category:"平和",desc:"著名な科学者らが核戦争の危険性を訴え、科学者の社会的責任を提起した。",impact:"後のパグウォッシュ会議創設など、科学者による平和運動の重要な出発点となった。"},
+  {title:"世界初の商用原子力発電が本格的に拡大",category:"科学",desc:"複数の国で原子力発電所の建設計画が具体化し始めた。",impact:"エネルギー源の多様化が進み、後のエネルギー政策に大きな影響を与えた。"}
+],aiComment:"日本は「もはや戦後ではない」という言葉とともに高度経済成長へ踏み出し、世界ではポリオワクチンの効果確認と核兵器廃絶を訴える科学者の声が広がりました。",stars:4,starReason:"高度経済成長の本格的な始まり"},
+
+1956:{jp:[
+  {title:"日本が国際連合に加盟",category:"平和",desc:"国際社会への復帰の総仕上げとして、日本の国連加盟が実現した。",impact:"以後、国連を通じた国際協力・平和貢献の道を歩む出発点となった。"},
+  {title:"経済白書が「もはや戦後ではない」と総括",category:"経済",desc:"国民所得が戦前水準を上回り、高度経済成長期の到来が明確になった。",impact:"以後約20年続く高度経済成長の起点として記憶される出来事となった。"},
+  {title:"南極観測船「宗谷」が初の南極観測に出発",category:"科学",desc:"日本初の南極地域観測隊が「宗谷」で南極に向けて出発した。",impact:"以後半世紀以上続く日本の南極科学観測プログラムの出発点となった。"},
+  {title:"メルボルン五輪で日本選手団が活躍",category:"スポーツ",desc:"体操や競泳などで日本選手が複数のメダルを獲得した。",impact:"以後の日本の五輪常連国としての地位を確立する足がかりとなった。"}
+],world:[
+  {title:"アジア・アフリカ諸国の独立運動が本格化",category:"平和",desc:"前年のバンドン会議を経て、多くの植民地で独立への動きが加速した。",impact:"戦後の脱植民地化の流れを決定づけ、国際社会の構造を大きく変えた。"},
+  {title:"ダートマス会議で「人工知能」という言葉が誕生",category:"AI",desc:"マッカーシーらがダートマス会議を開き、人工知能研究の分野が正式に確立された。",impact:"現在まで続くAI研究の学問分野としての出発点となった、歴史的な会議だった。"},
+  {title:"世界初の大西洋横断電話ケーブルTAT-1が開通",category:"IT",desc:"アメリカとヨーロッパを結ぶ海底電話ケーブルが開通した。",impact:"国際通信インフラの発展を象徴し、現在の海底ケーブル網の原点となった。"},
+  {title:"メルボルンオリンピックが開催",category:"スポーツ",desc:"南半球で初めて開催されたオリンピックとして注目を集めた。",impact:"国際スポーツ大会の開催地が広がる先駆けとなった。"}
+],aiComment:"「人工知能」という言葉が生まれたダートマス会議は、現在のAIブームの直接のルーツです。日本は国連加盟を果たし、南極観測とメルボルン五輪への参加という節目の年でした。",stars:5,starReason:"「人工知能」という言葉が誕生した年"},
+
+1957:{jp:[
+  {title:"南極・昭和基地が開設",category:"科学",desc:"南極観測隊により、日本初の南極観測拠点である昭和基地が設営された。",impact:"以後現在まで続く日本の南極科学研究の重要な活動拠点となっている。"},
+  {title:"糸川英夫らがロケット研究を本格化",category:"宇宙",desc:"東京大学生産技術研究所でペンシルロケットの打ち上げ実験が行われた。",impact:"日本の宇宙開発の原点となり、後のJAXAの技術系譜につながった。"},
+  {title:"がん検診・母子保健の制度整備が進む",category:"医学",desc:"がんの早期発見や母子の健康を守るための検診制度が拡充された。",impact:"日本の高い平均寿命を支える予防医療体制の重要な礎となった。"}
+],world:[
+  {title:"ソ連が世界初の人工衛星スプートニク1号を打ち上げ",category:"宇宙",desc:"人類史上初めて、人工物が地球周回軌道に打ち上げられた。",impact:"宇宙開発競争の幕開けとなり、現在の衛星通信・GPS技術の出発点となった。"},
+  {title:"国際原子力機関（IAEA）が設立",category:"科学",desc:"原子力の平和利用を推進し核拡散を防止する国際機関が設立された。",impact:"現在も原子力の安全利用と核不拡散の中心的な国際機関として機能している。"},
+  {title:"ガーナがサハラ以南アフリカで最初に独立",category:"平和",desc:"イギリスの植民地支配から、ガーナがアフリカで先駆けて独立を達成した。",impact:"アフリカ諸国の独立運動が続く大きな契機となった。"}
+],aiComment:"スプートニク1号の打ち上げは、人類が初めて地球の外へ人工物を送り出した歴史的な瞬間でした。日本もこの年、糸川英夫らによるロケット研究と南極観測基地開設という宇宙・科学への大きな一歩を踏み出しています。",stars:5,starReason:"人類初の人工衛星スプートニク1号打ち上げ"},
+
+1958:{jp:[
+  {title:"東京タワーが完成",category:"インフラ",desc:"テレビ放送用電波塔として、当時世界一の高さを誇る東京タワーが完成した。",impact:"日本の高度経済成長を象徴する建造物として、今も東京のシンボルであり続けている。"},
+  {title:"国民健康保険法が全面改正され国民皆保険への道筋",category:"医学",desc:"すべての国民が公的医療保険に加入できる制度への改正が行われた。",impact:"1961年の国民皆保険達成に直接つながる、日本の医療制度の重要な転換点となった。"},
+  {title:"チキンラーメンが発売され即席麺が誕生",category:"文化",desc:"日清食品が世界初のインスタントラーメンを発売した。",impact:"世界中で親しまれる食文化を生み出し、災害時の備蓄食としても社会に貢献している。"}
+],world:[
+  {title:"アメリカ航空宇宙局（NASA）が設立",category:"宇宙",desc:"アメリカの宇宙開発を統括する新組織NASAが発足した。",impact:"後のアポロ計画をはじめ、人類の宇宙進出を牽引する中心組織となった。"},
+  {title:"集積回路（IC）が発明される",category:"IT",desc:"ジャック・キルビーが世界初の集積回路の試作に成功した。",impact:"現代のコンピュータ・スマートフォンなど、あらゆる電子機器の基礎技術となった。"},
+  {title:"欧州経済共同体（EEC）が発足",category:"経済",desc:"ヨーロッパ諸国の経済統合を目指す共同体が発足した。",impact:"現在のEU（欧州連合）へとつながる、地域統合の重要な出発点となった。"}
+],aiComment:"集積回路の発明は、現代のあらゆる電子機器を生み出す技術的基盤となりました。日本では東京タワーが完成し、世界ではNASAが設立されるなど、インフラと宇宙開発の両面で大きな前進がありました。",stars:5,starReason:"集積回路発明という電子技術の大転換"},
+
+1959:{jp:[
+  {title:"国民年金法が制定",category:"経済",desc:"すべての国民を対象とする公的年金制度の基礎となる法律が制定された。",impact:"1961年の国民皆年金達成につながり、現在の社会保障制度の柱となっている。"},
+  {title:"伊勢湾台風を教訓に災害対策基本法制定への機運が高まる",category:"環境",desc:"戦後最大級の被害をもたらした台風を教訓に、防災体制の抜本強化が求められた。",impact:"1961年の災害対策基本法制定につながり、現在の防災行政の基礎となった。"},
+  {title:"皇太子ご成婚を機にテレビ受像機が急速に普及",category:"IT",desc:"大きな社会的関心を集めた行事の中継を機に、家庭用テレビが急速に広まった。",impact:"テレビが国民的なメディアとして定着する大きな転換点となった。"}
+],world:[
+  {title:"南極条約が採択される",category:"環境",desc:"南極を平和的・科学的目的にのみ利用することを定めた国際条約が採択された。",impact:"領土紛争を防ぎ、国際科学協力のモデルとして現在も機能し続けている。"},
+  {title:"世界初の惑星探査機ルナ計画が月面到達",category:"宇宙",desc:"ソ連のルナ2号が世界で初めて月面に到達した。",impact:"人類の月への挑戦を本格化させ、後のアポロ計画への機運を高めた。"},
+  {title:"国連総会で児童の権利宣言が採択される",category:"平和",desc:"子どもの基本的な権利を定めた国際宣言が国連総会で採択された。",impact:"1989年の子どもの権利条約制定につながる重要な国際的礎となった。"}
+],aiComment:"南極条約の採択は、国境を越えた科学協力と平和利用のモデルケースとなりました。日本では国民年金制度の礎が築かれ、防災体制強化への機運も高まった年です。",stars:4,starReason:"南極条約採択という国際協力のモデル"}
+,
+
+1960:{jp:[
+  {title:"国民皆保険・国民皆年金制度の実現に向け前進",category:"医学",desc:"すべての国民が医療保険・年金に加入できる体制の整備が最終段階を迎えた。",impact:"1961年の完全実施により、世界に誇る日本の社会保障制度が確立された。"},
+  {title:"カラーテレビの本放送が開始",category:"IT",desc:"NHKと民放各局によるカラーテレビ本放送が日本で始まった。",impact:"映像メディアの表現力が大きく向上し、家庭のエンタメ体験を一変させた。"},
+  {title:"国民所得倍増計画が策定される",category:"経済",desc:"池田内閣により、10年で国民所得を倍増させる経済政策が発表された。",impact:"高度経済成長を後押しし、日本の生活水準向上に大きく貢献した。"},
+  {title:"ローマ五輪に日本選手団が参加",category:"スポーツ",desc:"体操などで日本選手団が活躍し、複数のメダルを獲得した。",impact:"東京五輪（1964年）に向けた日本スポーツ界の実力向上を印象づけた。"}
+],world:[
+  {title:"世界初の経口避妊薬が実用化",category:"医学",desc:"アメリカでホルモンによる経口避妊薬（ピル）が承認・発売された。",impact:"女性が自らの妊娠を計画できるようになり、社会進出を大きく後押しした。"},
+  {title:"レーザーが発明される",category:"科学",desc:"セオドア・メイマンが世界初の実用的なレーザー発振に成功した。",impact:"医療・通信・製造業など、現代社会のあらゆる場面で使われる基盤技術となった。"},
+  {title:"アフリカで17か国が一斉独立（アフリカの年）",category:"平和",desc:"多くのアフリカ諸国が植民地支配から独立を達成した歴史的な年となった。",impact:"国際社会における主権国家の数が大きく増え、国連の姿を大きく変えた。"},
+  {title:"ローマオリンピックが開催",category:"スポーツ",desc:"古代オリンピック発祥の地に近いローマで近代五輪が開催された。",impact:"テレビによる世界的な生中継が本格化する契機となった大会となった。"}
+],aiComment:"レーザーの発明は、後の医療機器から光通信まで幅広い分野に応用される画期的な技術でした。日本ではカラーテレビ放送が始まり、社会保障制度も完成に近づいています。",stars:5,starReason:"レーザー発明という汎用技術の誕生"},
+
+1961:{jp:[
+  {title:"国民皆保険・国民皆年金が実現",category:"医学",desc:"すべての国民が公的医療保険と年金制度に加入する体制が完成した。",impact:"世界的にも先進的な社会保障制度として、日本人の健康と生活を支え続けている。"},
+  {title:"災害対策基本法が制定",category:"環境",desc:"伊勢湾台風の教訓を踏まえ、総合的な防災体制を定める法律が制定された。",impact:"現在の日本の防災行政・災害対応の基本的な枠組みとなっている。"},
+  {title:"農業基本法が制定",category:"経済",desc:"農業の近代化と農家の所得向上を目指す基本政策が定められた。",impact:"日本の農業構造改革の方向性を示し、その後の農政の基礎となった。"}
+],world:[
+  {title:"ガガーリンが人類初の宇宙飛行に成功",category:"宇宙",desc:"ソ連の宇宙飛行士ユーリイ・ガガーリンが人類として初めて地球を周回した。",impact:"有人宇宙飛行時代の幕開けとなり、後の月面着陸や国際宇宙ステーションへの道を開いた。"},
+  {title:"アムネスティ・インターナショナルが設立",category:"平和",desc:"世界中の政治犯支援と人権擁護を目的とするNGOが設立された。",impact:"現在も世界最大級の人権擁護団体として、良心の囚人の解放などに貢献している。"},
+  {title:"ケネディ大統領が月面着陸を国家目標に掲げる",category:"宇宙",desc:"アメリカが1960年代中の有人月面着陸を目指すと宣言した。",impact:"アポロ計画を強力に推進し、1969年の人類月面着陸につながった。"}
+],aiComment:"ガガーリンの宇宙飛行は、人類が初めて地球を飛び出した歴史的な瞬間でした。日本でも国民皆保険・皆年金が実現し、社会保障の土台が完成した節目の年です。",stars:5,starReason:"人類初の有人宇宙飛行という歴史的偉業"},
+
+1962:{jp:[
+  {title:"全国総合開発計画（一全総）が策定",category:"インフラ",desc:"地域間格差是正と国土の均衡ある発展を目指す国家的な計画が策定された。",impact:"新幹線・高速道路網など、その後の国土インフラ整備の指針となった。"},
+  {title:"新産業都市建設促進法が制定",category:"経済",desc:"地方における産業拠点の形成を促進する法律が制定された。",impact:"地方の工業化・雇用創出を後押しし、地域経済の発展に寄与した。"},
+  {title:"日本初の原子力発電研究炉が本格稼働",category:"科学",desc:"原子力の平和利用に向けた研究炉の運転実績が積み重ねられた。",impact:"1966年の商用原子力発電開始に向けた技術的な基盤となった。"}
+],world:[
+  {title:"レイチェル・カーソンが「沈黙の春」を出版",category:"環境",desc:"農薬による環境汚染の危険性を訴える書籍が世界的な反響を呼んだ。",impact:"現代の環境保護運動の出発点となり、各国の環境規制強化を後押しした。"},
+  {title:"世界初の商業通信衛星テルスター1号が打ち上げ",category:"IT",desc:"大西洋を越えたテレビ・電話の中継を可能にする通信衛星が打ち上げられた。",impact:"国際的な衛星通信時代の幕開けとなり、現在の衛星通信網の原点となった。"},
+  {title:"キューバ危機が回避され核戦争の危機を乗り越える",category:"平和",desc:"米ソの緊張が核戦争寸前まで高まったが、外交交渉により危機が回避された。",impact:"核軍縮交渉の重要性が国際的に強く認識される契機となった。"}
+],aiComment:"「沈黙の春」の出版は、現代の環境保護運動の原点となった歴史的な一冊です。人類が核戦争の危機を外交で乗り越えたことも、大きな意味を持つ出来事でした。",stars:4,starReason:"環境保護運動の原点となった「沈黙の春」出版"},
+
+1963:{jp:[
+  {title:"NHK衛星中継実験でアメリカからの映像を受信",category:"IT",desc:"太平洋を越えた衛星テレビ中継の実験が日本で初めて成功した。",impact:"国際的な映像通信の可能性を示し、後の衛星放送発展の礎となった。"},
+  {title:"新産業都市の指定が進み地方工業化が加速",category:"経済",desc:"全国各地で新たな産業拠点の指定と基盤整備が進められた。",impact:"地方における雇用創出と経済発展を後押しする政策として機能した。"},
+  {title:"老人福祉法が制定",category:"医学",desc:"高齢者の福祉を総合的に推進するための法律が制定された。",impact:"現在の高齢者福祉・介護保険制度につながる重要な法的基盤となった。"}
+],world:[
+  {title:"部分的核実験禁止条約が締結",category:"平和",desc:"大気圏内・宇宙空間・水中での核実験を禁止する国際条約が結ばれた。",impact:"核軍縮に向けた国際的な取り組みの重要な第一歩となった。"},
+  {title:"キング牧師が「私には夢がある」演説",category:"平和",desc:"公民権運動を象徴する歴史的な演説がワシントン大行進で行われた。",impact:"人種差別撤廃運動を世界的に加速させ、後の公民権法制定につながった。"},
+  {title:"アメリカで最初の商用原子力発電所が本格稼働",category:"科学",desc:"経済性を持つ商用規模の原子力発電所の運転が本格化した。",impact:"世界各国での原子力発電導入を後押しするモデルケースとなった。"}
+],aiComment:"キング牧師の演説は、人種平等を求める運動の象徴として今も語り継がれる、人類の良心を代表する出来事です。核実験禁止条約という軍縮への一歩も記されました。",stars:4,starReason:"公民権運動を象徴する歴史的演説"},
+
+1964:{jp:[
+  {title:"東海道新幹線が開業",category:"インフラ",desc:"東京〜新大阪間で世界初の高速鉄道、東海道新幹線が開業した。",impact:"世界の高速鉄道の先駆けとなり、各国の高速鉄道計画に大きな影響を与え続けている。"},
+  {title:"東京オリンピックが開催",category:"スポーツ",desc:"アジア初となるオリンピックが東京で開催され、日本の復興を世界に示した。",impact:"インフラ整備や国際交流を大きく前進させ、日本の国際的地位向上に貢献した。"},
+  {title:"OECD（経済協力開発機構）に加盟",category:"経済",desc:"先進国クラブとされるOECDへの加盟を日本が果たした。",impact:"先進国としての国際的な地位確立と、資本自由化への大きな一歩となった。"}
+],world:[
+  {title:"公民権法が成立",category:"平和",desc:"アメリカで人種差別を法的に禁止する画期的な公民権法が成立した。",impact:"人種平等に向けた法制度の大きな前進となり、世界の差別撤廃運動に影響を与えた。"},
+  {title:"部分的核実験禁止条約が発効",category:"平和",desc:"前年締結された核実験制限条約が正式に効力を持つようになった。",impact:"核軍縮に向けた国際的な法的枠組みの実効性を高めた。"},
+  {title:"IBM System/360が発表されコンピュータの標準化が進む",category:"IT",desc:"互換性を持つコンピュータ製品群がIBMから発表された。",impact:"コンピュータ産業の標準化を促進し、ビジネス利用の拡大を後押しした。"}
+],aiComment:"新幹線開業と東京オリンピック開催は、戦後日本の復興と発展を世界に示した象徴的な出来事でした。世界では公民権法の成立という、人種平等への大きな一歩がありました。",stars:5,starReason:"新幹線開業と東京オリンピックという二重の快挙"},
+
+1965:{jp:[
+  {title:"日韓基本条約が締結",category:"平和",desc:"日本と韓国の国交正常化を定める条約が締結された。",impact:"以後の日韓関係の基本的な枠組みとなり、経済・文化交流の基盤を築いた。"},
+  {title:"名神高速道路が全線開通",category:"インフラ",desc:"日本初の高速道路が全線で開通し、高速道路時代の幕が開いた。",impact:"以後の全国高速道路網整備のモデルとなり、物流・移動を大きく効率化した。"},
+  {title:"朝永振一郎がノーベル物理学賞を受賞",category:"科学",desc:"量子電磁力学の研究により、朝永振一郎がノーベル物理学賞を受賞した。",impact:"湯川秀樹に続く日本人の受賞となり、日本の物理学研究の水準の高さを示した。"}
+],world:[
+  {title:"世界初の商用静止通信衛星インテルサット1号が打ち上げ",category:"IT",desc:"大西洋を挟んだ大陸間通信を担う商用通信衛星が打ち上げられた。",impact:"国際電話・テレビ中継など、グローバルな通信インフラの発展を大きく後押しした。"},
+  {title:"アメリカでメディケア・メディケイドが創設",category:"医学",desc:"高齢者・低所得者向けの公的医療保険制度がアメリカで創設された。",impact:"アメリカの医療保障制度の重要な柱として、現在も高齢者の医療を支えている。"},
+  {title:"ソ連の宇宙飛行士が人類初の宇宙遊泳に成功",category:"宇宙",desc:"アレクセイ・レオーノフが宇宙船外での活動（船外活動）に世界で初めて成功した。",impact:"国際宇宙ステーションでの船外活動など、後の有人宇宙開発技術の基礎となった。"}
+],aiComment:"朝永振一郎のノーベル賞受賞は、日本の物理学研究が世界の第一線にあり続けることを改めて示しました。名神高速道路の開通も、日本の高度経済成長を支える重要な一歩でした。",stars:4,starReason:"朝永振一郎ノーベル賞受賞と高速道路時代の幕開け"},
+
+1966:{jp:[
+  {title:"武道館完成など東京の都市インフラがさらに整備",category:"インフラ",desc:"オリンピック後も都市機能を高める公共施設の整備が続けられた。",impact:"現在も多目的施設として活用され、都市の文化・スポーツ拠点となっている。"},
+  {title:"東海村の原子力発電所が営業運転を開始",category:"科学",desc:"日本初の商業用原子力発電所が本格的な営業運転を始めた。",impact:"以後の日本のエネルギー政策における原子力発電の位置づけを方向づけた。"},
+  {title:"いざなぎ景気による高度経済成長が本格化",category:"経済",desc:"戦後最長級の好景気により、企業の設備投資と国民所得が大きく伸びた。",impact:"日本が世界第2位の経済大国へと成長する重要な原動力となった。"}
+],world:[
+  {title:"ルナ9号が世界初の月面軟着陸に成功",category:"宇宙",desc:"ソ連の無人探査機が世界で初めて月面への軟着陸を達成した。",impact:"有人月面着陸に向けた技術的な知見を蓄積し、アポロ計画を後押しした。"},
+  {title:"イングランドがサッカーW杯で初優勝",category:"スポーツ",desc:"自国開催のワールドカップでイングランド代表が初優勝を果たした。",impact:"サッカーの国際的な人気拡大と、W杯という大会自体の権威向上に貢献した。"},
+  {title:"国際人権規約が国連総会で採択される",category:"平和",desc:"世界人権宣言を条約化した国際人権規約が採択された。",impact:"法的拘束力を持つ人権保障の国際的枠組みとして、現在も機能し続けている。"}
+],aiComment:"月への軟着陸成功と国際人権規約の採択は、宇宙開発と人権保障という異なる分野で、それぞれ大きな一歩となりました。日本は東海村の原発稼働と好景気で経済成長を加速させています。",stars:4,starReason:"月面軟着陸成功と国際人権規約採択"},
+
+1967:{jp:[
+  {title:"公害対策基本法が制定",category:"環境",desc:"深刻化する公害問題に対応するための総合的な法律が制定された。",impact:"現在の環境基本法・環境行政の出発点となり、公害克服の重要な一歩となった。"},
+  {title:"ホンダN360など軽自動車が普及し国民の移動の自由が拡大",category:"経済",desc:"手頃な価格の軽自動車が普及し、自家用車の大衆化が進んだ。",impact:"モータリゼーションの進展により、国民の生活と経済活動の範囲が大きく広がった。"},
+  {title:"美濃部亮吉都政のもと福祉政策が拡充",category:"平和",desc:"高齢者医療費無料化など、地方自治体レベルでの福祉政策が進んだ。",impact:"後の全国的な高齢者福祉政策の議論に影響を与えた。"}
+],world:[
+  {title:"世界初の心臓移植手術に成功",category:"医学",desc:"南アフリカの医師クリスチャン・バーナードが世界初の心臓移植を実施した。",impact:"臓器移植医療の時代を切り開き、多くの重症患者の命を救う道を開いた。"},
+  {title:"欧州共同体（EC）が発足",category:"経済",desc:"ヨーロッパの経済統合をさらに進める欧州共同体が発足した。",impact:"現在のEUへとつながる、地域統合の重要な発展段階となった。"},
+  {title:"パルサーが発見される",category:"科学",desc:"ジョスリン・ベルらが規則的な電波を発する天体パルサーを発見した。",impact:"中性子星の存在を実証し、天体物理学の理解を大きく前進させた。"}
+],aiComment:"世界初の心臓移植手術は、医学の可能性を大きく広げた歴史的な出来事でした。日本では公害対策基本法が制定され、環境問題への本格的な取り組みが始まっています。",stars:5,starReason:"世界初の心臓移植という医学史的偉業"},
+
+1968:{jp:[
+  {title:"小笠原諸島が日本に返還",category:"平和",desc:"アメリカの施政下にあった小笠原諸島の日本への返還が実現した。",impact:"戦後処理の重要な一歩となり、後の沖縄返還（1972年）への機運を高めた。"},
+  {title:"川端康成がノーベル文学賞を受賞",category:"文化",desc:"「雪国」などの作品により、川端康成が日本人初のノーベル文学賞を受賞した。",impact:"日本文学の美意識を世界に示し、国際的な文化交流を大きく後押しした。"},
+  {title:"GNPが世界第2位となる",category:"経済",desc:"日本の国民総生産が西側諸国の中でアメリカに次ぐ規模となった。",impact:"戦後復興から経済大国へと至る日本の成長を象徴する出来事となった。"}
+],world:[
+  {title:"アポロ8号が人類初の月周回飛行に成功",category:"宇宙",desc:"アポロ8号の乗組員が人類として初めて月を周回し、地球の姿を撮影した。",impact:"「地球の出」の写真は環境意識の高まりにも影響を与え、月面着陸への道を開いた。"},
+  {title:"核拡散防止条約（NPT）が署名開放",category:"平和",desc:"核兵器の拡散を防ぐための国際条約が署名のために開放された。",impact:"現在も核軍縮・不拡散体制の中心的な国際的枠組みとして機能している。"},
+  {title:"世界初の実用マウスが発明される",category:"IT",desc:"ダグラス・エンゲルバートがコンピュータ用マウスの実演を行った。",impact:"パソコンの操作性を大きく向上させ、後のGUI時代の基礎技術となった。"}
+],aiComment:"川端康成のノーベル文学賞受賞は、日本文化の美しさを世界に示した誇らしい出来事でした。アポロ8号が撮影した「地球の出」の写真は、人類の地球への見方そのものを変えました。",stars:5,starReason:"川端康成ノーベル賞受賞と「地球の出」撮影"},
+
+1969:{jp:[
+  {title:"東名高速道路が全線開通",category:"インフラ",desc:"東京〜小牧間を結ぶ大動脈、東名高速道路が全線で開通した。",impact:"名神高速道路とあわせ、日本の高速道路網の骨格が完成した。"},
+  {title:"新全国総合開発計画が策定",category:"インフラ",desc:"新幹線・高速道路網を全国に広げる長期国土計画が策定された。",impact:"以後の全国的な交通インフラ整備の基本方針として機能した。"},
+  {title:"公害健康被害の救済制度の検討が本格化",category:"環境",desc:"四大公害病など深刻な健康被害への救済策の議論が進められた。",impact:"1973年の公害健康被害補償法制定につながる重要な準備段階となった。"}
+],world:[
+  {title:"アポロ11号で人類が初めて月面に着陸",category:"宇宙",desc:"アームストロング船長らが人類史上初めて月面に降り立った。",impact:"「人類にとって大きな一歩」として、宇宙開発史上最大の偉業とされている。"},
+  {title:"インターネットの原型ARPANETが稼働開始",category:"IT",desc:"アメリカの研究機関を結ぶ世界初のパケット通信網が稼働を始めた。",impact:"現在の世界中を結ぶインターネットの直接の起源となった。"},
+  {title:"国際的な環境保護運動が各地で活発化",category:"環境",desc:"公害・環境破壊への懸念から、市民による環境保護運動が広がりを見せた。",impact:"1972年の国連人間環境会議開催につながる世論の高まりとなった。"}
+],aiComment:"人類が初めて月面に降り立った瞬間と、後の世界を一変させるインターネットの原型が同じ年に生まれました。人類の可能性を大きく広げた、歴史に残る一年です。",stars:5,starReason:"人類月面着陸とインターネット誕生という二重の偉業"}
+,
+
+1970:{jp:[
+  {title:"日本万国博覧会（大阪万博）が開催",category:"文化",desc:"アジア初の国際博覧会が大阪で開催され、最先端技術と文化が世界中に紹介された。",impact:"科学技術への関心を高め、その後の日本の技術立国路線を象徴する出来事となった。"},
+  {title:"人工衛星「おおすみ」打ち上げに成功",category:"宇宙",desc:"日本が世界で4番目に自国製ロケットでの人工衛星打ち上げに成功した。",impact:"以後のJAXAによる衛星・探査機開発の技術的な出発点となった。"},
+  {title:"よど号事件を教訓に航空保安体制が強化",category:"インフラ",desc:"航空機の安全確保に向けた保安体制の見直しが進められた。",impact:"現在の空港保安検査体制の強化につながる重要な契機となった。"}
+],world:[
+  {title:"アポロ13号の乗組員が奇跡の生還を果たす",category:"宇宙",desc:"事故に見舞われたアポロ13号の乗組員が、地上管制との連携で無事帰還した。",impact:"危機管理と技術者の知恵が人命を救った事例として、今も語り継がれている。"},
+  {title:"アースデイ（地球の日）が初めて開催される",category:"環境",desc:"環境保護への意識を高めるための国際的な記念日がアメリカで始まった。",impact:"世界的な環境運動の広がりを象徴し、現在も毎年世界中で行われている。"},
+  {title:"アメリカで大気浄化法（改正）が成立",category:"環境",desc:"自動車排ガスなど大気汚染物質の規制を強化する法律が成立した。",impact:"各国の環境規制強化のモデルとなり、大気汚染対策の国際標準を形づくった。"}
+],aiComment:"大阪万博で科学技術への夢が広がる一方、アポロ13号の生還は人類の知恵と結束の力を示しました。地球の日の始まりは、環境への意識が世界的に高まる転換点となりました。",stars:4,starReason:"大阪万博開催とアポロ13号奇跡の生還"},
+
+1971:{jp:[
+  {title:"環境庁が発足",category:"環境",desc:"公害・環境問題に総合的に取り組む行政機関として環境庁が設立された。",impact:"現在の環境省へとつながり、日本の環境行政の中心的な組織となっている。"},
+  {title:"カップヌードルが発売",category:"文化",desc:"世界初のカップ入り即席麺、カップヌードルが日清食品から発売された。",impact:"世界中で親しまれる食文化となり、災害時の備蓄食としても広く活用されている。"},
+  {title:"成田空港建設に向けた整備が進む",category:"インフラ",desc:"首都圏の新しい国際空港建設に向けた準備が本格化した。",impact:"1978年の開港を経て、日本の国際航空網の中核拠点となった。"}
+],world:[
+  {title:"インテルが世界初のマイクロプロセッサ4004を発表",category:"IT",desc:"1つのチップにコンピュータの中核機能を集約したマイクロプロセッサが発表された。",impact:"パソコンやスマートフォンなど、現代のあらゆる電子機器の心臓部となる技術の原点となった。"},
+  {title:"グリーンピースが設立される",category:"環境",desc:"核実験反対運動から発展した国際環境保護団体グリーンピースが設立された。",impact:"現在も世界的な環境保護活動を牽引する主要なNGOとして活動を続けている。"},
+  {title:"中国が国際連合に加盟",category:"平和",desc:"中華人民共和国が国連における中国の代表権を得て加盟した。",impact:"国際社会における中国の位置づけを大きく変える転換点となった。"}
+],aiComment:"マイクロプロセッサの発表は、後のパーソナルコンピュータ革命を可能にした決定的な技術でした。日本では環境庁が発足し、公害克服に向けた本格的な取り組みが始まっています。",stars:5,starReason:"世界初のマイクロプロセッサ誕生"},
+
+1972:{jp:[
+  {title:"沖縄が日本に返還",category:"平和",desc:"アメリカの施政下にあった沖縄が27年ぶりに日本に復帰した。",impact:"戦後処理の重要な節目となり、現在に至る沖縄振興策の出発点となった。"},
+  {title:"日中国交正常化が実現",category:"平和",desc:"日本と中華人民共和国の国交が正常化された。",impact:"以後の日中間の経済・文化交流拡大の基礎となる歴史的な転換点となった。"},
+  {title:"上野動物園にパンダが初来日",category:"文化",desc:"日中国交正常化を記念し、中国からジャイアントパンダが贈られた。",impact:"日本国内での動物保護・環境教育への関心を高める契機となった。"}
+],world:[
+  {title:"国連人間環境会議がストックホルムで開催",category:"環境",desc:"環境問題を主題とする初の国連会議が開催され、国際的な環境政策の枠組みが議論された。",impact:"国連環境計画（UNEP）設立につながり、地球規模の環境協力の出発点となった。"},
+  {title:"米ソが第一次戦略兵器制限交渉（SALT I）に合意",category:"平和",desc:"核兵器の削減に向けた米ソ間の初めての本格的な合意が成立した。",impact:"以後の核軍縮交渉の重要な先例となり、冷戦下の緊張緩和に貢献した。"},
+  {title:"アタリ社がビデオゲーム「ポン」を発売",category:"文化",desc:"商業的に成功した初期のビデオゲームとしてポンが人気を博した。",impact:"世界的なゲーム産業の発展の出発点となり、日本のゲーム産業にも影響を与えた。"}
+],aiComment:"沖縄返還と日中国交正常化という、戦後日本外交の大きな節目が同じ年に実現しました。世界では国連人間環境会議が開かれ、地球規模での環境協力が始まっています。",stars:5,starReason:"沖縄返還と日中国交正常化という歴史的節目"},
+
+1973:{jp:[
+  {title:"変動相場制へ移行",category:"経済",desc:"固定相場制から変動相場制へ、円の為替制度が移行した。",impact:"以後の日本経済は為替変動の影響を受けつつ、国際競争力を高めていくことになった。"},
+  {title:"公害健康被害補償法が制定",category:"環境",desc:"公害病の患者を救済するための補償制度を定める法律が制定された。",impact:"四大公害病の被害者救済に道を開き、公害対策の重要な到達点となった。"},
+  {title:"老人医療費無料化が実施",category:"医学",desc:"70歳以上の高齢者を対象に医療費を無料化する制度が導入された。",impact:"高齢者福祉政策の重要な一歩となったが、後の制度見直しの契機ともなった。"}
+],world:[
+  {title:"絶滅のおそれのある野生動植物の種の国際取引に関する条約（ワシントン条約）が採択",category:"環境",desc:"絶滅危惧種の保護を目的とした国際取引規制条約が採択された。",impact:"現在も世界の野生生物保護における中心的な国際法として機能している。"},
+  {title:"最初の携帯電話通話に成功",category:"IT",desc:"モトローラの技術者が世界初の携帯電話による通話実験に成功した。",impact:"以後数十年をかけて発展する携帯電話・スマートフォン時代の出発点となった。"},
+  {title:"アメリカでベトナム戦争の和平協定が締結",category:"平和",desc:"長期化した紛争に終止符を打つ和平協定がパリで締結された。",impact:"国際社会における紛争解決と平和構築の重要な事例となった。"}
+],aiComment:"世界初の携帯電話通話という、後の通信革命につながる出来事がありました。日本ではワシントン条約への対応も含め、環境保護と社会保障の両面で制度整備が進んでいます。",stars:4,starReason:"世界初の携帯電話通話成功"},
+
+1974:{jp:[
+  {title:"江崎玲於奈がノーベル物理学賞を受賞",category:"科学",desc:"半導体のトンネル効果の発見により、江崎玲於奈がノーベル物理学賞を受賞した。",impact:"日本の半導体技術研究の水準の高さを世界に示す出来事となった。"},
+  {title:"セブンイレブンの1号店が東京にオープン",category:"経済",desc:"日本初のコンビニエンスストアが開業し、新しい小売業態が始まった。",impact:"24時間営業のコンビニは、日本人の生活インフラとして定着していった。"},
+  {title:"総合的な省エネルギー政策の検討が本格化",category:"環境",desc:"石油危機を教訓に、エネルギー効率化に向けた政策議論が進められた。",impact:"日本が世界有数の省エネ技術大国となる政策的な出発点となった。"}
+],world:[
+  {title:"オゾン層破壊のメカニズムが科学的に指摘される",category:"環境",desc:"フロンガスがオゾン層を破壊する可能性が科学論文で示された。",impact:"後のモントリオール議定書（1987年）採択につながる重要な科学的警鐘となった。"},
+  {title:"世界人口会議が開催される",category:"平和",desc:"世界の人口問題に関する初の政府間会議がブカレストで開催された。",impact:"人口・開発政策に関する国際的な議論の出発点となった。"},
+  {title:"パーソナルコンピュータの試作機が相次いで登場",category:"IT",desc:"Altair 8800など、個人向けコンピュータの先駆けとなる製品が登場した。",impact:"翌年以降のパソコン産業勃興の直接の引き金となった。"}
+],aiComment:"オゾン層破壊メカニズムの指摘は、地球環境を守るための重要な科学的警鐘でした。江崎玲於奈のノーベル賞受賞は、日本の半導体研究の底力を示しています。",stars:4,starReason:"オゾン層破壊メカニズムの発見"},
+
+1975:{jp:[
+  {title:"山陽新幹線が博多まで全線開通",category:"インフラ",desc:"新幹線網が博多まで延伸し、東京〜博多間の高速鉄道網が完成した。",impact:"西日本の経済・観光の活性化に大きく貢献する交通インフラとなった。"},
+  {title:"沖縄国際海洋博覧会が開催",category:"文化",desc:"海洋をテーマとした国際博覧会が沖縄で開催された。",impact:"沖縄の観光振興と国際交流の重要な契機となった。"},
+  {title:"公害防止技術の輸出が本格化",category:"環境",desc:"日本の公害対策技術が国際的に評価され、海外への技術移転が進んだ。",impact:"日本が環境技術大国としての地位を確立する足がかりとなった。"}
+],world:[
+  {title:"マイクロソフトが設立される",category:"IT",desc:"ビル・ゲイツとポール・アレンによりマイクロソフト社が設立された。",impact:"パソコン用ソフトウェア産業を牽引し、世界のIT産業を大きく方向づけた。"},
+  {title:"世界初のパーソナルコンピュータキットAltair 8800が発売",category:"IT",desc:"個人が購入・組み立て可能なコンピュータキットが発売され話題となった。",impact:"パソコン革命の火付け役となり、現在のIT産業の礎を築いた。"},
+  {title:"ヘルシンキ宣言が採択され人権・安全保障の枠組みが前進",category:"平和",desc:"欧州の安全保障と人権保護に関する国際合意が採択された。",impact:"冷戦下の緊張緩和と人権保護の国際的な議論を前進させた。"}
+],aiComment:"マイクロソフトの設立は、後の世界のコンピュータ産業を大きく方向づける出来事でした。日本では新幹線網がさらに拡大し、環境技術の国際的評価も高まっています。",stars:5,starReason:"マイクロソフト設立というIT産業の転換点"},
+
+1976:{jp:[
+  {title:"ロッキード事件を機に政治倫理への関心が高まる",category:"平和",desc:"大規模な贈収賄事件を契機に、政治の透明性向上を求める世論が高まった。",impact:"その後の政治資金規正法改正など、政治改革の議論を後押しした。"},
+  {title:"日本電信電話公社が全国即時ダイヤル通話網を完成",category:"IT",desc:"全国どこからでもダイヤル一つで通話できる電話網が完成した。",impact:"現在の全国通信インフラの基礎を築き、経済活動の効率化に貢献した。"},
+  {title:"福井謙一の理論化学研究がさらに国際的評価を高める",category:"科学",desc:"フロンティア軌道理論による化学反応の理解が国際的に評価された。",impact:"1981年のノーベル化学賞受賞につながる重要な研究蓄積となった。"},
+  {title:"モントリオール五輪で体操男子が団体5連覇",category:"スポーツ",desc:"日本の体操男子団体が、オリンピックで前人未到の団体5連覇を達成した。",impact:"日本体操界の黄金時代を象徴する快挙として、今も語り継がれている。"}
+],world:[
+  {title:"アップルコンピュータが設立される",category:"IT",desc:"スティーブ・ジョブズとスティーブ・ウォズニアックによりアップル社が設立された。",impact:"パーソナルコンピュータの普及とデザイン性の高いIT製品文化を切り開いた。"},
+  {title:"バイキング1号が火星に着陸",category:"宇宙",desc:"アメリカの探査機バイキング1号が世界初の火星着陸に成功した。",impact:"火星の生命探査・環境調査の出発点となり、現在の火星探査の基礎を築いた。"},
+  {title:"世界保健機関がエボラ出血熱を初めて確認",category:"医学",desc:"アフリカで新たな感染症エボラ出血熱の存在が科学的に確認された。",impact:"新興感染症への国際的な警戒と対策体制構築の重要な契機となった。"},
+  {title:"モントリオールオリンピックが開催",category:"スポーツ",desc:"カナダ初のオリンピックとして、多くの新種目とともに開催された。",impact:"女子競技の拡大など、オリンピックの多様化が進む契機となった。"}
+],aiComment:"アップル社の設立とバイキング1号の火星着陸という、後の時代を象徴する二つの出来事が同じ年に起きました。日本では体操男子が五輪団体5連覇という金字塔を打ち立てています。",stars:5,starReason:"アップル設立と体操男子5連覇という二重の快挙"},
+
+1977:{jp:[
+  {title:"200海里漁業水域が設定され海洋政策が転換",category:"環境",desc:"国際的な海洋資源管理の流れを受け、日本の漁業政策が見直された。",impact:"持続可能な漁業資源管理への取り組みの出発点となった。"},
+  {title:"有人潜水調査船「しんかい2000」の開発が始まる",category:"科学",desc:"深海調査を可能にする有人潜水調査船の開発プロジェクトが始動した。",impact:"日本の深海探査技術の発展と海洋科学研究の進展に貢献した。"},
+  {title:"福祉元年の理念を継承した社会保障の拡充が続く",category:"医学",desc:"高齢者・障害者福祉の充実に向けた政策が引き続き進められた。",impact:"現在の福祉制度の考え方の重要な基盤の一つとなった。"}
+],world:[
+  {title:"ボイジャー1号・2号が打ち上げ",category:"宇宙",desc:"太陽系外惑星探査を目的とした無人探査機が相次いで打ち上げられた。",impact:"現在も太陽系外を飛行し続け、人類が送り出した最も遠い人工物となっている。"},
+  {title:"アップルIIが発売されパソコンの大衆化が始まる",category:"IT",desc:"一般消費者向けの完成品パソコンとしてアップルIIが発売された。",impact:"パソコンが企業や個人の生活に本格的に浸透する出発点となった。"},
+  {title:"世界保健機関が天然痘の自然感染を撲滅と発表へ前進",category:"医学",desc:"世界最後の天然痘自然感染例が確認され、根絶に向けた大きな前進があった。",impact:"1980年の天然痘根絶宣言につながる、人類初の感染症根絶への道のりとなった。"}
+],aiComment:"ボイジャー探査機の打ち上げは、人類の探査範囲を太陽系の外まで広げる壮大な挑戦の始まりでした。天然痘根絶への大きな前進もあった年です。",stars:5,starReason:"ボイジャー打ち上げと天然痘根絶への前進"},
+
+1978:{jp:[
+  {title:"新東京国際空港（成田空港）が開港",category:"インフラ",desc:"首都圏の新しい国際空港として成田空港が開港した。",impact:"日本の国際航空需要の拡大を支える中核的なハブ空港となった。"},
+  {title:"日中平和友好条約が締結",category:"平和",desc:"日本と中国の間で平和友好関係を定める条約が締結された。",impact:"日中間の経済・文化交流をさらに深める重要な外交的基盤となった。"},
+  {title:"有機水銀中毒（水俣病）認定基準の見直しが進む",category:"環境",desc:"公害病の認定・救済制度についての検討がさらに進められた。",impact:"公害被害者救済の充実に向けた継続的な取り組みの一環となった。"}
+],world:[
+  {title:"世界初の体外受精児（試験管ベビー）が誕生",category:"医学",desc:"イギリスで世界初の体外受精による赤ちゃんが誕生した。",impact:"不妊治療の新たな選択肢を切り開き、現在まで数百万人の命を誕生させている。"},
+  {title:"WHOがプライマリ・ヘルス・ケアに関するアルマ・アタ宣言を採択",category:"医学",desc:"基礎的な保健医療をすべての人に届けるための国際的な理念が宣言された。",impact:"現在のユニバーサル・ヘルス・カバレッジ（UHC）推進の理念的な礎となった。"},
+  {title:"中国が改革開放路線へ転換",category:"経済",desc:"鄧小平の指導のもと、中国が市場経済導入による改革開放政策を開始した。",impact:"以後数十年で中国が世界第2位の経済大国へ成長する出発点となった。"}
+],aiComment:"世界初の体外受精児の誕生は、生殖医療の可能性を大きく広げた歴史的な出来事でした。中国の改革開放という、その後の世界経済を大きく変える転換もこの年に始まっています。",stars:5,starReason:"世界初の体外受精児誕生という医学的偉業"},
+
+1979:{jp:[
+  {title:"ソニーがウォークマンを発売",category:"IT",desc:"携帯型カセットプレーヤー「ウォークマン」がソニーから発売された。",impact:"音楽を持ち歩くという新しいライフスタイルを生み出し、世界的な大ヒットとなった。"},
+  {title:"第2次石油危機を機に省エネ技術がさらに発展",category:"環境",desc:"エネルギー価格高騰を受け、省エネルギー技術の開発がさらに加速した。",impact:"日本の自動車・家電の省エネ性能が世界トップクラスとなる原動力となった。"},
+  {title:"国立大学共通第1次学力試験（共通一次）が開始",category:"教育",desc:"国公立大学の入試における共通試験制度が導入された。",impact:"現在の大学入学共通テストに至る大学入試制度の重要な転換点となった。"}
+],world:[
+  {title:"世界保健機関が天然痘根絶を宣言",category:"医学",desc:"人類の努力により、天然痘が地球上から根絶されたことが正式に宣言された。",impact:"人類が感染症を根絶した史上初の事例として、医学史に輝かしい功績を残した。"},
+  {title:"ボイジャー1号が木星に接近し詳細画像を取得",category:"宇宙",desc:"探査機ボイジャー1号が木星とその衛星の鮮明な画像を初めて地球に送信した。",impact:"木星の大赤斑や衛星イオの火山活動発見など、太陽系理解を大きく前進させた。"},
+  {title:"米中国交正常化が実現",category:"平和",desc:"アメリカと中国の間で正式な外交関係が樹立された。",impact:"冷戦構造の変化と、その後のグローバルな経済関係構築に大きな影響を与えた。"}
+],aiComment:"天然痘根絶宣言は、人類が感染症に打ち勝った歴史上初めての快挙です。日本ではウォークマンが生まれ、音楽との付き合い方そのものを変える発明が世に出ました。",stars:5,starReason:"人類初の感染症根絶という歴史的偉業"}
+,
+
+1980:{jp:[
+  {title:"NHKが衛星放送実験を本格化",category:"IT",desc:"衛星を使った放送の実用化に向けた技術検証が進められた。",impact:"1989年の衛星本放送開始につながる技術基盤を築いた。"},
+  {title:"日本の自動車生産台数が世界一に",category:"経済",desc:"日本の自動車生産台数がアメリカを抜いて世界最大となった。",impact:"日本の製造業の国際競争力の高さを世界に示す象徴的な出来事となった。"},
+  {title:"「くたばれGNP」に代わる豊かさ指標の議論が進む",category:"経済",desc:"経済成長だけでなく生活の質を重視する政策論議が広がった。",impact:"後の福祉政策や生活の質を重視する行政指標の議論に影響を与えた。"}
+],world:[
+  {title:"世界保健機関が天然痘根絶を正式に確認",category:"医学",desc:"世界保健総会で天然痘の世界根絶が公式に確認・宣言された。",impact:"人類が感染症を完全に克服した史上初の事例として医学史に刻まれた。"},
+  {title:"CNNが世界初の24時間ニュース専門チャンネルとして開局",category:"IT",desc:"終日ニュースを配信する専門テレビ局が世界で初めて登場した。",impact:"世界的なニュース報道のあり方を変え、速報性の重要性を高めた。"},
+  {title:"ボイジャー1号が土星に接近し詳細な観測データを取得",category:"宇宙",desc:"無人探査機が土星とその衛星群の詳細な画像・データを地球に送信した。",impact:"太陽系の外惑星に関する理解を大きく前進させる貴重なデータとなった。"}
+],aiComment:"天然痘根絶の公式確認という人類史的偉業があった年です。日本の自動車生産が世界一となり、ものづくり大国としての地位を確立しました。",stars:4,starReason:"天然痘根絶の公式確認"},
+
+1981:{jp:[
+  {title:"福井謙一がノーベル化学賞を受賞",category:"科学",desc:"フロンティア軌道理論により、福井謙一がアジア人初のノーベル化学賞を受賞した。",impact:"日本の理論化学研究の水準の高さを世界に示す歴史的な受賞となった。"},
+  {title:"神戸ポートアイランド博覧会が開催",category:"文化",desc:"人工島を舞台にした都市型博覧会が神戸で開催された。",impact:"都市開発と博覧会を組み合わせた新しいまちづくりのモデルとなった。"},
+  {title:"健康増進のための生活習慣病予防対策が本格化",category:"医学",desc:"食生活や運動習慣の改善を促す公衆衛生施策が拡充された。",impact:"日本人の長寿を支える予防医療の重要な取り組みの一つとなった。"}
+],world:[
+  {title:"スペースシャトル・コロンビア号が初飛行",category:"宇宙",desc:"再使用可能な有人宇宙船スペースシャトルが初めて宇宙へ飛び立った。",impact:"以後30年にわたり国際宇宙ステーション建設などを支える中核輸送手段となった。"},
+  {title:"IBM PCが発売されパソコンの企業利用が本格化",category:"IT",desc:"IBMが個人・企業向けパソコンIBM PCを発売した。",impact:"パソコンの標準規格として広まり、現在のPC産業の基礎を築いた。"},
+  {title:"後天性免疫不全症候群（エイズ）の症例が初めて報告される",category:"医学",desc:"アメリカでエイズとみられる症例が医学文献に初めて報告された。",impact:"以後の世界的なHIV/エイズ対策研究と国際協力を促す契機となった。"}
+],aiComment:"福井謙一のノーベル化学賞受賞は、アジア人として初の快挙であり、日本の基礎科学研究への信頼を高めました。スペースシャトルの初飛行も、新しい宇宙開発時代の幕開けを告げました。",stars:5,starReason:"福井謙一 アジア人初のノーベル化学賞受賞"},
+
+1982:{jp:[
+  {title:"東北新幹線・上越新幹線が開業",category:"インフラ",desc:"東京から東北・上越方面へ向かう新幹線が開業した。",impact:"新幹線網が東日本にも拡大し、全国的な高速鉄道網の発展を後押しした。"},
+  {title:"500円硬貨が発行",category:"経済",desc:"高額硬貨として500円玉が新たに発行された。",impact:"貨幣制度の利便性向上に寄与し、現在も広く使われ続けている。"},
+  {title:"がん対策のための老人保健法が制定",category:"医学",desc:"高齢者の健康診査やがん検診の体制を強化する法律が制定された。",impact:"日本のがん早期発見・予防医療体制の充実に大きく貢献した。"},
+  {title:"第五世代コンピュータプロジェクトが始動",category:"AI",desc:"通商産業省主導で、人工知能技術を核とした国家的研究プロジェクトが始まった。",impact:"世界的なAI研究への関心を高め、日本のAI基礎研究の技術蓄積に貢献した。"}
+],world:[
+  {title:"世界初の人工心臓（永久使用）移植手術が実施",category:"医学",desc:"バーニー・クラーク氏へ人工心臓ジャービック7が移植された。",impact:"人工臓器技術の可能性を示し、後の医療機器開発を大きく前進させた。"},
+  {title:"国連海洋法条約が採択される",category:"環境",desc:"海洋の利用・資源管理に関する包括的な国際条約が採択された。",impact:"現在の排他的経済水域（EEZ）など、海洋秩序の基本的な枠組みとなっている。"},
+  {title:"コンパクトディスク（CD）が実用化",category:"IT",desc:"ソニーとフィリップスが共同開発したCDが商業的に発売された。",impact:"音楽メディアの高音質化とデジタル化を大きく進める転換点となった。"}
+],aiComment:"人工心臓移植という医療技術の挑戦と、CDというデジタル音楽メディアの誕生が同じ年に起きました。日本では新幹線網がさらに拡大しています。",stars:4,starReason:"人工心臓移植とCD実用化という技術的挑戦"},
+
+1983:{jp:[
+  {title:"任天堂がファミリーコンピュータを発売",category:"IT",desc:"家庭用ゲーム機「ファミコン」が任天堂から発売された。",impact:"世界的なゲーム産業の発展を牽引し、日本発の娯楽文化を世界に広めた。"},
+  {title:"東京ディズニーランドが開園",category:"文化",desc:"日本初の本格的な大型テーマパークが千葉県浦安市に開園した。",impact:"日本のレジャー・観光産業の発展に大きな影響を与える存在となった。"},
+  {title:"三宅島噴火を教訓に火山防災体制が強化",category:"環境",desc:"火山活動への観測・避難体制の見直しが進められた。",impact:"現在の火山防災情報システムの充実につながる重要な教訓となった。"}
+],world:[
+  {title:"HIVがエイズの原因ウイルスとして特定される",category:"医学",desc:"フランスの研究者らがエイズの原因となるウイルスを発見した。",impact:"以後の治療薬開発・検査技術の確立につながる決定的な発見となった。"},
+  {title:"アメリカが衛星測位システムGPSを民間利用に開放",category:"IT",desc:"軍事用に開発されたGPSの民間利用への道が開かれた。",impact:"現在のカーナビ・スマートフォン位置情報サービスの基礎技術となった。"},
+  {title:"モトローラが世界初の商用携帯電話を発売",category:"IT",desc:"一般消費者向けの携帯電話「DynaTAC」が発売された。",impact:"以後数十年かけて普及する携帯電話・モバイル通信時代の出発点となった。"}
+],aiComment:"ファミコンの発売は、日本発のゲーム文化が世界に広がる大きな一歩でした。HIVの特定という医学的発見、GPSの民間開放という、後の生活を大きく変える出来事も相次いでいます。",stars:5,starReason:"ファミコン発売とHIV特定という二重の転換点"},
+
+1984:{jp:[
+  {title:"グリコ・森永事件を教訓に食品安全対策が強化",category:"医学",desc:"食品への異物混入事件を受け、食品業界の安全管理体制が見直された。",impact:"現在の食品安全基準・危機管理体制の強化につながる契機となった。"},
+  {title:"1万円札の肖像が福澤諭吉に変更",category:"経済",desc:"偽造防止技術を高めた新紙幣が発行された。",impact:"紙幣の偽造防止技術の向上に貢献し、通貨の信頼性を高めた。"},
+  {title:"日本科学未来館構想など科学教育の充実が議論される",category:"教育",desc:"次世代の科学技術人材育成に向けた教育施設の構想が進められた。",impact:"後の科学館・博物館を通じた科学教育の充実につながった。"}
+],world:[
+  {title:"アップルがMacintoshを発売",category:"IT",desc:"グラフィカルユーザーインターフェース（GUI）を採用したMacintoshが発売された。",impact:"直感的なパソコン操作を広め、現在のパソコン・スマートフォンUIの原点となった。"},
+  {title:"ロサンゼルスオリンピックが開催",category:"スポーツ",desc:"民間資金主導の運営で黒字化に成功した大会として注目を集めた。",impact:"以後のオリンピック運営における商業的モデルの先駆けとなった。"},
+  {title:"遺伝子診断技術（DNA型鑑定）が確立される",category:"科学",desc:"イギリスの研究者がDNA配列による個人識別技術を開発した。",impact:"犯罪捜査や親子鑑定など、社会に広く応用される技術の基礎となった。"}
+],aiComment:"Macintoshの登場は、コンピュータを誰もが直感的に使えるものに変えた革命的な出来事でした。DNA型鑑定技術の確立も、後の科学捜査や医療に大きな影響を与えています。",stars:5,starReason:"Macintosh発売というパソコン革命"},
+
+1985:{jp:[
+  {title:"男女雇用機会均等法が制定",category:"平和",desc:"雇用における性別による差別を禁止する法律が制定された。",impact:"女性の社会進出を後押しし、現在の職場における男女平等の重要な基盤となった。"},
+  {title:"日本電信電話（NTT）が民営化",category:"経済",desc:"国営だった電電公社が民営化されNTTとして発足した。",impact:"通信市場の競争が促進され、通信料金低下やサービス多様化につながった。"},
+  {title:"つくば科学万博が開催",category:"科学",desc:"科学技術をテーマにした国際博覧会がつくばで開催された。",impact:"科学技術への国民的関心を高め、つくば研究学園都市の発展を後押しした。"}
+],world:[
+  {title:"南極上空のオゾンホールが発見される",category:"環境",desc:"イギリスの科学者らが南極上空でオゾン層の著しい減少を確認した。",impact:"モントリオール議定書採択（1987年）を後押しする決定的な科学的証拠となった。"},
+  {title:"ソ連でゴルバチョフ書記長がペレストロイカを開始",category:"平和",desc:"ソ連の政治・経済改革路線が始動した。",impact:"冷戦終結（1989年）への大きな流れをつくる歴史的な転換点となった。"},
+  {title:"世界初のインターネットドメイン名が登録される",category:"IT",desc:"symbolics.comが世界で初めて登録されたインターネットドメインとなった。",impact:"現在の.comを中心とするインターネットのドメイン体系の出発点となった。"}
+],aiComment:"男女雇用機会均等法の制定は、日本の職場における男女平等への重要な一歩でした。オゾンホールの発見という地球環境への警鐘、ペレストロイカという世界史の転換点も、この年に記されています。",stars:5,starReason:"オゾンホール発見とペレストロイカ開始"},
+
+1986:{jp:[
+  {title:"男女雇用機会均等法が施行",category:"平和",desc:"前年制定された法律が実際に施行され、企業の雇用慣行の見直しが進んだ。",impact:"女性の管理職登用や総合職採用の拡大など、職場環境の変化を後押しした。"},
+  {title:"東京サミット（先進国首脳会議）が開催",category:"平和",desc:"主要先進国の首脳が集う国際会議が東京で開催された。",impact:"国際経済・政治問題における日本の存在感を高める契機となった。"},
+  {title:"科学技術基本政策の見直しが進む",category:"科学",desc:"国際競争力強化に向けた研究開発投資のあり方が議論された。",impact:"後の科学技術基本法（1995年）制定につながる政策的な土台となった。"}
+],world:[
+  {title:"遺伝子組み換え技術によるB型肝炎ワクチンが実用化",category:"医学",desc:"バイオテクノロジーを用いた安全性の高いB型肝炎ワクチンが承認された。",impact:"世界的なB型肝炎の予防接種普及に貢献し、多くの命を救い続けている。"},
+  {title:"ボイジャー2号が天王星に接近",category:"宇宙",desc:"無人探査機が天王星とその衛星の詳細な観測データを取得した。",impact:"太陽系外縁の惑星に関する人類の理解を大きく前進させた。"},
+  {title:"モントリオール議定書に向けた国際交渉が本格化",category:"環境",desc:"オゾン層を破壊する物質の規制に向けた国際交渉が進められた。",impact:"翌年の議定書採択につながり、オゾン層保護の国際的な枠組みを形づくった。"}
+],aiComment:"B型肝炎ワクチンの実用化やモントリオール議定書に向けた交渉進展など、医学と環境の両面で人類の健康を守る取り組みが前進しました。天王星探査など、宇宙への挑戦も続きました。",stars:4,starReason:"バイオ技術によるワクチン実用化"},
+
+1987:{jp:[
+  {title:"国鉄がJRグループとして分割民営化",category:"インフラ",desc:"国有鉄道が地域別のJR各社に分割民営化され、経営効率化が図られた。",impact:"サービス改善や新幹線網のさらなる拡充など、鉄道の質的向上につながった。"},
+  {title:"リゾート法（総合保養地域整備法）が制定",category:"経済",desc:"地域の観光・保養地開発を促進する法律が制定された。",impact:"全国各地のリゾート開発や地域振興策に影響を与えた。"},
+  {title:"利根川進がノーベル生理学・医学賞を受賞",category:"科学",desc:"抗体多様性の遺伝的原理の解明により、利根川進がノーベル賞を受賞した。",impact:"日本の分子生物学・免疫学研究の国際的評価を大きく高めた。"}
+],world:[
+  {title:"モントリオール議定書が採択される",category:"環境",desc:"オゾン層破壊物質の生産・消費を段階的に削減する国際条約が採択された。",impact:"最も成功した国際環境条約とされ、オゾン層の回復傾向をもたらしている。"},
+  {title:"米ソが中距離核戦力（INF）全廃条約に調印",category:"平和",desc:"特定の種類の核兵器を全廃する画期的な軍縮条約が締結された。",impact:"冷戦終結に向けた軍縮の流れを大きく前進させる歴史的な合意となった。"},
+  {title:"世界人口が50億人に到達",category:"環境",desc:"国連推計により世界人口が50億人を突破したとされた。",impact:"人口増加と資源・環境の持続可能性についての国際的な議論を深めた。"}
+],aiComment:"モントリオール議定書は、国際社会が地球環境問題に協調して立ち向かった最も成功した事例とされています。利根川進のノーベル賞受賞も、日本の生命科学研究の実力を示しました。",stars:5,starReason:"モントリオール議定書採択という環境協力の金字塔"},
+
+1988:{jp:[
+  {title:"瀬戸大橋が開通",category:"インフラ",desc:"本州と四国を結ぶ瀬戸大橋が開通し、鉄道と道路の両方が通行可能となった。",impact:"四国地方の経済・観光振興に大きく貢献する交通インフラとなった。"},
+  {title:"青函トンネルが開通",category:"インフラ",desc:"本州と北海道を結ぶ世界最長級の海底トンネルが開通した。",impact:"本州・北海道間の鉄道輸送を飛躍的に向上させる大工事となった。"},
+  {title:"消費税導入に向けた税制改革の議論が本格化",category:"経済",desc:"間接税を柱とする税制改革の検討が国会で本格的に進められた。",impact:"1989年の消費税導入につながる、日本の税制の大きな転換点となった。"}
+],world:[
+  {title:"気候変動に関する政府間パネル（IPCC）が設立",category:"環境",desc:"地球温暖化の科学的評価を行う国際組織IPCCが設立された。",impact:"現在に至る気候変動対策の科学的根拠を提供し続ける中心的な組織となった。"},
+  {title:"NASAの研究者が地球温暖化の議会証言を行う",category:"環境",desc:"気候科学者が温暖化の進行について公式の場で警鐘を鳴らした。",impact:"気候変動問題への一般社会・政策決定者の関心を大きく高めた。"},
+  {title:"ソ連がアフガニスタンからの撤退を開始",category:"平和",desc:"長期化した紛争からのソ連軍撤退が始まった。",impact:"冷戦終結に向かう国際情勢の大きな転換点の一つとなった。"}
+],aiComment:"瀬戸大橋と青函トンネルの開通により、日本の主要4島が陸路でつながりました。世界ではIPCC設立という、気候変動対策の科学的基盤を築く重要な一歩がありました。",stars:5,starReason:"本州四国連絡橋開通とIPCC設立"},
+
+1989:{jp:[
+  {title:"消費税が導入される",category:"経済",desc:"税率3%の消費税が日本で初めて導入された。",impact:"以後の日本の税制における間接税の位置づけを大きく変える転換点となった。"},
+  {title:"平成への改元",category:"文化",desc:"昭和天皇の崩御に伴い、元号が平成に改められた。",impact:"新しい時代の始まりとして、社会全体に大きな節目の意識をもたらした。"},
+  {title:"NHK衛星第一・第二テレビが本放送を開始",category:"IT",desc:"衛星放送による全国向けテレビ本放送が始まった。",impact:"多チャンネル放送時代の幕開けとなり、視聴者の選択肢を大きく広げた。"}
+],world:[
+  {title:"ベルリンの壁が崩壊",category:"平和",desc:"東西冷戦を象徴していたベルリンの壁が市民の手により崩された。",impact:"冷戦終結を象徴する出来事となり、東西ドイツ統一への道を開いた。"},
+  {title:"ワールド・ワイド・ウェブ（WWW）の構想が提案される",category:"IT",desc:"ティム・バーナーズ＝リーがCERNでハイパーテキストによる情報共有システムを提案した。",impact:"現在のインターネット・ウェブ社会全体の直接の出発点となった。"},
+  {title:"国連総会で子どもの権利条約が採択",category:"平和",desc:"子どもの基本的な権利を包括的に定めた国際条約が採択された。",impact:"現在も世界で最も広く批准されている人権条約として子どもたちを守っている。"}
+],aiComment:"ベルリンの壁崩壊は、冷戦という長い対立の時代の終わりを告げる歴史的な瞬間でした。同じ年に提案されたWWWの構想は、後に世界を根本から変えるインターネット時代の出発点となります。",stars:5,starReason:"ベルリンの壁崩壊とWWW構想提案という二重の歴史的転換"}
+,
+
+1990:{jp:[
+  {title:"大学入試センター試験が開始",category:"教育",desc:"共通一次試験に代わる新しい大学入試共通テストが導入された。",impact:"2020年の大学入学共通テストへ引き継がれる、大学入試制度の重要な柱となった。"},
+  {title:"礼宮さまご成婚など皇室関連行事を機に伝統文化への関心が高まる",category:"文化",desc:"皇室関連の行事を通じ、日本の伝統文化・儀礼への関心が広がった。",impact:"伝統文化の継承・国際発信への意識を高める契機となった。"},
+  {title:"日本初の人工衛星による移動体通信サービスが開始",category:"IT",desc:"衛星を利用した携帯電話・通信サービスの実用化が進んだ。",impact:"僻地や海上での通信手段の確保に貢献する技術基盤となった。"}
+],world:[
+  {title:"ハッブル宇宙望遠鏡が打ち上げ",category:"宇宙",desc:"地上の大気の影響を受けない宇宙望遠鏡がスペースシャトルで打ち上げられた。",impact:"以後30年以上にわたり、宇宙の姿を捉えた数多くの科学的発見をもたらしている。"},
+  {title:"東西ドイツが統一",category:"平和",desc:"冷戦の象徴だった東西ドイツが再統一を果たした。",impact:"欧州の政治地図を大きく塗り替え、冷戦終結を決定づける出来事となった。"},
+  {title:"ヒトゲノム計画が正式に始動",category:"科学",desc:"人間の全遺伝情報を解読する国際的な研究プロジェクトが開始された。",impact:"2003年の完了を経て、現在の遺伝子医療・個別化医療の基盤を築いた。"}
+],aiComment:"ハッブル宇宙望遠鏡の打ち上げとヒトゲノム計画の始動という、宇宙と生命という両極の謎に挑む壮大なプロジェクトが同じ年にスタートしました。東西ドイツ統一という歴史的な出来事もありました。",stars:5,starReason:"ハッブル望遠鏡打ち上げとヒトゲノム計画始動"},
+
+1991:{jp:[
+  {title:"牛肉・オレンジの輸入自由化が実施",category:"経済",desc:"農産物の市場開放が進み、貿易自由化がさらに進展した。",impact:"日本の食料市場の国際化と消費者の選択肢拡大につながった。"},
+  {title:"雲仙普賢岳の噴火を教訓に火山防災研究が強化",category:"環境",desc:"大規模な火砕流被害を受け、火山観測・避難体制の見直しが進められた。",impact:"現在の火山防災情報・避難計画の充実につながる重要な教訓となった。"},
+  {title:"育児休業法が制定",category:"平和",desc:"働く親が子育てのために休業できる権利を保障する法律が制定された。",impact:"仕事と育児の両立支援の重要な法的基盤となり、後の改正で拡充され続けている。"}
+],world:[
+  {title:"ソビエト連邦が解体",category:"平和",desc:"70年余り続いたソ連が解体し、複数の独立国家が誕生した。",impact:"冷戦の完全な終結を意味し、国際政治の構造を根本から変える出来事となった。"},
+  {title:"ワールド・ワイド・ウェブが一般公開される",category:"IT",desc:"CERNで開発されたWWWの技術が一般に公開された。",impact:"現在のインターネット社会の実質的な出発点となった、歴史的な公開だった。"},
+  {title:"南アフリカでアパルトヘイト（人種隔離政策）関連法が撤廃",category:"平和",desc:"長く続いた人種隔離政策を支える法律の撤廃が進められた。",impact:"1994年の民主的選挙実現につながる、人種平等への大きな前進となった。"}
+],aiComment:"WWWが一般公開されたこの年は、後の世界を一変させるインターネット時代の実質的な始まりです。ソ連解体とアパルトヘイト撤廃という、二つの大きな歴史的転換も同時に起きました。",stars:5,starReason:"WWW一般公開という情報革命の出発点"},
+
+1992:{jp:[
+  {title:"国連平和維持活動（PKO）協力法が成立",category:"平和",desc:"自衛隊による国連PKOへの参加を可能にする法律が成立した。",impact:"日本の国際平和協力のあり方を大きく広げる重要な法的枠組みとなった。"},
+  {title:"毛利衛さんが日本人初のスペースシャトル搭乗",category:"宇宙",desc:"日本人宇宙飛行士がスペースシャトルに搭乗し、科学実験を行った。",impact:"日本の有人宇宙開発参加への機運を高め、後の宇宙飛行士育成につながった。"},
+  {title:"学校週5日制の検討が本格化",category:"教育",desc:"月1回の学校休業日導入など、教育制度の見直しが進められた。",impact:"後の完全学校週5日制（2002年）実施に向けた重要な一歩となった。"}
+],world:[
+  {title:"国連環境開発会議（地球サミット）がリオデジャネイロで開催",category:"環境",desc:"持続可能な開発をテーマにした過去最大級の国際会議が開催された。",impact:"気候変動枠組条約・生物多様性条約の署名につながり、現在の環境政策の礎となった。"},
+  {title:"気候変動枠組条約が署名開放",category:"環境",desc:"地球温暖化対策の国際的な枠組みを定める条約が署名のために開放された。",impact:"後の京都議定書・パリ協定へとつながる気候変動対策の出発点となった。"},
+  {title:"欧州連合（EU）創設に向けたマーストリヒト条約が調印",category:"経済",desc:"欧州の政治・経済統合をさらに進める条約が調印された。",impact:"翌年のEU発足につながり、地域統合の新たな段階を切り開いた。"}
+],aiComment:"地球サミットの開催と気候変動枠組条約の署名開放は、人類が地球規模の環境問題に本格的に取り組み始めた歴史的な節目でした。日本人宇宙飛行士の活躍も大きな話題となりました。",stars:5,starReason:"地球サミット開催という環境協力の転換点"},
+
+1993:{jp:[
+  {title:"環境基本法が制定",category:"環境",desc:"公害対策基本法に代わる、より包括的な環境政策の基本法が制定された。",impact:"現在の日本の環境政策全体を方向づける中心的な法律となっている。"},
+  {title:"屋久島・白神山地・法隆寺・姫路城が世界遺産に登録",category:"文化",desc:"日本で初めての世界遺産登録がユネスコにより認定された。",impact:"日本の自然・文化遺産の国際的評価を高め、保護意識を大きく向上させた。"},
+  {title:"皇太子さまご成婚",category:"文化",desc:"皇室の慶事として国内外から大きな関心を集めた。",impact:"日本の皇室文化・伝統への国際的な関心を高める契機となった。"}
+],world:[
+  {title:"欧州連合（EU）が発足",category:"経済",desc:"マーストリヒト条約の発効により、欧州連合が正式に発足した。",impact:"単一通貨ユーロの導入など、世界最大級の地域統合体として発展を続けている。"},
+  {title:"イスラエルとPLOがオスロ合意に調印",category:"平和",desc:"中東和平に向けた歴史的な相互承認と暫定自治合意が結ばれた。",impact:"中東和平プロセスの重要な一歩となり、以後の交渉の基礎となった。"},
+  {title:"世界初のウェブブラウザMosaicが公開される",category:"IT",desc:"画像表示に対応した使いやすいウェブブラウザが一般公開された。",impact:"インターネットの一般利用を爆発的に拡大させる重要な技術となった。"}
+],aiComment:"日本初の世界遺産登録は、日本の自然と文化の価値が国際的に認められた誇らしい出来事でした。EU発足とオスロ合意という、世界の統合と和平に向けた大きな一歩もありました。",stars:4,starReason:"日本初の世界遺産登録とEU発足"},
+
+1994:{jp:[
+  {title:"関西国際空港が開港",category:"インフラ",desc:"世界初の完全人工島に建設された国際空港が開港した。",impact:"24時間運用可能な国際ハブ空港として、関西圏の国際競争力向上に貢献している。"},
+  {title:"大江健三郎がノーベル文学賞を受賞",category:"文化",desc:"独自の文学世界により、大江健三郎が日本人2人目のノーベル文学賞を受賞した。",impact:"戦後日本文学の思想的深さを世界に示す出来事となった。"},
+  {title:"高齢社会対策基本法の検討が本格化",category:"医学",desc:"急速な高齢化に対応するための総合的な政策議論が進められた。",impact:"1995年の同法制定につながり、高齢社会対策の基本的な枠組みを形づくった。"}
+],world:[
+  {title:"南アフリカで民主的選挙が実施されマンデラ氏が大統領に",category:"平和",desc:"アパルトヘイト撤廃後初の全人種参加による選挙が実施された。",impact:"人種平等の実現に向けた歴史的な転換点として、世界に大きな希望を与えた。"},
+  {title:"世界貿易機関（WTO）設立協定に合意",category:"経済",desc:"国際貿易のルールを定めるWTOの設立に向けた合意が成立した。",impact:"翌年のWTO発足につながり、自由貿易体制の強化に貢献した。"},
+  {title:"アマゾンが書籍のオンライン販売を開始",category:"IT",desc:"インターネットを使った書籍のオンライン販売サービスが始まった。",impact:"以後のEコマース産業の急速な発展を牽引する先駆けとなった。"}
+],aiComment:"マンデラ氏の大統領就任は、人種平等を求める長い闘いが実を結んだ、人類にとって大きな希望の出来事でした。日本では大江健三郎のノーベル賞受賞という誇らしい快挙もありました。",stars:5,starReason:"マンデラ氏大統領就任という人権史的偉業"},
+
+1995:{jp:[
+  {title:"阪神・淡路大震災を教訓に耐震・防災対策が抜本強化",category:"環境",desc:"甚大な被害を受けた震災を教訓に、建築耐震基準や災害対応体制が見直された。",impact:"現在の耐震基準・緊急地震速報など、日本の防災技術向上の重要な転機となった。"},
+  {title:"科学技術基本法が制定",category:"科学",desc:"日本の科学技術政策を体系的に推進するための基本法が制定された。",impact:"以後の科学技術基本計画による研究開発投資の枠組みを確立した。"},
+  {title:"ボランティア元年と呼ばれる市民活動の広がり",category:"平和",desc:"震災を機に、市民によるボランティア活動が全国的に広がりを見せた。",impact:"後のNPO法制定（1998年）につながる市民社会の重要な転換点となった。"}
+],world:[
+  {title:"世界貿易機関（WTO）が発足",category:"経済",desc:"自由貿易の促進とルール整備を担うWTOが正式に発足した。",impact:"国際貿易紛争の解決や関税引き下げなど、世界経済の安定に貢献してきた。"},
+  {title:"太陽系外惑星が初めて発見される",category:"宇宙",desc:"ペガスス座51番星を周回する系外惑星が初めて確認された。",impact:"地球以外に生命が存在しうる惑星探しという、新たな天文学分野を切り開いた。"},
+  {title:"ボスニア紛争の和平合意（デイトン合意）が成立",category:"平和",desc:"激しい紛争が続いたボスニアで、国際的な仲介により和平が実現した。",impact:"国際社会による紛争解決・平和構築の重要な成功事例となった。"}
+],aiComment:"阪神・淡路大震災という大きな悲しみを経験しましたが、そこから日本の防災技術とボランティア文化が大きく育ちました。世界では太陽系外惑星の発見という、宇宙への理解を広げる出来事もありました。",stars:4,starReason:"系外惑星発見と震災を機にした防災技術の進化"},
+
+1996:{jp:[
+  {title:"O157食中毒事件を教訓に食品衛生対策が強化",category:"医学",desc:"学校給食での集団食中毒を受け、食品衛生管理体制の見直しが進んだ。",impact:"現在のHACCPに基づく衛生管理など、食品安全対策の強化につながった。"},
+  {title:"優生保護法が母体保護法に改正",category:"平和",desc:"障害者に対する強制的な措置を含んでいた法律の見直しが行われた。",impact:"人権尊重の観点から医療関連法制を見直す重要な一歩となった。"},
+  {title:"高輝度青色LEDの実用化が世界的に評価される",category:"科学",desc:"日本人研究者らが開発した高輝度青色LEDの実用化が本格的に進んだ。",impact:"白色LED照明の実現につながり、省エネ照明の世界的普及の礎となった。"}
+],world:[
+  {title:"包括的核実験禁止条約（CTBT）が国連総会で採択",category:"平和",desc:"あらゆる核爆発実験を禁止する国際条約が採択された。",impact:"核軍縮・不拡散体制の強化に向けた重要な国際的合意となった。"},
+  {title:"クローン羊「ドリー」が誕生",category:"科学",desc:"体細胞クローン技術により、世界初の哺乳類クローン「ドリー」が誕生した。",impact:"再生医療・クローン技術研究の可能性と倫理的課題の両方を世界に提起した。"},
+  {title:"WHOが結核対策を国際的な緊急課題と宣言",category:"医学",desc:"再び深刻化する結核問題への国際的な取り組み強化が呼びかけられた。",impact:"世界的な結核対策プログラムの強化につながる重要な契機となった。"}
+],aiComment:"クローン羊ドリーの誕生は、生命科学の可能性を大きく広げると同時に、倫理的な議論を世界に投げかけた画期的な出来事でした。",stars:4,starReason:"世界初の哺乳類クローン誕生"},
+
+1997:{jp:[
+  {title:"トヨタがハイブリッド車プリウスを世界初の量産化",category:"環境",desc:"ガソリンエンジンと電気モーターを組み合わせた量産ハイブリッド車が発売された。",impact:"世界の自動車産業における環境技術の方向性を大きく変える先駆けとなった。"},
+  {title:"臓器の移植に関する法律（臓器移植法）が施行",category:"医学",desc:"脳死判定に基づく臓器移植を可能にする法律が施行された。",impact:"日本の臓器移植医療の道を開き、多くの患者に新たな治療選択肢を提供した。"},
+  {title:"介護保険法が成立",category:"医学",desc:"高齢者の介護を社会全体で支える公的介護保険制度が創設された。",impact:"2000年の施行を経て、日本の高齢社会を支える重要な社会保障制度となった。"}
+],world:[
+  {title:"京都議定書が採択される",category:"環境",desc:"先進国に温室効果ガス排出削減を義務づける国際協定が京都で採択された。",impact:"気候変動対策における法的拘束力を持つ枠組みの先駆けとなり、パリ協定へとつながった。"},
+  {title:"IBMのディープ・ブルーがチェス世界王者に勝利",category:"AI",desc:"コンピュータが人間のチェス世界チャンピオンに公式戦で勝利した。",impact:"AIが人間の知的能力に迫る可能性を示し、後のAI研究への関心を大きく高めた。"},
+  {title:"香港が中国に返還される",category:"平和",desc:"イギリスの統治下にあった香港が中華人民共和国に返還された。",impact:"「一国二制度」という新しい統治モデルの実践として国際的に注目された。"}
+],aiComment:"京都議定書の採択は、地球温暖化対策における画期的な国際合意でした。日本発のハイブリッド車プリウスの登場と合わせ、環境技術への取り組みが大きく前進した年です。",stars:5,starReason:"京都議定書採択とプリウス発売という環境技術の転換点"},
+
+1998:{jp:[
+  {title:"長野オリンピックが開催",category:"スポーツ",desc:"冬季オリンピックが長野で開催され、日本選手団が多くのメダルを獲得した。",impact:"冬季競技の普及とウィンタースポーツ施設の整備を大きく後押しした。"},
+  {title:"特定非営利活動促進法（NPO法）が制定",category:"平和",desc:"市民活動団体が法人格を取得しやすくする法律が制定された。",impact:"日本の市民社会・ボランティア活動の発展を支える重要な法的基盤となった。"},
+  {title:"明石海峡大橋が開通",category:"インフラ",desc:"世界最長級の吊り橋である明石海峡大橋が開通した。",impact:"本州・淡路島・四国を結ぶ交通網の完成に大きく貢献した。"}
+],world:[
+  {title:"Googleが設立される",category:"IT",desc:"ラリー・ペイジとセルゲイ・ブリンによりGoogle社が設立された。",impact:"インターネット検索のあり方を一変させ、現在の情報アクセスの中心的存在となった。"},
+  {title:"国際宇宙ステーション（ISS）の建設が始まる",category:"宇宙",desc:"複数国が協力する巨大な宇宙ステーションの最初のモジュールが打ち上げられた。",impact:"国際協力による有人宇宙開発の象徴として、現在も科学研究を続けている。"},
+  {title:"オタワ条約（対人地雷禁止条約）が発効",category:"平和",desc:"対人地雷の使用・生産・貯蔵を禁止する国際条約が発効した。",impact:"紛争後の地雷被害を減らす人道的な取り組みの重要な成果となった。"}
+],aiComment:"Googleの設立は、後の情報社会のあり方を根本から変える出来事でした。国際宇宙ステーションの建設開始という、国際協力による壮大な挑戦も始まっています。",stars:5,starReason:"Google設立という情報革命の始まり"},
+
+1999:{jp:[
+  {title:"NTTドコモがiモードサービスを開始",category:"IT",desc:"携帯電話でインターネットが利用できるiモードサービスが始まった。",impact:"日本独自のモバイルインターネット文化を発展させ、後のスマートフォン普及の礎となった。"},
+  {title:"男女共同参画社会基本法が制定",category:"平和",desc:"男女が対等な立場で社会に参画することを目指す基本法が制定された。",impact:"日本のジェンダー平等政策を推進する重要な法的基盤となっている。"},
+  {title:"食料・農業・農村基本法が制定",category:"経済",desc:"食料自給率向上と農村振興を目指す新たな農業政策の基本法が定められた。",impact:"現在の日本の農業政策の基本的な方向性を形づくっている。"}
+],world:[
+  {title:"ユーロが導入される",category:"経済",desc:"欧州連合の単一通貨ユーロが決済通貨として導入された。",impact:"欧州域内の経済統合を大きく前進させる歴史的な通貨改革となった。"},
+  {title:"世界人口が60億人に到達",category:"環境",desc:"国連推計により世界人口が60億人を突破したとされた。",impact:"人口増加と持続可能な開発についての国際的議論をさらに深めた。"},
+  {title:"ナパスター（Napster）が登場し音楽配信のデジタル化が加速",category:"IT",desc:"インターネットを通じた音楽ファイル共有サービスが登場した。",impact:"賛否を呼びつつも、後の音楽配信サービス発展の重要な契機となった。"}
+],aiComment:"日本発のiモードは、世界に先駆けたモバイルインターネット文化を花開かせました。ユーロ導入という欧州統合の大きな一歩もあった、20世紀最後の節目の年です。",stars:4,starReason:"iモード開始というモバイルインターネットの先駆け"}
+,
+
+2000:{jp:[
+  {title:"白川英樹がノーベル化学賞を受賞",category:"科学",desc:"導電性高分子の発見・開発により、白川英樹がノーベル化学賞を受賞した。",impact:"有機エレクトロニクス・有機ELディスプレイなど現代技術の科学的基盤に貢献した。"},
+  {title:"介護保険制度が施行",category:"医学",desc:"高齢者介護を社会全体で支える公的介護保険制度の運用が始まった。",impact:"日本の高齢社会を支える中心的な社会保障制度として定着している。"},
+  {title:"三宅島噴火・有珠山噴火を教訓に火山防災体制がさらに強化",category:"環境",desc:"複数の火山活動を受け、避難計画と観測体制の充実が図られた。",impact:"現在の噴火警戒レベル制度など、火山防災の実効性向上につながった。"}
+],world:[
+  {title:"ヒトゲノムの概要配列解読が発表される",category:"医学",desc:"国際チームが人間の全遺伝情報の概要配列を解読したと発表した。",impact:"個別化医療・遺伝子治療など、現在の精密医療の科学的基盤を築いた。"},
+  {title:"国連ミレニアム開発目標（MDGs）が採択される",category:"平和",desc:"貧困削減や教育普及など8つの国際開発目標が国連で採択された。",impact:"後の持続可能な開発目標（SDGs）へとつながる国際協力の重要な出発点となった。"},
+  {title:"南北首脳会談が実現し朝鮮半島の緊張緩和に前進",category:"平和",desc:"韓国と北朝鮮の首脳が初めて会談し、共同宣言が発表された。",impact:"朝鮮半島の平和構築に向けた対話の重要な一歩として記録されている。"}
+],aiComment:"ヒトゲノム概要配列の解読は、生命の設計図をほぼ読み終えたという人類史上の快挙です。白川英樹のノーベル賞受賞、国連ミレニアム開発目標の採択も、この節目の年を彩りました。",stars:5,starReason:"ヒトゲノム概要配列解読という生命科学の金字塔"},
+
+2001:{jp:[
+  {title:"野依良治がノーベル化学賞を受賞",category:"科学",desc:"不斉合成触媒の開発により、野依良治がノーベル化学賞を受賞した。",impact:"医薬品合成技術の発展に大きく貢献し、日本の化学研究の実力を示した。"},
+  {title:"中央省庁再編により行政組織が大幅に効率化",category:"インフラ",desc:"1府12省庁体制への移行など、国の行政組織の再編が行われた。",impact:"行政の効率化と政策決定プロセスの合理化を進める重要な改革となった。"},
+  {title:"文部科学省が発足し科学技術政策と教育政策が統合",category:"教育",desc:"文部省と科学技術庁が統合され、文部科学省として発足した。",impact:"教育と科学技術政策の一体的な推進が可能となる体制が整った。"}
+],world:[
+  {title:"ヒトゲノムの詳細な解析結果が科学誌に発表",category:"医学",desc:"国際チームによるヒトゲノム解読の詳細な論文が発表された。",impact:"がんゲノム医療など、現在の精密医療研究の重要な科学的基盤となった。"},
+  {title:"ウィキペディアが創設される",category:"IT",desc:"誰でも編集できるオンライン百科事典ウィキペディアが公開された。",impact:"知識への自由なアクセスを世界的に広げ、情報共有のあり方を大きく変えた。"},
+  {title:"国連が国際ボランティア年を実施し市民社会の役割を強調",category:"平和",desc:"世界各地でのボランティア活動の意義を高める国際的な取り組みが行われた。",impact:"市民社会による国際協力・地域貢献の重要性への認識を高めた。"}
+],aiComment:"ウィキペディアの創設は、人類の知識を誰もが自由にアクセスできるものに変えた画期的な出来事です。野依良治のノーベル賞受賞という誇らしい快挙もありました。",stars:4,starReason:"ウィキペディア創設という知識共有の革新"},
+
+2002:{jp:[
+  {title:"小柴昌俊がノーベル物理学賞を受賞",category:"科学",desc:"ニュートリノ天文学の開拓により、小柴昌俊がノーベル物理学賞を受賞した。",impact:"日本のニュートリノ研究（スーパーカミオカンデ）の世界的評価を確立した。"},
+  {title:"田中耕一がノーベル化学賞を受賞",category:"科学",desc:"生体高分子の質量分析法の開発により、田中耕一がノーベル化学賞を受賞した。",impact:"タンパク質解析技術の発展を通じ、創薬や医療診断技術に大きく貢献した。"},
+  {title:"サッカーワールドカップ日韓大会が開催",category:"スポーツ",desc:"アジア初のサッカーワールドカップが日本と韓国の共催で開催された。",impact:"スポーツを通じた国際交流と日韓関係の一時的な緊密化に貢献した。"}
+],world:[
+  {title:"ユーロ紙幣・硬貨の流通が開始",category:"経済",desc:"欧州連合加盟国の多くでユーロが実際の通貨として流通を開始した。",impact:"欧州域内の経済取引・旅行の利便性を大きく向上させた。"},
+  {title:"国際刑事裁判所（ICC）が設立",category:"平和",desc:"戦争犯罪やジェノサイドを裁く常設の国際司法機関が発足した。",impact:"国際人道法の実効性を高め、重大犯罪の不処罰を防ぐ枠組みとなっている。"},
+  {title:"アフリカ連合（AU）が発足",category:"平和",desc:"アフリカ諸国の統合と協力を推進する地域機構が発足した。",impact:"アフリカにおける平和構築・経済開発協力の重要な枠組みとなっている。"}
+],aiComment:"日本人研究者2人が同時にノーベル賞を受賞するという快挙があった年です。国際刑事裁判所の設立という、国際社会の正義を守る新たな仕組みも生まれました。",stars:5,starReason:"日本人2人同時ノーベル賞受賞という快挙"},
+
+2003:{jp:[
+  {title:"小惑星探査機「はやぶさ」が打ち上げ",category:"宇宙",desc:"小惑星からのサンプルリターンを目指す探査機「はやぶさ」が打ち上げられた。",impact:"2010年の帰還を経て、日本の小天体探査技術を世界トップクラスに引き上げた。"},
+  {title:"個人情報保護法が制定",category:"IT",desc:"個人情報の適切な取り扱いを定める法律が制定された。",impact:"デジタル社会における個人情報保護の基本的な法的枠組みとなっている。"},
+  {title:"国立大学が法人化",category:"教育",desc:"国立大学が独立行政法人化され、経営の自律性が高められた。",impact:"大学の研究・教育活動における自主性と説明責任のあり方を変える改革となった。"}
+],world:[
+  {title:"ヒトゲノム計画が完了",category:"医学",desc:"人間の全遺伝情報の解読プロジェクトが正式に完了したと発表された。",impact:"現在のゲノム医療・個別化医療の科学的基盤を確立した歴史的偉業となった。"},
+  {title:"中国が有人宇宙船「神舟5号」の打ち上げに成功",category:"宇宙",desc:"中国が独自技術で初めての有人宇宙飛行を実現した。",impact:"有人宇宙飛行を実現した国が拡大し、宇宙開発の国際的な広がりを示した。"},
+  {title:"SARS（重症急性呼吸器症候群）の流行に国際協調で対応",category:"医学",desc:"新興感染症SARSの流行に対し、WHOを中心とした国際的な対応が行われた。",impact:"新興感染症への国際的な監視・対応体制強化の重要な教訓となった。"}
+],aiComment:"ヒトゲノム計画の完了は、人類が自らの設計図を読み解いた歴史的な瞬間でした。日本の「はやぶさ」打ち上げも、小天体探査という新しい宇宙開発の扉を開いています。",stars:5,starReason:"ヒトゲノム計画完了という科学史上の金字塔"},
+
+2004:{jp:[
+  {title:"新潟県中越地震を教訓に耐震・防災技術がさらに進化",category:"環境",desc:"内陸直下型地震の被害を受け、住宅耐震化・避難支援の充実が図られた。",impact:"現在の被災者支援制度・住宅耐震改修支援策の強化につながった。"},
+  {title:"新千円札・五千円札・一万円札が発行",category:"経済",desc:"偽造防止技術を高めた新紙幣が発行された。",impact:"通貨の信頼性向上と偽造防止技術の高度化に貢献した。"},
+  {title:"京都議定書の批准に向けた国内対策が本格化",category:"環境",desc:"温室効果ガス削減目標達成に向けた国内政策の整備が進められた。",impact:"日本の省エネ・再生可能エネルギー技術の発展を後押しした。"}
+],world:[
+  {title:"火星探査ローバー「スピリット」「オポチュニティ」が火星着陸",category:"宇宙",desc:"NASAの探査ローバーが火星表面での長期探査を開始した。",impact:"火星における水の存在の証拠を発見するなど、火星研究を大きく前進させた。"},
+  {title:"インド洋大津波を教訓に津波警報システムが国際的に整備",category:"環境",desc:"甚大な被害をもたらした津波を受け、国際的な早期警戒体制の構築が進んだ。",impact:"インド洋津波警戒システムの構築など、国際防災協力の強化につながった。"},
+  {title:"Facebookが創設される",category:"IT",desc:"マーク・ザッカーバーグらによりソーシャルネットワークFacebookが創設された。",impact:"世界中の人々をつなぐSNSという新しいコミュニケーション手段の先駆けとなった。"}
+],aiComment:"インド洋大津波という大きな悲劇がありましたが、そこから国際的な津波警報システムという、多くの命を守る仕組みが生まれました。火星探査も新たな段階に入っています。",stars:3,starReason:"津波警報システム整備という防災協力の前進"},
+
+2005:{jp:[
+  {title:"愛・地球博（愛知万博）が開催",category:"文化",desc:"「自然の叡智」をテーマにした国際博覧会が愛知県で開催された。",impact:"環境技術と持続可能な社会のあり方を広く発信する契機となった。"},
+  {title:"郵政民営化法が成立",category:"経済",desc:"日本郵政公社を民営化する法律が成立した。",impact:"郵便・貯金・保険事業の経営効率化と競争環境の整備につながった。"},
+  {title:"愛知県で中部国際空港（セントレア）が開港",category:"インフラ",desc:"中部圏の国際拠点空港として海上空港が開港した。",impact:"中部地方の国際競争力向上と航空ネットワークの拡充に貢献した。"}
+],world:[
+  {title:"京都議定書が発効",category:"環境",desc:"先進国に温室効果ガス削減を義務づける国際協定が正式に発効した。",impact:"気候変動対策における法的拘束力を持つ枠組みが初めて実効化された。"},
+  {title:"YouTubeが創設される",category:"IT",desc:"動画共有サービスYouTubeが設立され、一般公開された。",impact:"個人が世界に情報発信できる時代を切り開き、動画文化を大きく変えた。"},
+  {title:"国連総会で「保護する責任（R2P）」の理念が採択",category:"平和",desc:"深刻な人権侵害から市民を守る国際社会の責任という理念が確認された。",impact:"人道的介入をめぐる国際規範の発展に重要な影響を与えた。"}
+],aiComment:"京都議定書の発効は、気候変動対策が国際法として実際に動き始めた歴史的な瞬間でした。YouTubeの誕生も、個人の情報発信力を大きく広げる転換点となっています。",stars:4,starReason:"京都議定書発効という気候変動対策の実効化"},
+
+2006:{jp:[
+  {title:"教育基本法が改正",category:"教育",desc:"1947年制定の教育基本法が約60年ぶりに改正された。",impact:"現代的な教育理念を反映した、日本の教育政策の新たな指針となった。"},
+  {title:"がん対策基本法が制定",category:"医学",desc:"がん医療の均てん化と研究推進を目指す基本法が制定された。",impact:"全国どこでも質の高いがん医療を受けられる体制整備を後押しした。"},
+  {title:"ニンテンドーDS・Wiiが世界的にヒット",category:"文化",desc:"任天堂の携帯型・据置型ゲーム機が世界中で大ヒットした。",impact:"直感的な操作性でゲーム人口を拡大し、日本のゲーム産業の存在感を高めた。"}
+],world:[
+  {title:"冥王星が準惑星に再分類される",category:"科学",desc:"国際天文学連合が惑星の定義を見直し、冥王星を準惑星とした。",impact:"太陽系の天体分類の科学的基準を明確化し、天文学の理解を深めた。"},
+  {title:"Twitterが創設される",category:"IT",desc:"短文投稿型のソーシャルメディア、Twitterがサービスを開始した。",impact:"リアルタイムの情報共有という新しいコミュニケーション文化を世界に広めた。"},
+  {title:"バングラデシュのグラミン銀行創設者がノーベル平和賞を受賞",category:"平和",desc:"貧困層向け少額融資（マイクロクレジット）の功績が評価された。",impact:"貧困削減の新しい手法として、世界中でマイクロファイナンスの普及を後押しした。"},
+  {title:"Netflixが推薦アルゴリズム精度を競う「Netflix Prize」を開始",category:"AI",desc:"映画推薦の精度向上を目指す大規模な機械学習コンペティションが始まった。",impact:"後の機械学習・レコメンデーション技術の研究発展を大きく後押しした。"}
+],aiComment:"マイクロクレジットの功績が評価されたノーベル平和賞受賞は、貧困削減への新しいアプローチを世界に示しました。Netflix Prizeの開始も、機械学習研究が実用に近づく重要な一歩でした。",stars:4,starReason:"マイクロクレジットのノーベル平和賞受賞"},
+
+2007:{jp:[
+  {title:"郵政民営化が実施",category:"経済",desc:"日本郵政公社が民営化され、日本郵政グループとして再編された。",impact:"郵便・金融サービスの経営形態を大きく変える改革が実現した。"},
+  {title:"改正教育基本法に基づく教育改革が進む",category:"教育",desc:"新しい教育理念に基づく学校教育の改善が各地で進められた。",impact:"現在の学習指導要領の考え方の一部に影響を与えている。"},
+  {title:"新潟県中越沖地震を機に原子力施設の耐震基準を見直し",category:"環境",desc:"原発への影響を受け、原子力施設の地震対策強化が図られた。",impact:"原子力施設の安全性向上に向けた重要な教訓となった。"}
+],world:[
+  {title:"iPhoneが発売される",category:"IT",desc:"アップルがタッチスクリーン式スマートフォンiPhoneを発売した。",impact:"スマートフォン時代の幕開けとなり、人々の生活・情報アクセスを根本から変えた。"},
+  {title:"気候変動に関する政府間パネル（IPCC）がノーベル平和賞を受賞",category:"環境",desc:"気候変動の科学的評価における貢献が国際的に評価された。",impact:"気候変動問題への世界的な関心と対策の緊急性への認識を高めた。"},
+  {title:"国連総会で先住民族の権利に関する宣言が採択",category:"平和",desc:"世界各地の先住民族の権利を保護する国際宣言が採択された。",impact:"先住民族の文化・土地・自己決定権を尊重する国際規範の発展を後押しした。"}
+],aiComment:"iPhoneの発売は、後のあらゆる産業とライフスタイルを変えるスマートフォン革命の始まりでした。人類の生活を最も大きく変えた製品の一つといえるでしょう。",stars:5,starReason:"iPhone発売というモバイル革命の出発点"},
+
+2008:{jp:[
+  {title:"南部陽一郎・小林誠・益川敏英がノーベル物理学賞を受賞",category:"科学",desc:"対称性の破れの理論的発見により、日本人3人が同時に受賞した。",impact:"素粒子物理学における日本の理論研究の高い水準を世界に示した。"},
+  {title:"下村脩がノーベル化学賞を受賞",category:"科学",desc:"緑色蛍光タンパク質（GFP）の発見により、下村脩がノーベル化学賞を受賞した。",impact:"生命科学研究における細胞可視化技術に革命をもたらす発見となった。"},
+  {title:"後期高齢者医療制度が施行",category:"医学",desc:"75歳以上の高齢者を対象とする独立した医療保険制度が始まった。",impact:"高齢化が進む中での医療財政の持続可能性を模索する制度改革となった。"}
+],world:[
+  {title:"iPS細胞技術の応用研究が世界的に加速",category:"医学",desc:"前年の人工多能性幹細胞（iPS細胞）樹立を受け、再生医療応用研究が急拡大した。",impact:"創薬研究や難病治療への応用など、再生医療の新時代を切り開いた。"},
+  {title:"大型ハドロン衝突型加速器（LHC）が稼働開始",category:"科学",desc:"世界最大の粒子加速器がCERNで稼働を始めた。",impact:"2012年のヒッグス粒子発見につながる、素粒子物理学の重要な研究基盤となった。"},
+  {title:"バラク・オバマ氏がアメリカ初のアフリカ系大統領に当選",category:"平和",desc:"人種の壁を越えた歴史的な大統領選挙がアメリカで行われた。",impact:"人種平等の歴史における大きな象徴的出来事として世界的に注目された。"}
+],aiComment:"日本人研究者4人が同時にノーベル賞を受賞するという、科学史に残る快挙がありました。世界ではLHCの稼働開始という、素粒子物理学の新時代を切り開く出来事もありました。",stars:5,starReason:"日本人研究者4人同時ノーベル賞受賞という快挙"},
+
+2009:{jp:[
+  {title:"裁判員制度が開始",category:"平和",desc:"一般市民が刑事裁判に参加する裁判員制度の運用が始まった。",impact:"司法への市民参加を通じ、裁判の透明性と国民の理解向上に貢献している。"},
+  {title:"新型インフルエンザ対策で国際協調体制を強化",category:"医学",desc:"世界的な新型インフルエンザの流行に対し、水際対策や医療体制が整備された。",impact:"後の新興感染症対策における日本の危機管理体制強化につながった。"},
+  {title:"はやぶさが小惑星イトカワへの往復ミッションを継続中",category:"宇宙",desc:"帰還に向けたはやぶさの困難な航行が続けられ、世界が注目した。",impact:"技術者たちの粘り強い努力が、翌年の奇跡的な帰還を実現させる原動力となった。"}
+],world:[
+  {title:"アメリカでオバマ大統領が就任",category:"平和",desc:"アフリカ系として初めてのアメリカ大統領が正式に就任した。",impact:"人種の壁を越えた政治的リーダーシップの象徴として世界に希望を与えた。"},
+  {title:"ビットコインの運用が開始される",category:"IT",desc:"分散型のデジタル通貨ビットコインの取引が実際に始まった。",impact:"ブロックチェーン技術という、後の金融・IT分野を変える技術の実用化の先駆けとなった。"},
+  {title:"コペンハーゲンで気候変動対策の国際交渉が行われる",category:"環境",desc:"京都議定書後の枠組みをめぐる国際交渉がデンマークで行われた。",impact:"完全合意には至らなかったが、後のパリ協定に向けた重要な議論の場となった。"}
+],aiComment:"ビットコインの登場は、後にブロックチェーン技術という新しい分野を切り開く、静かながら大きな一歩でした。オバマ大統領の就任も、人類の平等への歩みを象徴する出来事です。",stars:4,starReason:"ビットコイン運用開始という新しい技術の萌芽"}
+,
+
+2010:{jp:[
+  {title:"小惑星探査機「はやぶさ」が地球に帰還",category:"宇宙",desc:"7年に及ぶ旅を経て、はやぶさが小惑星のサンプルを持ち帰ることに成功した。",impact:"世界初の小惑星サンプルリターンとして、日本の宇宙探査技術を世界に示した。"},
+  {title:"高校授業料の実質無償化が実施",category:"教育",desc:"公立高校の授業料を無償化する制度が導入された。",impact:"教育機会の均等化を進め、家庭の経済状況によらない学びの環境整備に貢献した。"},
+  {title:"羽田空港に国際線ターミナルが再開",category:"インフラ",desc:"長らく国内線中心だった羽田空港で国際線の本格運用が再開された。",impact:"首都圏の航空アクセスが大きく向上し、国際競争力の強化につながった。"}
+],world:[
+  {title:"チリ落盤事故で作業員33人全員が生還",category:"平和",desc:"地下に閉じ込められた作業員全員が69日ぶりに救出された。",impact:"国際的な技術協力と粘り強い救助活動が人命を救った象徴的な出来事となった。"},
+  {title:"iPadが発売されタブレット市場が本格化",category:"IT",desc:"アップルが新しい形態のタブレット型コンピュータを発売した。",impact:"教育・ビジネスなど幅広い分野でのデジタル活用を大きく前進させた。"},
+  {title:"国連生物多様性条約締約国会議で愛知目標が採択",category:"環境",desc:"生物多様性の保全に関する国際的な目標が名古屋で採択された。",impact:"世界各国の生物多様性保全政策の重要な指針となった。"}
+],aiComment:"はやぶさの奇跡的な帰還は、幾多の困難を乗り越えた技術者たちの努力の結晶であり、日本の宇宙開発史に輝く出来事でした。チリの落盤事故での全員生還も、世界に希望を与えました。",stars:5,starReason:"はやぶさ帰還という世界初の快挙"},
+
+2011:{jp:[
+  {title:"東日本大震災を教訓に防災・エネルギー政策が大転換",category:"環境",desc:"甚大な被害をもたらした震災を機に、防災体制と再生可能エネルギー政策の見直しが進んだ。",impact:"緊急地震速報の高度化や再エネ普及策など、その後の政策に大きな影響を与えている。"},
+  {title:"地上デジタル放送へ完全移行",category:"IT",desc:"アナログ放送が終了し、地上デジタル放送への完全移行が実現した。",impact:"高画質・多チャンネル化など、放送サービスの質的向上につながった。"},
+  {title:"なでしこジャパンがサッカー女子ワールドカップで優勝",category:"スポーツ",desc:"日本女子代表が世界一に輝き、震災に苦しむ国民に大きな勇気を与えた。",impact:"女子サッカーの普及と、困難な時期の国民への大きな励みとなった。"}
+],world:[
+  {title:"ヒトパピローマウイルス（HPV）ワクチンの普及が世界で進む",category:"医学",desc:"子宮頸がん予防のためのワクチン接種プログラムが各国で拡大した。",impact:"子宮頸がんの罹患率低下に寄与する重要な予防医療の普及となった。"},
+  {title:"アラブの春が中東・北アフリカ各地に広がる",category:"平和",desc:"民主化を求める市民運動が複数の国で広がりを見せた。",impact:"中東地域の政治変革への機運を高め、国際社会の関心を集めた。"},
+  {title:"南スーダンが独立",category:"平和",desc:"長期の内戦を経て、アフリカに新しい独立国家南スーダンが誕生した。",impact:"アフリカにおける新たな国家建設と平和構築の課題を国際社会に示した。"}
+],aiComment:"東日本大震災という深い悲しみを経験した年でしたが、その教訓は日本の防災・エネルギー政策の大きな転換点となりました。なでしこジャパンの優勝は、困難な時期に多くの人に勇気を与えました。",stars:3,starReason:"震災を機にした防災・エネルギー政策の転換"},
+
+2012:{jp:[
+  {title:"山中伸弥がノーベル生理学・医学賞を受賞",category:"科学",desc:"iPS細胞（人工多能性幹細胞）の開発により、山中伸弥が受賞した。",impact:"再生医療研究に革命をもたらし、難病治療の新たな可能性を切り開いた。"},
+  {title:"東京スカイツリーが開業",category:"インフラ",desc:"世界一の高さを誇る電波塔・観光施設として東京スカイツリーが開業した。",impact:"東京の新たなランドマークとして、観光・文化発信の拠点となっている。"},
+  {title:"金環日食が国内広範囲で観測される",category:"科学",desc:"多くの地域で金環日食が観測でき、天文学への関心が高まった。",impact:"科学教育や天文観測への国民的な関心を高める貴重な機会となった。"}
+],world:[
+  {title:"ヒッグス粒子の発見が発表される",category:"科学",desc:"CERNの大型加速器実験により、素粒子の質量の起源とされるヒッグス粒子が発見された。",impact:"「標準模型」の最後のピースが埋まり、素粒子物理学の理解を大きく前進させた。"},
+  {title:"国連総会でマララ・ユスフザイさんが女子教育の権利を訴える",category:"教育",desc:"女子教育を求めるパキスタンの活動家が国際的に大きな注目を集めた。",impact:"世界の女子教育の権利向上に向けた運動を大きく後押しした。"},
+  {title:"火星探査ローバー「キュリオシティ」が着陸",category:"宇宙",desc:"NASAの大型探査ローバーが火星表面への着陸に成功した。",impact:"火星における過去の生命存在可能性の探査を大きく前進させた。"}
+],aiComment:"ヒッグス粒子の発見は、物質の質量の起源を説明する素粒子物理学の一大金字塔でした。山中伸弥のiPS細胞研究によるノーベル賞受賞も、再生医療の未来を大きく切り開いています。",stars:5,starReason:"ヒッグス粒子発見とiPS細胞研究の受賞"},
+
+2013:{jp:[
+  {title:"富士山が世界文化遺産に登録",category:"文化",desc:"日本を象徴する霊峰富士がユネスコの世界文化遺産に登録された。",impact:"日本の自然・信仰・芸術の融合した価値が国際的に認められた。"},
+  {title:"和食がユネスコ無形文化遺産に登録",category:"文化",desc:"日本の伝統的な食文化「和食」が無形文化遺産として登録された。",impact:"日本の食文化への国際的な評価と関心を大きく高めた。"},
+  {title:"2020年東京オリンピック・パラリンピックの開催が決定",category:"スポーツ",desc:"国際オリンピック委員会総会で東京開催が決定された。",impact:"スポーツ施設整備やバリアフリー化など、都市インフラの発展を後押しした。"}
+],world:[
+  {title:"重力波観測に向けた研究基盤がさらに整備される",category:"科学",desc:"高精度な重力波検出装置の開発・改良が各国で進められた。",impact:"2015年の重力波直接観測という歴史的成果への重要な準備段階となった。"},
+  {title:"ゲノム編集技術CRISPR-Cas9が実用化へ大きく前進",category:"科学",desc:"効率的な遺伝子編集を可能にする技術が生命科学研究に応用され始めた。",impact:"医療・農業など幅広い分野でのゲノム編集技術活用の道を開いた。"},
+  {title:"教皇フランシスコが選出され対話重視の姿勢を打ち出す",category:"平和",desc:"新しいローマ教皇が貧困層への配慮や宗教間対話を重視する姿勢を示した。",impact:"国際社会における宗教間対話や人道支援の機運を高めた。"}
+],aiComment:"CRISPR-Cas9によるゲノム編集技術の実用化は、生命科学研究に革命をもたらす技術として大きく発展し始めました。日本では富士山と和食がユネスコに登録される慶事もありました。",stars:4,starReason:"ゲノム編集技術CRISPR-Cas9の実用化前進"},
+
+2014:{jp:[
+  {title:"STAP細胞問題を経て研究不正防止体制が強化",category:"科学",desc:"研究論文の検証を通じ、科学研究の公正性を守る体制の見直しが進んだ。",impact:"日本の研究倫理・再現性検証の重要性への意識を高める契機となった。"},
+  {title:"小惑星探査機「はやぶさ2」が打ち上げ",category:"宇宙",desc:"小惑星リュウグウを目指す新たな探査機が打ち上げられた。",impact:"日本の小天体探査技術をさらに発展させる重要なミッションとなった。"},
+  {title:"消費税率が8%に引き上げ",category:"経済",desc:"社会保障財源の確保を目的に消費税率の引き上げが実施された。",impact:"少子高齢化時代の財政持続可能性を模索する重要な政策転換となった。"}
+],world:[
+  {title:"エボラ出血熱の流行に国際社会が対応",category:"医学",desc:"西アフリカで発生した大規模なエボラ出血熱流行に国際的な支援が行われた。",impact:"新興感染症対策における国際協力の重要性と課題を世界に示した。"},
+  {title:"欧州宇宙機関の探査機が彗星への着陸に世界初成功",category:"宇宙",desc:"ロゼッタ探査機の着陸機フィラエが彗星表面への着陸を達成した。",impact:"彗星の組成解明など、太陽系の起源研究を大きく前進させた。"},
+  {title:"マララ・ユスフザイさんが史上最年少でノーベル平和賞を受賞",category:"教育",desc:"女子教育の権利を訴え続けた功績が国際的に評価された。",impact:"世界中の女子教育向上運動への関心と支援を大きく高めた。"}
+],aiComment:"彗星への世界初の着陸成功は、太陽系の起源を探る人類の探査能力の高さを示しました。マララさんの史上最年少ノーベル平和賞受賞も、教育の権利への意識を世界に広げています。",stars:4,starReason:"彗星着陸成功とマララ氏のノーベル平和賞受賞"},
+
+2015:{jp:[
+  {title:"梶田隆章がノーベル物理学賞を受賞",category:"科学",desc:"ニュートリノ振動の発見により、梶田隆章がノーベル物理学賞を受賞した。",impact:"素粒子の質量に関する理解を深め、日本のニュートリノ研究の伝統を継承した。"},
+  {title:"大村智がノーベル生理学・医学賞を受賞",category:"医学",desc:"寄生虫感染症の新しい治療法の発見により、大村智が受賞した。",impact:"アフリカなど途上国の感染症対策に大きく貢献する治療薬開発につながった。"},
+  {title:"北陸新幹線が金沢まで開業",category:"インフラ",desc:"東京〜金沢間を結ぶ北陸新幹線が開業した。",impact:"北陸地方の経済・観光振興と地域間交流の活性化に貢献している。"}
+],world:[
+  {title:"パリ協定が採択される",category:"環境",desc:"世界のほぼすべての国が参加する気候変動対策の新たな国際協定が採択された。",impact:"産業革命前からの気温上昇を抑える世界共通の目標を定めた歴史的な合意となった。"},
+  {title:"国連で持続可能な開発目標（SDGs）が採択される",category:"平和",desc:"貧困・環境・教育など17の目標からなる国際開発目標が採択された。",impact:"2030年に向けた世界共通の行動指針として、各国の政策に大きな影響を与えている。"},
+  {title:"新型ワクチンによりエボラ出血熱の流行が終息に向かう",category:"医学",desc:"国際的な研究協力により開発されたワクチンの効果が確認された。",impact:"新興感染症対策における国際的な研究協力の成功事例となった。"}
+],aiComment:"パリ協定とSDGsという、地球規模の課題に世界が共通の目標で取り組む二つの歴史的な合意が同じ年に成立しました。日本人2人のノーベル賞受賞という誇らしい快挙もありました。",stars:5,starReason:"パリ協定とSDGs採択という国際協力の金字塔"},
+
+2016:{jp:[
+  {title:"大隅良典がノーベル生理学・医学賞を受賞",category:"科学",desc:"オートファジー（細胞の自食作用）の仕組みの解明により受賞した。",impact:"がんや神経変性疾患など、幅広い病気の理解と治療法開発への道を開いた。"},
+  {title:"熊本地震を教訓に住宅耐震化がさらに推進",category:"環境",desc:"連続する大きな地震被害を受け、耐震改修支援策が強化された。",impact:"住宅の耐震性向上に向けた国民の意識と支援制度の充実につながった。"},
+  {title:"障害者差別解消法が施行",category:"平和",desc:"障害を理由とする差別を禁止し、合理的配慮を求める法律が施行された。",impact:"障害の有無にかかわらず共生できる社会づくりの重要な法的基盤となった。"}
+],world:[
+  {title:"パリ協定が発効",category:"環境",desc:"多くの国が批准し、気候変動対策の新たな国際枠組みが正式に発効した。",impact:"世界的な脱炭素社会への移行を後押しする実効的な国際合意となった。"},
+  {title:"AIの囲碁プログラムAlphaGoが世界トップ棋士に勝利",category:"AI",desc:"グーグル傘下のディープマインドが開発したAIが囲碁の世界トップ棋士を破った。",impact:"深層学習AIの実力を世界に示し、その後のAI開発ブームを大きく加速させた。"},
+  {title:"重力波の直接観測に世界で初めて成功したと発表",category:"科学",desc:"アメリカの観測施設LIGOが重力波を初めて直接検出したと発表した。",impact:"アインシュタインの予言から100年を経て実証され、宇宙観測の新時代を開いた。"}
+],aiComment:"AlphaGoの勝利は、AIが人間の直感的な判断力の領域にも到達しつつあることを世界に示した画期的な出来事でした。重力波の直接観測という、宇宙物理学の歴史的偉業もありました。",stars:5,starReason:"AlphaGo勝利と重力波直接観測という二重の偉業"},
+
+2017:{jp:[
+  {title:"働き方改革関連法の検討が本格化",category:"経済",desc:"長時間労働是正や多様な働き方の推進に向けた法整備が進められた。",impact:"翌年の法成立を経て、日本の労働環境改善への重要な一歩となった。"},
+  {title:"重力波観測に貢献した国際研究にノーベル物理学賞",category:"科学",desc:"日本の研究者も参加する国際的な重力波研究の意義が世界的に評価された。",impact:"日本の重力波望遠鏡KAGRAなど、国際協力研究の重要性を高めた。"},
+  {title:"改正民法（債権法）が成立",category:"経済",desc:"約120年ぶりとなる民法の債権関連規定の大改正が行われた。",impact:"契約や取引に関するルールが現代の社会実態に即したものに整備された。"}
+],world:[
+  {title:"国連で核兵器禁止条約が採択される",category:"平和",desc:"核兵器の開発・保有・使用を全面的に禁止する国際条約が採択された。",impact:"核兵器廃絶を目指す市民運動と国際社会の取り組みの重要な到達点となった。"},
+  {title:"重力波観測とマルチメッセンジャー天文学が本格化",category:"科学",desc:"中性子星合体による重力波と電磁波が同時に観測される快挙が達成された。",impact:"宇宙における重元素の起源解明など、天文学の新たな時代を切り開いた。"},
+  {title:"パリ協定の実施指針づくりが各国で本格化",category:"環境",desc:"気候変動対策の具体的な実施方法についての国際交渉が進められた。",impact:"各国の温室効果ガス削減目標の実効性を高める議論の土台となった。"}
+],aiComment:"核兵器禁止条約の採択は、長年の市民運動と国際社会の努力が実を結んだ歴史的な成果です。中性子星合体の観測という天文学史に残る発見もありました。",stars:5,starReason:"核兵器禁止条約採択という平和運動の到達点"},
+
+2018:{jp:[
+  {title:"本庶佑がノーベル生理学・医学賞を受賞",category:"医学",desc:"免疫チェックポイント阻害によるがん治療法の発見により受賞した。",impact:"従来治療が困難だったがんへの新しい治療の道を開き、多くの患者を救っている。"},
+  {title:"働き方改革関連法が成立",category:"経済",desc:"長時間労働の是正や同一労働同一賃金を目指す法律が成立した。",impact:"日本の労働環境・雇用慣行を見直す重要な制度改革となった。"},
+  {title:"北海道胆振東部地震を教訓に電力供給網の強靭化が進む",category:"インフラ",desc:"広域停電（ブラックアウト）を受け、電力システムの分散化・強化が議論された。",impact:"災害に強い電力インフラづくりへの重要な教訓となった。"}
+],world:[
+  {title:"ゲノム編集技術のノーベル賞級の応用研究が加速",category:"科学",desc:"CRISPR技術を用いた遺伝性疾患治療の臨床応用研究が世界で進展した。",impact:"難治性の遺伝性疾患に対する新しい治療法開発の道を大きく広げた。"},
+  {title:"世界初のブラックホールの撮影プロジェクトが最終段階に",category:"科学",desc:"国際的な望遠鏡ネットワークによるブラックホール撮影の観測データ解析が進んだ。",impact:"翌年の歴史的な撮影成功発表につながる重要な準備段階となった。"},
+  {title:"南北首脳会談・米朝首脳会談が実現",category:"平和",desc:"朝鮮半島の緊張緩和に向けた歴史的な首脳会談が相次いで行われた。",impact:"朝鮮半島の平和構築に向けた対話の重要な進展として国際的に注目された。"}
+],aiComment:"本庶佑のノーベル賞受賞につながる、がん免疫療法という新しい治療法は、多くのがん患者に希望をもたらしています。ブラックホール撮影に向けた国際協力も最終段階を迎えていました。",stars:4,starReason:"がん免疫療法の確立という医学的偉業"},
+
+2019:{jp:[
+  {title:"吉野彰がノーベル化学賞を受賞",category:"科学",desc:"リチウムイオン電池の開発により、吉野彰がノーベル化学賞を受賞した。",impact:"スマートフォンから電気自動車まで、現代社会を支える蓄電技術の礎を築いた。"},
+  {title:"令和への改元",category:"文化",desc:"天皇の退位・即位に伴い、元号が令和に改められた。",impact:"新しい時代の始まりとして、国民に新たな節目の意識をもたらした。"},
+  {title:"はやぶさ2が小惑星リュウグウへの着陸に成功",category:"宇宙",desc:"探査機はやぶさ2が小惑星表面へのタッチダウンを成功させた。",impact:"世界初の小惑星地下物質採取など、日本の探査技術をさらに前進させた。"}
+],world:[
+  {title:"人類史上初のブラックホール撮影に成功",category:"科学",desc:"国際的な望遠鏡ネットワーク「イベント・ホライズン・テレスコープ」が撮影に成功した。",impact:"一般相対性理論の予言を視覚的に実証し、宇宙物理学の歴史的な成果となった。"},
+  {title:"グレタ・トゥンベリさんの気候変動運動が世界に広がる",category:"環境",desc:"若い世代による気候変動対策を求める運動が世界各地で活発化した。",impact:"若者主導の気候変動運動として、各国政府の気候政策への圧力を高めた。"},
+  {title:"WHOが伝統医療を国際疾病分類に初めて統合",category:"医学",desc:"伝統医学の知見を現代医療の分類体系に組み込む取り組みが進んだ。",impact:"多様な医療体系の国際的な統合・活用への道を開いた。"}
+],aiComment:"人類史上初のブラックホール撮影は、宇宙の最も謎めいた天体を視覚的に捉えた歴史的偉業です。吉野彰のノーベル賞受賞につながるリチウムイオン電池も、現代社会に不可欠な技術となっています。",stars:5,starReason:"人類初のブラックホール撮影という宇宙物理学の金字塔"}
+,
+
+2020:{jp:[
+  {title:"新型コロナウイルス対策で医療・社会体制が大きく変化",category:"医学",desc:"世界的な感染症流行を受け、医療提供体制やデジタル活用が急速に進んだ。",impact:"オンライン診療や在宅勤務の普及など、社会のデジタル化を大きく加速させた。"},
+  {title:"はやぶさ2が小惑星のサンプルを地球に帰還させる",category:"宇宙",desc:"探査機はやぶさ2が小惑星リュウグウの試料カプセルを地球に届けた。",impact:"世界初の小惑星地下物質の採取・持ち帰りという歴史的偉業を達成した。"},
+  {title:"レジ袋有料化などプラスチックごみ削減策が本格化",category:"環境",desc:"海洋プラスチック問題への対応として、使い捨てプラスチック削減策が始まった。",impact:"国民の環境意識向上と、持続可能な資源利用への転換を後押しした。"}
+],world:[
+  {title:"新型コロナウイルスワクチンが史上最速で開発される",category:"医学",desc:"mRNAワクチンをはじめ、複数の新型コロナワクチンが1年足らずで実用化された。",impact:"ワクチン開発技術の飛躍的進歩を示し、後の感染症対策の可能性を大きく広げた。"},
+  {title:"世界保健機関が新型コロナウイルスをパンデミックと宣言",category:"医学",desc:"世界的な感染拡大を受け、WHOが公式にパンデミックを宣言した。",impact:"世界各国の協調的な感染症対策の必要性を改めて認識させる契機となった。"},
+  {title:"中国の探査機が月からのサンプルリターンに成功",category:"宇宙",desc:"嫦娥5号が月の石や砂を地球に持ち帰ることに成功した。",impact:"約44年ぶりとなる月面サンプルリターンで、月研究に新たな知見をもたらした。"}
+],aiComment:"世界的なパンデミックという大きな試練の年でしたが、史上最速のワクチン開発という科学の底力も示されました。はやぶさ2の帰還という日本の誇るべき偉業もありました。",stars:4,starReason:"史上最速のワクチン開発とはやぶさ2帰還"},
+
+2021:{jp:[
+  {title:"真鍋淑郎がノーベル物理学賞を受賞",category:"科学",desc:"地球温暖化予測に関する気候モデル研究により、真鍋淑郎が受賞した。",impact:"現在の気候変動予測の科学的基盤を築き、気候政策の礎となる研究を確立した。"},
+  {title:"東京オリンピック・パラリンピックが1年延期の末に開催",category:"スポーツ",desc:"新型コロナの影響で延期された東京大会が無観客を含む形で開催された。",impact:"困難な状況下でも国際スポーツ大会を実現し、世界に一体感をもたらした。"},
+  {title:"デジタル庁が発足",category:"IT",desc:"行政のデジタル化を一元的に推進する新しい省庁が発足した。",impact:"行政手続きのオンライン化など、社会全体のデジタル化を加速させる契機となった。"}
+],world:[
+  {title:"新型コロナワクチンの世界的な接種が拡大",category:"医学",desc:"多くの国でワクチン接種プログラムが本格的に進められた。",impact:"重症化・死亡の抑制に大きく貢献し、パンデミックの収束に向けた鍵となった。"},
+  {title:"COP26でグラスゴー気候合意が採択される",category:"環境",desc:"石炭火力発電の段階的削減などを含む気候変動対策の合意が結ばれた。",impact:"パリ協定の目標達成に向けた各国の取り組み強化を後押しした。"},
+  {title:"民間人による本格的な宇宙旅行が実現",category:"宇宙",desc:"民間企業による有人宇宙飛行が相次いで成功した。",impact:"宇宙旅行の商業化という新しい宇宙開発の時代の幕開けとなった。"}
+],aiComment:"真鍋淑郎のノーベル賞受賞は、気候変動という人類共通の課題への科学的理解を大きく前進させた功績が認められたものです。ワクチン接種の拡大も、世界がパンデミックに立ち向かう大きな力となりました。",stars:4,starReason:"真鍋淑郎ノーベル賞受賞と民間宇宙旅行の実現"},
+
+2022:{jp:[
+  {title:"改正民法により成年年齢が18歳に引き下げ",category:"教育",desc:"約140年ぶりに成年年齢の見直しが行われ、18歳が成人となった。",impact:"若者の社会参画のあり方や消費者教育のあり方に大きな影響を与えている。"},
+  {title:"国産初の量子コンピュータが稼働開始",category:"IT",desc:"理化学研究所などが国産初の量子コンピュータの稼働を開始した。",impact:"次世代計算技術における日本の研究開発力向上に貢献している。"},
+  {title:"こども家庭庁の設置が決定",category:"教育",desc:"子どもに関する政策を一元的に担う新しい行政組織の設置が決まった。",impact:"子育て支援・児童福祉政策の充実に向けた重要な体制整備となった。"}
+],world:[
+  {title:"ジェイムズ・ウェッブ宇宙望遠鏡が本格観測を開始",category:"宇宙",desc:"史上最大級の宇宙望遠鏡が高精細な宇宙の画像を届け始めた。",impact:"宇宙誕生初期の銀河や系外惑星の観測など、天文学に新時代をもたらした。"},
+  {title:"核融合実験でエネルギー収支プラスを達成する研究が進展",category:"科学",desc:"レーザー核融合実験で投入エネルギーを上回る出力を得る研究成果が報告された。",impact:"次世代のクリーンエネルギー源として、核融合発電実現への期待を高めた。"},
+  {title:"WHOがサル痘（エムポックス）の緊急事態を宣言し国際協調で対応",category:"医学",desc:"新たな感染症の広がりに対し、国際的な監視・対応体制が強化された。",impact:"新興感染症への迅速な国際協調対応の重要性を改めて示した。"}
+],aiComment:"ジェイムズ・ウェッブ宇宙望遠鏡の観測開始は、宇宙の始まりに迫る新しい目を人類が手にした歴史的な出来事でした。核融合エネルギーの研究進展も、未来のクリーンエネルギーへの期待を高めています。",stars:5,starReason:"ジェイムズ・ウェッブ宇宙望遠鏡観測開始という天文学の新時代"},
+
+2023:{jp:[
+  {title:"はやぶさ2が持ち帰った試料からアミノ酸を検出",category:"科学",desc:"小惑星リュウグウの試料分析で生命の材料となるアミノ酸が発見された。",impact:"生命の起源に関する研究に重要な手がかりを与える成果となった。"},
+  {title:"新型コロナウイルスが感染症法上の5類に移行",category:"医学",desc:"感染症の分類見直しにより、社会経済活動の正常化が進められた。",impact:"パンデミック後の社会・経済活動の本格的な再開を後押しした。"},
+  {title:"小型ロケット「H3」の開発と打ち上げ実証が進む",category:"宇宙",desc:"次世代の主力ロケットとしてH3ロケットの打ち上げ試験が行われた。",impact:"日本の宇宙輸送能力の強化とコスト低減に向けた重要な技術開発となった。"}
+],world:[
+  {title:"生成AI「ChatGPT」が世界的に急速普及",category:"AI",desc:"対話型の生成AIサービスが公開され、わずか数か月で数億人が利用した。",impact:"教育・仕事・創作・研究など幅広い分野に変革をもたらし、AI活用の裾野を劇的に広げた。"},
+  {title:"WHOが新型コロナの緊急事態終了を宣言",category:"医学",desc:"3年以上続いたパンデミックの国際的な緊急事態が正式に終了した。",impact:"世界がパンデミックからの回復と日常への移行を進める重要な節目となった。"},
+  {title:"インドの無人探査機が月の南極域に世界初着陸",category:"宇宙",desc:"チャンドラヤーン3号が月の南極付近への着陸に世界で初めて成功した。",impact:"将来の月面資源利用や有人探査に向けた重要な技術的成果となった。"}
+],aiComment:"生成AIの急速な普及は、人類とコンピュータの関わり方を一変させる歴史的な転換点となりました。教育や仕事のあり方まで変える、この時代を象徴する出来事です。",stars:5,starReason:"生成AI ChatGPTの世界的普及という技術革命"},
+
+2024:{jp:[
+  {title:"能登半島地震を教訓に災害医療・支援体制の見直しが進む",category:"環境",desc:"半島特有の地理的制約を踏まえた、災害対応の課題と改善策が検討された。",impact:"孤立集落対策や広域医療搬送体制の強化など、防災力向上につながっている。"},
+  {title:"小型ロケット「H3」が本格運用段階に移行",category:"宇宙",desc:"開発中だった次世代主力ロケットが実用衛星の打ち上げに成功した。",impact:"日本の宇宙輸送能力を強化し、国際的な打ち上げ需要への対応力を高めた。"},
+  {title:"新紙幣（渋沢栄一・津田梅子・北里柴三郎）が発行",category:"経済",desc:"偽造防止技術をさらに高めた新紙幣が20年ぶりに発行された。",impact:"最新のホログラム技術導入など、通貨の信頼性向上に貢献している。"}
+],world:[
+  {title:"生成AIの医療・科学研究への応用が急速に拡大",category:"AI",desc:"AIによるタンパク質構造予測などの研究成果が実用段階を迎えた。",impact:"創薬プロセスの大幅な効率化など、科学研究のあり方を大きく変えつつある。"},
+  {title:"世界的な平均気温の記録的な上昇が観測される",category:"環境",desc:"複数の国際機関が観測史上最も高い平均気温を記録したと発表した。",impact:"気候変動対策の緊急性への認識を国際的にさらに高める契機となった。"},
+  {title:"AI研究者らがノーベル物理学賞・化学賞を受賞",category:"AI",desc:"機械学習の基礎理論やタンパク質構造予測AIの開発が高く評価された。",impact:"AI技術が基礎科学研究に不可欠な存在となったことを象徴する受賞となった。"}
+],aiComment:"AI研究がノーベル賞の対象になるという、科学史における新しい時代の到来を示す出来事がありました。日本ではH3ロケットが本格運用に入るなど、宇宙開発も着実に前進しています。",stars:4,starReason:"AI研究者のノーベル賞受賞という科学史の新章"},
+
+2025:{jp:[
+  {title:"大阪・関西万博が開催",category:"文化",desc:"「いのち輝く未来社会のデザイン」をテーマに国際博覧会が大阪で開催された。",impact:"最新技術と国際交流の場として、持続可能な社会への関心を広く発信した。"},
+  {title:"次世代半導体・AI技術への国家的投資がさらに拡大",category:"IT",desc:"国内での先端半導体製造やAI開発への大規模な投資・支援策が進められた。",impact:"日本の先端技術産業における国際競争力の再構築に向けた重要な取り組みとなった。"},
+  {title:"少子化対策・こども未来戦略の施策が本格実施",category:"教育",desc:"子育て支援の拡充を柱とする総合的な少子化対策が実施段階に入った。",impact:"仕事と子育ての両立支援など、持続可能な社会づくりに向けた重要な一歩となった。"}
+],world:[
+  {title:"生成AIエージェント技術が急速に発展",category:"AI",desc:"自律的にタスクを遂行するAIエージェントの研究・実用化が世界で加速した。",impact:"仕事や研究の進め方を変える可能性を持つ技術として急速に注目を集めている。"},
+  {title:"再生可能エネルギーの発電コストがさらに低下し普及が加速",category:"環境",desc:"太陽光・風力発電の効率向上とコスト低減が世界各地で進んだ。",impact:"脱炭素社会への移行を経済的にも後押しする重要な進展となっている。"},
+  {title:"国際的な次世代原子力技術（小型モジュール炉）の開発が進展",category:"科学",desc:"安全性を高めた新型の原子炉技術の開発・実証が各国で進められた。",impact:"脱炭素とエネルギー安定供給を両立させる技術選択肢の一つとして注目されている。"}
+],aiComment:"AIエージェント技術の発展は、人と機械の協働のあり方をさらに大きく変えようとしています。大阪・関西万博の開催という、日本発の国際交流の場も大きな話題となりました。",stars:4,starReason:"生成AIエージェント技術の急速な発展"}
+,
+
+2026:{jp:[
+  {title:"H3ロケット6号機の打ち上げに成功",category:"宇宙",desc:"固体補助ロケットを使わない低コスト型の試験機として、H3ロケット6号機が打ち上げに成功した。",impact:"前年12月の打ち上げ失敗からの信頼回復と、国際商業打ち上げ市場への参入を後押しした。"},
+  {title:"がんの5年生存率が膵臓・肺などで上昇と発表",category:"医学",desc:"厚生労働省が、膵臓がんや肺がんなど複数のがん種で5年生存率の改善を確認したと発表した。",impact:"早期発見技術や新規治療薬の進歩が、がん治療成績の底上げにつながっていることを示した。"},
+  {title:"核融合実験装置JT-60SAでプラズマ研究が進展",category:"科学",desc:"量子科学技術研究開発機構の核融合実験装置で、高性能プラズマ生成に向けた研究が続けられた。",impact:"次世代のクリーンエネルギー源とされる核融合発電の実現に向けた重要な知見を積み重ねている。"}
+],world:[
+  {title:"膵臓がん治療薬の臨床試験で生存期間が大幅に延長",category:"医学",desc:"新しいがん治療薬の臨床試験で、従来と比べて生存期間が約2倍に延びる結果が報告された。",impact:"治療が難しいとされてきた膵臓がんの治療成績を大きく塗り替える可能性がある成果となった。"},
+  {title:"世界保健デーのテーマに「科学に基づく健康」が掲げられる",category:"医学",desc:"WHOが感染症・気候変動など複合的な健康課題に科学的知見で対応する重要性を呼びかけた。",impact:"国境を越えた保健協力と、科学的根拠に基づく政策判断の重要性を国際的に再確認する機会となった。"},
+  {title:"AIロボット基盤モデルの実用化が世界的に加速",category:"AI",desc:"力触覚情報を活用したロボット運動学習など、AIとロボティクスを組み合わせた技術開発が進展した。",impact:"製造業や物流など幅広い現場でのロボット活用を後押しし、労働のあり方に変化をもたらしつつある。"}
+],aiComment:"膵臓がん治療薬の臨床試験成果は、治療が難しいとされてきたがんへの希望を大きく広げました。日本ではH3ロケットが信頼回復を果たすなど、着実な前進が続いています。",stars:4,starReason:"膵臓がん治療薬の画期的な臨床成果"}
+};
+
+</script>
+
+<script>
+(function(){
+  "use strict";
+
+  document.getElementById('birthdate').max = new Date().toISOString().slice(0,10);
+
+  const starsEl = document.getElementById('stars');
+  for(let i=0;i<70;i++){
+    const s=document.createElement('span');
+    s.style.left=Math.random()*100+'%';
+    s.style.top=Math.random()*100+'%';
+    s.style.animationDelay=(Math.random()*4)+'s';
+    s.style.width=s.style.height=(Math.random()<0.15?'3px':'1.5px');
+    starsEl.appendChild(s);
+  }
+
+  let state = {
+    birthDate: null,
+    years: {},
+    currentYear: new Date().getFullYear(),
+    region: 'all',
+    category: '',
+    search: '',
+    theme: 'light'
+  };
+
+  const CATEGORY_ICONS = {
+    "科学":"🧬","医学":"🏥","医療":"🏥","IT":"💻","AI":"🤖","教育":"📚",
+    "宇宙":"🚀","環境":"🌱","インフラ":"🏗️","文化":"🎨","スポーツ":"🏅",
+    "経済":"💰","平和":"🤝","平和・人権":"🤝","人権":"🤝"
+  };
+
+  function updateStats(){
+    if(!state.birthDate) return;
+    const now = new Date();
+    const birth = state.birthDate;
+    const diffMs = now - birth;
+    const ageYears = Math.floor((now - birth) / (365.2425*86400000));
+    const days = Math.floor(diffMs/86400000);
+    const weeks = Math.floor(days/7);
+    const months = (now.getFullYear()-birth.getFullYear())*12 + (now.getMonth()-birth.getMonth());
+    const hours = Math.floor(diffMs/3600000);
+    const secs = Math.floor(diffMs/1000);
+    const grid = document.getElementById('statsGrid');
+    const items = [
+      [ageYears+' 歳','現在年齢'],
+      [days.toLocaleString(),'生後日数'],
+      [weeks.toLocaleString(),'週数'],
+      [months.toLocaleString(),'月数'],
+      [hours.toLocaleString(),'時間'],
+      [secs.toLocaleString(),'秒']
+    ];
+    grid.innerHTML = items.map(function(pair){
+      return '<div class="stat"><div class="num">'+pair[0]+'</div><div class="lbl">'+pair[1]+'</div></div>';
+    }).join('');
+  }
+  setInterval(updateStats, 1000);
+
+  function ageInYear(y){ return y - state.birthDate.getFullYear(); }
+
+  function passesFilter(ev){
+    if(state.category && ev.category !== state.category) return false;
+    if(state.search){
+      const q = state.search.toLowerCase();
+      if(!(ev.title.toLowerCase().includes(q) || ev.desc.toLowerCase().includes(q))) return false;
+    }
+    return true;
+  }
+
+  function renderEventCard(ev){
+    const icon = CATEGORY_ICONS[ev.category] || '✦';
+    return '<div class="event-card">'+
+      '<span class="cat">'+icon+' '+ev.category+'</span>'+
+      '<h5>'+ev.title+'</h5>'+
+      '<p>'+ev.desc+'</p>'+
+      '<div class="impact"><b>現在への影響</b>'+ev.impact+'</div>'+
+    '</div>';
+  }
+
+  function renderYearBlock(y){
+    const d = state.years[y];
+    const isCurrent = y === state.currentYear;
+    if(!d){
+      return '<div class="year-block" id="year-'+y+'">'+
+        '<div class="year-node '+(isCurrent?'current':'')+'">'+
+          '<div class="year-badge"><span class="yr">'+y+'</span><span class="age">'+ageInYear(y)+'歳</span></div>'+
+        '</div>'+
+        '<p style="text-align:center;color:var(--text-muted);font-size:13px;">この年のデータは準備中です。</p>'+
+      '</div>';
+    }
+    const jpEvents = d.jp.filter(passesFilter);
+    const worldEvents = d.world.filter(passesFilter);
+    if(state.search || state.category){
+      if(jpEvents.length===0 && worldEvents.length===0) return '';
+    }
+    const showJp = state.region!=='world';
+    const showWorld = state.region!=='jp';
+    let stars = '';
+    for(let i=0;i<5;i++) stars += '<span class="star '+(i<d.stars?'on':'')+'">★</span>';
+
+    let cols = '<div class="cols">';
+    if(showJp) cols += '<div class="col"><h4>🇯🇵 日本の進化</h4>'+(jpEvents.length?jpEvents:d.jp).map(renderEventCard).join('')+'</div>';
+    if(showWorld) cols += '<div class="col"><h4>🌍 世界の進化</h4>'+(worldEvents.length?worldEvents:d.world).map(renderEventCard).join('')+'</div>';
+    cols += '</div>';
+
+    return '<div class="year-block" id="year-'+y+'">'+
+      '<div class="year-node '+(isCurrent?'current':'')+'">'+
+        '<div class="year-badge"><span class="yr">'+y+'</span><span class="age">'+ageInYear(y)+'歳</span></div>'+
+      '</div>'+
+      '<div class="stars-row">'+stars+'</div>'+
+      '<div class="star-reason">'+(d.starReason||'')+'</div>'+
+      cols+
+      '<div class="ai-comment"><b>この一年が人類へ与えた影響</b>'+d.aiComment+'</div>'+
+    '</div>';
+  }
+
+  function renderTimeline(){
+    const wrap = document.getElementById('timelineWrap');
+    const startY = state.birthDate.getFullYear();
+    const endY = state.currentYear;
+    let html = '<div class="spine"></div>';
+    for(let y=startY; y<=endY; y++){
+      html += renderYearBlock(y);
+    }
+    wrap.innerHTML = html;
+  }
+
+  /* 生年に応じた「あなたが生きた時代」総括文をルールベースで組み立てる（AI呼び出しなし） */
+  function buildSummary(birth, age, startY, endY){
+    const by = birth.getFullYear();
+    const frags = [];
+    if(by<=1926) frags.push('大正から昭和初期に生まれ、ラジオ放送の始まりなど情報化の芽生えを経験した世代です。');
+    else if(by<=1945) frags.push('戦中・戦前に生まれ、戦後復興とともに新しい日本の歩みを見てきた世代です。');
+    else if(by<=1959) frags.push('戦後復興期に生まれ、高度経済成長とテレビ・新幹線が生活を大きく変えていく時代を体験した世代です。');
+    else if(by<=1969) frags.push('高度経済成長期に生まれ、東京オリンピックや宇宙開発競争に世界が沸く時代を体験した世代です。');
+    else if(by<=1979) frags.push('安定成長へ向かう時代に生まれ、家庭用ゲーム機など新しい娯楽の登場を経験した世代です。');
+    else if(by<=1989) frags.push('バブル経済とその崩壊、そしてパソコンの黎明期を通じて育った世代です。');
+    else if(by<=1999) frags.push('冷戦終結後のグローバル化とインターネットの普及を、成長とともに体感してきた世代です。');
+    else if(by<=2009) frags.push('携帯電話とインターネットが当たり前の環境に生まれ、スマートフォン登場の衝撃を目の当たりにした世代です。');
+    else frags.push('スマートフォンとSNSが生活基盤としてすでに存在し、生成AIの急速な進化を早い時期から経験している世代です。');
+
+    if(startY<=2011 && endY>=2011) frags.push('東日本大震災という、社会全体で防災とエネルギーのあり方を見つめ直す大きな転換点も経てきました。');
+    if(startY<=2020 && endY>=2020) frags.push('新型コロナウイルスのパンデミックという、社会の仕組みそのものを問い直す出来事も経験しました。');
+    if(startY<=2023 && endY>=2023) frags.push('生成AIが世界的に普及し始めた転換期を、リアルタイムで目撃してきた世代でもあります。');
+    frags.push('この'+age+'年の間、科学・医療・宇宙開発・情報技術は目覚ましい進化を遂げ、あなたの人生の歩みはその歴史と確かに重なっています。');
+    frags.push('これからも時代は変わり続けますが、あなたが刻んできた時間は、これからを生きる誰かにとっても意味のある記録になるはずです。');
+    document.getElementById('summaryText').textContent = frags.join('');
+  }
+
+  function refreshFilterOptions(){
+    const catSel = document.getElementById('categoryFilter');
+    const cats = new Set();
+    Object.values(state.years).forEach(function(d){
+      d.jp.concat(d.world).forEach(function(ev){ cats.add(ev.category); });
+    });
+    let catHtml = '<option value="">すべてのカテゴリ</option>';
+    cats.forEach(function(c){ catHtml += '<option value="'+c+'">'+(CATEGORY_ICONS[c]||'')+' '+c+'</option>'; });
+    catSel.innerHTML = catHtml;
+
+    const jump = document.getElementById('jumpYear');
+    const startY = state.birthDate.getFullYear();
+    let opts = '<option value="">年代へジャンプ</option>';
+    for(let y=startY; y<=state.currentYear; y++) opts += '<option value="'+y+'">'+y+'年（'+ageInYear(y)+'歳）</option>';
+    jump.innerHTML = opts;
+  }
+
+  function pickRandomCategoryItems(raw){
+    const categories = [];
+    (raw.jp||[]).forEach(function(e){ if(categories.indexOf(e.category)===-1) categories.push(e.category); });
+    (raw.world||[]).forEach(function(e){ if(categories.indexOf(e.category)===-1) categories.push(e.category); });
+    if(categories.length===0) return { jp: [], world: [] };
+    const picked = categories[Math.floor(Math.random()*categories.length)];
+    return {
+      jp: (raw.jp||[]).filter(function(e){ return e.category===picked; }),
+      world: (raw.world||[]).filter(function(e){ return e.category===picked; })
+    };
+  }
+
+  function showTimelineFor(birth){
+    state.birthDate = birth;
+    state.years = {};
+
+    const startY = birth.getFullYear();
+    const endY = state.currentYear;
+    for(let y=startY; y<=endY; y++){
+      if(TIMELINE_DATA && TIMELINE_DATA[y]){
+        const raw = TIMELINE_DATA[y];
+        const picked = pickRandomCategoryItems(raw);
+        state.years[y] = {
+          year: y,
+          jp: picked.jp,
+          world: picked.world,
+          aiComment: raw.aiComment || '',
+          stars: raw.stars || 3,
+          starReason: raw.starReason || ''
+        };
+      }
+    }
+
+    document.getElementById('hero').classList.add('hidden');
+    document.getElementById('app').classList.remove('hidden');
+    updateStats();
+    renderTimeline();
+    refreshFilterOptions();
+    buildSummary(birth, endY-startY, startY, endY);
+    document.getElementById('summarySection').classList.remove('hidden');
+  }
+
+  const SAVED_BIRTHDATE_KEY = 'lifeEarthTimeline_birthdate';
+
+  document.getElementById('birthForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const val = document.getElementById('birthdate').value;
+    if(!val) return;
+    const birth = new Date(val+'T00:00:00');
+    if(birth > new Date()){ alert('未来の日付は選択できません。'); return; }
+
+    try{
+      localStorage.setItem(SAVED_BIRTHDATE_KEY, val);
+    }catch(e){ /* localStorageが使えない環境では保存をスキップ */ }
+
+    showTimelineFor(birth);
+  });
+
+  (function restoreSavedBirthdate(){
+    try{
+      const savedVal = localStorage.getItem(SAVED_BIRTHDATE_KEY);
+      if(savedVal){
+        document.getElementById('birthdate').value = savedVal;
+        const birth = new Date(savedVal+'T00:00:00');
+        if(!isNaN(birth.getTime()) && birth <= new Date()){
+          showTimelineFor(birth);
+        }
+      }
+    }catch(e){ /* localStorageが使えない環境では復元をスキップ */ }
+  })();
+
+  document.getElementById('searchInput').addEventListener('input', function(e){
+    state.search = e.target.value; renderTimeline();
+  });
+  document.getElementById('categoryFilter').addEventListener('change', function(e){
+    state.category = e.target.value; renderTimeline();
+  });
+  document.getElementById('regionToggle').addEventListener('click', function(e){
+    const btn = e.target.closest('button'); if(!btn) return;
+    state.region = btn.dataset.region;
+    Array.prototype.forEach.call(document.getElementById('regionToggle').children, function(b){ b.classList.toggle('active', b===btn); });
+    renderTimeline();
+  });
+  document.getElementById('jumpYear').addEventListener('change', function(e){
+    if(!e.target.value) return;
+    const el = document.getElementById('year-'+e.target.value);
+    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+  document.getElementById('themeToggle').addEventListener('click', function(){
+    state.theme = state.theme==='light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', state.theme);
+    document.getElementById('themeToggle').textContent = state.theme==='light' ? '🌙 ダーク' : '☀️ ライト';
+  });
+  document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
+  document.getElementById('restartBtn').addEventListener('click', function(){
+    if(confirm('最初の画面に戻ります。よろしいですか？')){
+      document.getElementById('app').classList.add('hidden');
+      document.getElementById('hero').classList.remove('hidden');
+      document.getElementById('generateBtn').disabled = false;
+      document.getElementById('generateBtn').textContent = '年表を作成';
+    }
+  });
+
+  document.getElementById('exportJson').addEventListener('click', function(){
+    const blob = new Blob([JSON.stringify({birthDate:state.birthDate, years:state.years}, null, 2)], {type:'application/json'});
+    downloadBlob(blob, 'life-timeline.json');
+  });
+  document.getElementById('exportCsv').addEventListener('click', function(){
+    let rows = [['year','age','region','category','title','desc','impact']];
+    Object.keys(state.years).sort().forEach(function(y){
+      const d = state.years[y];
+      d.jp.forEach(function(ev){ rows.push([y, ageInYear(+y), '日本', ev.category, ev.title, ev.desc, ev.impact]); });
+      d.world.forEach(function(ev){ rows.push([y, ageInYear(+y), '世界', ev.category, ev.title, ev.desc, ev.impact]); });
+    });
+    const csv = rows.map(function(r){ return r.map(function(v){ return '"'+String(v).replace(/"/g,'""')+'"'; }).join(','); }).join('\n');
+    const blob = new Blob(["\uFEFF"+csv], {type:'text/csv'});
+    downloadBlob(blob, 'life-timeline.csv');
+  });
+  function downloadBlob(blob, filename){
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.getElementById('saveHistory').addEventListener('click', async function(){
+    try{
+      const key = 'history:' + state.birthDate.toISOString().slice(0,10);
+      await window.storage.set(key, JSON.stringify({birthDate:state.birthDate, years:state.years, savedAt:new Date().toISOString()}));
+      alert('この年表を保存しました。');
+    }catch(e){ alert('保存に失敗しました: '+e.message); }
+  });
+  document.getElementById('loadHistory').addEventListener('click', async function(){
+    try{
+      const list = await window.storage.list('history:');
+      if(!list || !list.keys || list.keys.length===0){ alert('保存された年表はまだありません。'); return; }
+      const choice = prompt('読み込む生年月日を入力してください:\n' + list.keys.map(function(k){ return k.replace('history:',''); }).join('\n'));
+      if(!choice) return;
+      const rec = await window.storage.get('history:'+choice);
+      if(!rec){ alert('見つかりませんでした。'); return; }
+      const parsed = JSON.parse(rec.value);
+      state.birthDate = new Date(parsed.birthDate);
+      state.years = parsed.years;
+      document.getElementById('hero').classList.add('hidden');
+      document.getElementById('app').classList.remove('hidden');
+      updateStats(); renderTimeline(); refreshFilterOptions();
+      document.getElementById('summarySection').classList.add('hidden');
+    }catch(e){ alert('読み込みに失敗しました: '+e.message); }
+  });
+
+})();
+</script>
+</body>
+</html>
